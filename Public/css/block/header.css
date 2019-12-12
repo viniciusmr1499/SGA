@@ -1,0 +1,72 @@
+#header .navbar{
+    background: #fff;
+    box-shadow:2px 1px 7px rgba(0,0,0,.2);
+}
+
+#wrapper #header{
+    width:100%;
+    display:block;
+    margin:0 0 0 auto;
+    height:auto;
+    position:sticky;
+    z-index:1001;
+    top:0;
+    transition: .5s;
+}
+
+#header .division{
+    width: 0;
+    position: absolute;
+    right: 0;
+    transform:translateY(25%);
+    border-right: 1px solid #e3e6f0;
+    height: calc(4.375rem - 2rem);
+    margin: auto 1rem;
+}
+#header .avatar{
+    height: auto;
+    width: 2rem;
+    border-radius:50%;
+}
+
+#wrapper #page-content-wrapper .right{
+    position:absolute;
+    right:2rem;
+}
+
+#wrapper #page-content-wrapper #header .h__text--admin{
+    right:100%;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 700;
+}
+
+#wrapper #page-content-wrapper #header .navbar{
+    width:100%;
+}
+
+
+#wrapper #page-content-wrapper #header .icon{
+    left:9.88rem;
+    top:1.215rem;
+}
+
+#wrapper #button{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor:pointer;
+    background:#446ad8;
+    background:#ff8055;
+    border-color:#ff8055;
+}
+
+#page-content-wrapper #header .form-control{
+    border:none;
+    font-family: 'reboto', sans-serif;
+    width:17rem;
+}
+
+#page-content-wrapper #header .fa-user-circle{
+    font-size:2rem;
+    color:#ff8055;
+    padding-right:1rem;
+}

@@ -2,6 +2,7 @@
 // TRATATIVAS DE ERROS - QUESTÃO DE SEGURANÇA
 
 function setInternalServerError($errno, $errstr, $errfile, $errline){
+    http_response_code(500);
     echo "<h1>Error</h1>";
     echo '<span style="color:red;">';
     switch ($errno) {
@@ -21,6 +22,10 @@ function setInternalServerError($errno, $errstr, $errfile, $errline){
         default:
             echo 'UNKNOW ERROR TYPE [' . $errno . '] ' . $errstr . " <br>\n";
         break;
+    }
+    
+    if(!DEBUG){
+        exit;
     }
 
     echo "</span>";

@@ -1,0 +1,17 @@
+@import "../modifier/fontes.css";
+@import "../modifier/botoes.css";
+@import "../dest/fontawesome-free/css/all.min.css";
+@import "../dest/reset.css";
+@import "../block/sidebar.css";
+@import "../block/footer.css";
+@import "../block/header.css";
+@import "../templates/register-insumo.css";
+@import "../templates/register-user.css";
+@import "../templates/materiais.css";
+@import "../templates/login.css";
+@import "../block/theme-aeris.css";
+
+html {
+    scroll-behavior: smooth;
+}
+

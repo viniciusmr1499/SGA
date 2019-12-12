@@ -1,3 +1,2 @@
-<h3>Página inicial</h3>
+<img src="/img/logo.png" class="img-fluid theme" alt="Aeris">
 
-<a href="/admin/pages">Ir para pages</a>

@@ -1,0 +1,61 @@
+#form-register{
+    position:relative;
+    padding:3rem 2rem;
+}
+
+#form-register .gradient{
+    background:#ff8055;
+    width:100%;
+    display: block;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding:1.5rem 1rem;
+    margin-bottom:1rem;
+}
+
+#form-register .title__register{
+    font-size:2rem;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight:bold;
+    color:#fff;
+    letter-spacing: 1px;
+    text-align: justify;
+    box-sizing: border-box;
+}
+
+#form-register .t-head{
+    font-size:1rem;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight:600;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.t-cel, .form-control::placeholder,.form-control{
+    font-size:1rem;
+    font-family: 'Lato', sans-serif;
+    font-weight:500;
+    /* line-height: 20px; */
+    text-align: justify;
+}
+
+.text-title{
+    font-size:2.5rem;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight:600;
+    letter-spacing: 1px;
+    text-align: justify;
+}
+
+.fa-pencil-alt, .fa-trash{
+    font-size:1.5rem;
+    color:#ff8055;
+    padding:0 .5rem;
+}
+
+.fa-trash{
+    font-size:1.5rem;
+    color:rgb(224, 81, 65);
+    padding:0 .5rem;
+}

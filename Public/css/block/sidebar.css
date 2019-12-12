@@ -1,0 +1,113 @@
+body {
+    overflow-x: hidden;
+}
+
+#wrapper{
+    background:#f8f9fc;
+}
+
+#wrapper #page-content-wrapper #header img{
+    position: absolute;;
+    left:4em;
+    top:4px;
+    height:55px;
+    width: 55x;
+}
+
+#wrapper #header .h__toggle{
+    font-size:2rem;
+    cursor:pointer;
+    margin-left:-5px;
+    color:rgb(143, 138, 138);
+}
+
+
+.list-group-item:hover{
+    background:#252525;
+    color:#fff;
+}
+
+.list-group-item{
+    transition: .3s;
+    background:none;
+    color:#fff;
+    font-size:.9rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-family: 'Open Sans Condensed', sans-serif;
+    /* font-family: 'Lato', sans-serif; */
+    /* font-family: 'Roboto Condensed', sans-serif; */
+    text-transform: uppercase;
+}
+
+
+#sidebar-wrapper {
+    position: fixed;
+    width:15rem;
+    min-height: 100%;
+    background:#333;
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:rgba(0,0,0,.4);
+    background-size:cover;
+    background-repeat:no-repeat;
+
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper{
+    width:calc(100% - 15rem);
+    transition:.25s;
+    display: block;
+    margin:0 0 0 auto;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+        height: 100%;
+        z-index:1001;
+    }
+    
+    #wrapper.toggled #page-content-wrapper{
+        width:100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+
+@media(max-width:767.9px){
+    #page-content-wrapper{
+        width:100%;
+    }
+    #header{
+        width:100%;
+    }
+
+    #wrapper.toggled #page-content-wrapper{
+        width:calc(100% - 15rem);
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0em;
+    }
+}
+

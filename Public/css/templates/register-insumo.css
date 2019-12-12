@@ -1,0 +1,33 @@
+#form-register-insumo{
+    position:relative;
+    position:relative;
+    padding:3rem;
+}
+
+#form-register-insumo .title__insumo{
+    font-size:2rem;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight:bold;
+    color:#fff;
+    letter-spacing: 1px;
+}
+
+.block-insumos{
+    background:#ff8055;
+    width:100%;
+    display: block;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding:1.5rem 1rem;
+    margin-bottom:1rem;
+}
+
+#form-register-insumo .form-group{
+    /* border:1px solid blue; */
+    padding:1rem 0rem;  
+}
+
+#form-register-insumo .form-control{
+    margin:1rem 0;
+}

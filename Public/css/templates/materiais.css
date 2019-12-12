@@ -1,0 +1,26 @@
+#materiais{
+    position:relative;
+    width:100%;
+    padding:3rem;
+}
+
+.title__material{
+    font-size:2rem;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight:bold;
+    color:#fff;
+    letter-spacing: 1px;
+    text-align: justify;
+    box-sizing: border-box;
+}
+
+.gradient{
+    background:#ff8055;
+    width:100%;
+    display: block;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding:1.5rem 1rem;
+    margin-bottom:1rem
+}

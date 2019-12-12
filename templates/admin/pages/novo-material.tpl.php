@@ -1,6 +1,6 @@
-<form action="/admin/materiais" class="pt-5 pl-3" method="post">
+<form action="/admin/materiais" class="f-register pl-3" method="post">
     <div class="col">
-        <h1 class="text-title">Materiais</h1>
+        <h1 class="text-title pt-2">Materiais</h1>
         <hr class="pb-4">
     </div>
     <div class="form-group ml-3">
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-6 mt-4">
                 <label for="Descricao" class="pb-2 t-cel">Descrição</label>
-                <textarea name="Descricao" id="Descricao" cols="30" rows="5" class="form-control"></textarea>
+                <textarea name="Descricao" maxlength="55" placeholder="Digite sua descrição" id="Descricao" cols="30" rows="3" class="form-control"></textarea>
             </div>
             <div class="col-md-6 mt-4">
                 <label for="Estoque" class="pb-2 t-cel">Estoque</label>

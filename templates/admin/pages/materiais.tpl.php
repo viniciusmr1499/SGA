@@ -28,7 +28,7 @@
                         <td class="t-cel">006216</td>
                         <td class="t-cel">TARTLER</td>
                         <td class="t-cel">EK80-0020</td>
-                        <td class="t-cel">EK80-0020 Motor dosador de corrente alt</td>
+                        <td class="t-cel">EK80-0020 Motor dosador de corrente alt </td>
                         <td class="t-cel">BL1-A1</td>
                         <td class="t-cel">Lam Vestas - V110</td>
                         <td class="t-cel">10</td>

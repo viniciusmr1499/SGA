@@ -1,9 +1,9 @@
-.btn__sum{
-    background:#0cccc2;
+#wrapper .btn__sum{
+    background:#4eddd6;
     cursor:pointer;
     color:#fff;
 }
-.btn_register{
+#wrapper .btn_register{
     background:#ff8055;
     color:#fff;
     cursor:pointer;

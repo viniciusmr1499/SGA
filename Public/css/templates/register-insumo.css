@@ -1,10 +1,4 @@
-#form-register-insumo{
-    position:relative;
-    position:relative;
-    padding:3rem;
-}
-
-#form-register-insumo .title__insumo{
+#f-register .title__insumo{
     font-size:2rem;
     font-family: 'Open Sans Condensed', sans-serif;
     font-weight:bold;
@@ -23,18 +17,19 @@
     margin-bottom:1rem;
 }
 
-#form-register-insumo .form-group{
+#f-register .form-group{
     padding:1rem 0rem;  
 }
 
-#form-register-insumo .form-control{
+#f-register .form-control{
     margin:1rem 0;
 }
 
 #wrapper .f-register{
     margin-top:2rem;
-    box-shadow:1px 1px 25px rgba(0,0,0,.25);
+    box-shadow:1px 1px 8px rgba(0,0,0,.25);
     border-radius:10px;
     padding:1rem 2rem;
     background:#fff;
+    border-top: 2px solid #ff8055;
 }

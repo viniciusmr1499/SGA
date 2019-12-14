@@ -1,7 +1,8 @@
 <div id="form-register">
     <section class="row">
         <div class="col-md-12">
-            <div class="gradient"><h1 class="title__register">Cadastro de materiais</h1></div>
+            <div class="gradient"><h1 class="title__article">Cadastro de materiais</h1></div>
+            <hr>
         </div>
         
         <form action="/admin/novo-material" class="ml-auto mr-3" method="post">
@@ -9,8 +10,8 @@
         </form>
 
 
-        <div class="col-md-12 col-sm-12">
-            <table class="table mt-3 table-register table-bordered">
+        <div class="table-responsive mt-3">
+            <table class="table table-register table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="thead-dark">
                     <tr>
                         <th class="t-head" scope="col">Código</th>

@@ -21,15 +21,14 @@ body {
     color:rgb(143, 138, 138);
 }
 
-
 .list-group-item:hover{
-    background:#252525;
     color:#fff;
+    background:#252525 !important;
 }
-
-.list-group-item{
+  
+#sidebar-wrapper .list-group-item{
+    background:#333;
     transition: .3s;
-    background:none;
     color:#fff;
     font-size:.9rem;
     letter-spacing: 1px;

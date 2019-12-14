@@ -30,6 +30,7 @@
                 <input type="number" class="form-control" name="Estoque" id="Estoque">
             </div>
             <div class="col-12 mt-2 pt-1 t-cel">
+                <hr>
                 <button type="submit" class="btn btn_register">Cadastrar</button>
             </div>
         </div>

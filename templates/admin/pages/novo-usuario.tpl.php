@@ -21,16 +21,21 @@
                 <label for="email" class="pb-2 t-cel">E-mail</label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="@aerisenergy.com.br">
             </div>
-            <div class="col-md-6 mt-4">
+            <div class="col-md-2 mt-4">
+                <label for="file__img" class="pb-2 t-cel">Anexar imagem <i class="fas fa-download"></i></label>
+                <input type="file" name="file" id="file__img">
+            </div>
+            <div class="col-md-5 mt-4">
                 <label for="senha" class="pb-2 t-cel">Senha</label>
                 <input type="password" class="form-control" name="senha" id="senha">
             </div>
-            <div class="col-md-6 mt-4">
+            <div class="col-md-5 mt-4">
                 <label for="confirmar-senha" class="pb-2 t-cel">Confirmar Senha</label>
                 <input type="password" class="form-control" name="senha" id="confirmar-senha">
             </div>
             
             <div class="col-12 mt-2 pt-1 t-cel">
+                <hr>
                 <button type="submit" class="btn btn_register">Cadastrar</button>
             </div>
         </div>

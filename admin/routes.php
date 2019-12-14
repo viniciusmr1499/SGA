@@ -18,6 +18,12 @@
 }else if(resolve('/admin/novo-ativo')){
     render('admin/pages/materiais','admin');
 
+}else if(resolve('/admin/historico')){
+    render('admin/pages/historico','admin');
+
+}else if(resolve('/admin/perfil')){
+    render('admin/pages/perfil','admin');
+
 }else{
     http_response_code(404);
     echo "<h1>pagina nao encontrada</h1>";

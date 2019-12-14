@@ -2,7 +2,8 @@
     <section class="row">
         <div class="col-md-12">
             <div class="gradient">
-                <h1 class="title__register">Cadastro de Usuário</h1>
+                <h1 class="title__article">Cadastro de Usuário</h1>
+                <hr>
             </div>
         </div>
         
@@ -10,9 +11,8 @@
             <button class="btn btn__sum"><i class="fas fa-plus"></i></button>
         </form>
 
-
-        <div class="col-md-12 col-sm-12">
-            <table class="table mt-3 table-register table-bordered">
+        <div class="table-responsive mt-3">
+            <table class="table table-register table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="thead-dark">
                     <tr>
                         <th class="t-head" scope="col">Matricula</th>
@@ -30,7 +30,10 @@
                         <td class="t-cel">Vinicius.oliveira@aerisenergy.com.br</td>
                         <td class="t-cel">TIC</td>
                         <td class="t-cel">Aprendiz</td>
-                        <td class="t-cel">Ativo</td>
+                        <td class="t-cel">
+                            <a href=""><i class="fas fa-pencil-alt"></i></a>
+                            <a href=""><i class="fas fa-trash"></i></a>
+                        </td>
                     </tr>
                     
                 </tbody>

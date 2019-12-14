@@ -10,6 +10,8 @@
 @import "../templates/materiais.css";
 @import "../templates/login.css";
 @import "../block/theme-aeris.css";
+@import "../templates/admin.css";
+@import "../templates/tables.css";
 
 html {
     scroll-behavior: smooth;

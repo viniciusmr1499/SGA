@@ -1,36 +1,17 @@
 #form-register{
     position:relative;
-    padding:3rem 2rem;
-}
-
-
-#form-register .gradient{
-    background:#ff8055;
+    padding:1rem 2rem;
+    border-radius:10px;
     width:100%;
-    display: block;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    padding:1.5rem 1rem;
-    margin-bottom:1rem;
+    height: auto;
 }
 
-#form-register .title__register{
-    font-size:2rem;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-weight:bold;
-    color:#fff;
-    letter-spacing: 1px;
-    text-align: justify;
-    box-sizing: border-box;
-}
-
-#form-register .t-head{
+#wrapper #form-register .t-head{
     font-size:1rem;
     font-family: 'Open Sans Condensed', sans-serif;
-    font-weight:600;
     letter-spacing: 1.5px;
     text-align: center;
+    font-weight: 600;
 }
 
 .t-cel, .form-control::placeholder,.form-control{
@@ -59,4 +40,30 @@
     font-size:1.5rem;
     color:rgb(224, 81, 65);
     padding:0 .5rem;
+}
+
+#file__img {
+    display: none;
+    opacity: .25s;
+}
+#wrapper .fa-download:hover{
+    transform:rotateX(360deg);
+    color:#333;
+}
+#wrapper .fa-download{
+    transition: .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: absolute;
+    top:50%;
+    left:25%;
+    cursor:pointer;
+    font-size:3rem;
+}
+#wrapper .file:hover{
+    transform:rotateY(0);
+}
+#wrapper .file{
+    position: absolute;
+    top:60%;
+    left:7.5%;
+    transform:translateY(50%);
 }

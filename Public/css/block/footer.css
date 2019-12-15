@@ -1,17 +1,9 @@
 #footer{
-    padding:.6rem 1rem;
-    width:calc(100% - 15rem);
-    position: fixed;
-    bottom:0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    position:fixed;
+    padding:1rem 2rem;
     transition:.5s cubic-bezier(0.215, 0.610, 0.355, 1);
     background:#eee;
-    z-index:1;
-}
-
-#wrapper.toggled #footer{
+    bottom:0;
     width:100%;
 }
 

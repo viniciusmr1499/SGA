@@ -1,4 +1,4 @@
-<form action="/admin/materiais" class="f-register pl-3" method="post">
+<form action="/admin/pages/materiais" class="f-register pl-3" method="post">
     <div class="col">
         <h1 class="text-title pt-2">Materiais</h1>
         <hr class="pb-4">

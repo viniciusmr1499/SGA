@@ -21,13 +21,13 @@
 
                 <div class="list-group list-group-flush">
                     <a href="/admin" class="list-group-item"><i class="fas fa-home"></i> Início</a>
-                    <a href="/admin/usuarios" class="list-group-item"><i class="fas fa-user"></i> Usuários</a>
+                    <a href="/admin/pages" class="list-group-item"><i class="fas fa-user"></i> Usuários</a>
                     
                     <div class="dropdown">
                         <a href="materiais.php" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Inventário</a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
-                            <a href="/admin/materiais" class="dropdown-item list-group-item">Cadastro de Ativos</a>
-                            <a href="/admin/historico" class="dropdown-item list-group-item">Histórico</a>   
+                            <a href="/admin/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Cadastro de Ativos</a>
+                            <a href="/admin/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>   
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Pesquisar" aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btn" id="button" type="button">
-                            <i class="fas fa-search fa-sm"></i>
+                                <i class="fas fa-search fa-sm"></i>
                             </button>
                         </div>
                         </div>
@@ -83,7 +83,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/admin/perfil">
+                                <a class="dropdown-item" href="/admin/pages/perfil">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
                                 </a>
@@ -101,7 +101,7 @@
                 </nav>
             </header>
 
-            <div class="container-fluid">
+            <div class="container-fluid mb-5 pb-5">
                 <?php include $content ?>
             </div>
             <footer id="footer">

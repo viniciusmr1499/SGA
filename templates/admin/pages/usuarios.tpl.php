@@ -7,7 +7,7 @@
             </div>
         </div>
         
-        <form action="/admin/novo-usuario" class="ml-auto mr-3" method="post">
+        <form action="/admin/pages/novo-usuario" class="ml-auto mr-3" method="post">
             <button class="btn btn__sum"><i class="fas fa-plus"></i></button>
         </form>
 
@@ -31,8 +31,8 @@
                         <td class="t-cel">TIC</td>
                         <td class="t-cel">Aprendiz</td>
                         <td class="t-cel">
-                            <a href=""><i class="fas fa-pencil-alt"></i></a>
-                            <a href=""><i class="fas fa-trash"></i></a>
+                            <a href="/admin/pages/1/editar-usuario"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="/admin/pages/1/delete-usuario"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                     

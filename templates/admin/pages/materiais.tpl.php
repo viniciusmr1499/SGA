@@ -5,7 +5,7 @@
             <hr>
         </div>
         
-        <form action="/admin/novo-material" class="ml-auto mr-3" method="post">
+        <form action="/admin/pages/novo-material" class="ml-auto mr-3" method="post">
             <button class="btn btn__sum"><i class="fas fa-plus"></i></button>
         </form>
 

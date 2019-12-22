@@ -5,9 +5,9 @@
             <hr>
         </div>
         
-        <form action="/admin/pages/novo-material" class="ml-auto mr-3" method="post">
-            <button class="btn btn__sum"><i class="fas fa-plus"></i></button>
-        </form>
+        <div  class="ml-auto mr-3">
+            <a href="/admin/pages/novo-material" class="btn btn__sum"><i class="fas fa-plus"></i></a>
+        </div>
 
 
         <div class="table-responsive mt-3">
@@ -16,11 +16,11 @@
                     <tr>
                         <th class="t-head" scope="col">Código</th>
                         <th class="t-head" scope="col">Equipamento</th>
-                        <th class="t-head" scope="col">Referencia </th>
-                        <th class="t-head" scope="col">Descricao</th>
-                        <th class="t-head" scope="col">Endereco</th>
+                        <th class="t-head" scope="col">Referência </th>
+                        <th class="t-head" scope="col">Descrição</th>
+                        <th class="t-head" scope="col">Endereço</th>
                         <th class="t-head" scope="col">Servico</th>
-                        <th class="t-head" scope="col">Estoque</th>
+                        <th class="t-head" scope="col">Quantidade</th>
                         <th class="t-head" scope="col">Status</th>
                     </tr>
                 </thead>
@@ -34,8 +34,9 @@
                         <td class="t-cel">Lam Vestas - V110</td>
                         <td class="t-cel">10</td>
                         <td class="t-cel">
-                            <a href=""><i class="fas fa-pencil-alt"></i></a>
-                            <a href=""><i class="fas fa-trash"></i></a>
+                            <a href="/admin/pages/1/ver-material"><i class="fas fa-eye"></i></a>
+                            <a href="/admin/pages/1/editar-material"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="/admin/pages/1/remover-material" class="confirm fas fa-trash"></a>
                         </td>
                     </tr>
                 </tbody>

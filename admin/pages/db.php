@@ -4,18 +4,37 @@ $pages_all = function(){
     // buscar todas as paginas
 };
 
-$pages_one = function($id){
-    // buscar um unico registro
+// *** FUNCÇÕES ANÔNIMAS PARA OS USUARIOS ***
+
+$criarUsuario = function(){
+    flash('Usuário foi criado com sucesso!', 'success');
 };
 
-$pages_create = function(){
-    // cria um usuario
+$editarUsuario = function($id){
+    flash('Usuário foi atualizado com sucesso!', 'success');
 };
 
-$pages_edit = function($id){
-    // edita um registro
+$removerUsuario = function($id){
+    flash('Usuário foi removido com sucesso!', 'success');
 };
 
-$pages_delet = function($id){
-    // remove um registro
+$verUsuario = function($id){
+    
+};
+
+// *** FUNCÇÕES ANÔNIMAS PARA OS MATERIAIS ***
+$criarMaterial = function(){
+    flash('Material foi inserido com sucesso!', 'success');
+};
+
+$editarMaterial = function($id){
+    flash('Material foi atualizado com sucesso!', 'success');
+};
+
+$removerMaterial = function($id){
+    flash('Material foi excluído com sucesso!', 'success');
+};
+
+$verMaterial = function($id){
+    
 };

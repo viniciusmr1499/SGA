@@ -30,16 +30,24 @@
     text-align: justify;
 }
 
-.fa-pencil-alt, .fa-trash{
-    font-size:1.5rem;
+.fa-pencil-alt, .fa-trash, .fa-eye{
+    font-size:1.25rem;
     color:#ff8055;
     padding:0 .5rem;
 }
-
+.fa-eye:hover{
+    color:#000;
+}
+.fa-eye{
+    transition:.3s;
+    color:#333;
+}
+a.fa-trash:hover{
+    color:#fb2525;
+}
 .fa-trash{
-    font-size:1.5rem;
     color:rgb(224, 81, 65);
-    padding:0 .5rem;
+    transition:.3s;
 }
 
 #file__img {

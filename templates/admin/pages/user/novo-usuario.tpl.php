@@ -1,4 +1,4 @@
-<form action="/admin/pages/usuarios" class="f-register pl-3" method="post">
+<form class="f-register pl-3" method="post">
     <div class="col">
         <h1 class="text-title pt-2">Usuários</h1>
         <hr class="pb-4">

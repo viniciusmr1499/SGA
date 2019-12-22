@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/dest/bootstrap.min.css">
     <link rel="stylesheet" href="/css/dest/style.css">
+    <link rel="stylesheet" href="/resources/pinotify/pnotify.custom.min.css">
     <title>Painel - SGA</title>
 </head>
 <body id="page-top">   
@@ -21,7 +22,7 @@
 
                 <div class="list-group list-group-flush">
                     <a href="/admin" class="list-group-item"><i class="fas fa-home"></i> Início</a>
-                    <a href="/admin/pages" class="list-group-item"><i class="fas fa-user"></i> Usuários</a>
+                    <a href="/admin/pages/usuarios" class="list-group-item"><i class="fas fa-user"></i> Usuários</a>
                     
                     <div class="dropdown">
                         <a href="materiais.php" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Inventário</a>
@@ -83,7 +84,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/admin/pages/perfil">
+                                <a class="dropdown-item" href="/admin/pages/1/ver-perfil">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
                                 </a>
@@ -126,5 +127,17 @@
     <script src="/js/admin.js"></script>
     <script src="/js/datatables/jquery.dataTables.min.js"></script>
     <script src="/js/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/resources/pinotify/pnotify.custom.min.js"></script>
+    <script>
+        <?php flash();?>
+            const confirmEl = document.querySelector('.confirm');
+
+            confirmEl.addEventListener('click',function(e){
+                e.preventDefault();
+                if(confirm('Tem certeza de que deseja excluir esse material permanentemente?')){
+                    window.location = e.target.getAttribute('href');
+                }
+            });
+    </script>
 </body>
 </html>

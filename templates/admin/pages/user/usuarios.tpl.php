@@ -7,9 +7,9 @@
             </div>
         </div>
         
-        <form action="/admin/pages/novo-usuario" class="ml-auto mr-3" method="post">
-            <button class="btn btn__sum"><i class="fas fa-plus"></i></button>
-        </form>
+        <div class="ml-auto mr-3">
+            <a href="/admin/pages/novo-usuario" class="btn btn__sum"><i class="fas fa-plus"></i></a>
+        </div>
 
         <div class="table-responsive mt-3">
             <table class="table table-register table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -31,8 +31,9 @@
                         <td class="t-cel">TIC</td>
                         <td class="t-cel">Aprendiz</td>
                         <td class="t-cel">
+                            <a href="/admin/pages/1/ver-perfil"><i class="fas fa-eye"></i></a>
                             <a href="/admin/pages/1/editar-usuario"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="/admin/pages/1/delete-usuario"><i class="fas fa-trash"></i></a>
+                            <a href="/admin/pages/1/remover-usuario" class="confirm fas fa-trash"></a> 
                         </td>
                     </tr>
                     

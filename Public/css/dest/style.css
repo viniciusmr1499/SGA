@@ -12,6 +12,7 @@
 @import "../block/theme-aeris.css";
 @import "../templates/admin.css";
 @import "../templates/tables.css";
+@import "../modifier/label.css";
 
 html {
     scroll-behavior: smooth;

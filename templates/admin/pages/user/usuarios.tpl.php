@@ -24,19 +24,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php foreach($data['lista'] as $lista): ?>
                     <tr scope="row">
-                        <td class="t-cel">006216</td>
-                        <td class="t-cel">Marcos Vinicius Meneses de Oliveira</td>
-                        <td class="t-cel">Vinicius.oliveira@aerisenergy.com.br</td>
-                        <td class="t-cel">TIC</td>
-                        <td class="t-cel">Aprendiz</td>
-                        <td class="t-cel">
-                            <a href="/admin/pages/1/ver-perfil"><i class="fas fa-eye"></i></a>
-                            <a href="/admin/pages/1/editar-usuario"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="/admin/pages/1/remover-usuario" class="confirm fas fa-trash"></a> 
+                        <td class="t-cel"><?php echo $lista['matricula']?></td>
+                        <td class="t-cel d-flex"><?php echo $lista['nome']?></td>
+                        <td class="t-cel"><?php echo $lista['email']?></td>
+                        <td class="t-cel"><?php echo $lista['setor']?></td>
+                        <td class="t-cel"><?php echo $lista['cargo']?></td>
+                        <td class="t-cel d-flex justify-content-center align-self-center">
+                            <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/ver-perfil"><i class="fas fa-eye"></i></a>
+                            <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/editar-usuario"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/remover-usuario" class="confirm fas fa-trash"></a> 
                         </td>
                     </tr>
-                    
+                <?php endforeach; ?> 
                 </tbody>
             </table>
         </div>

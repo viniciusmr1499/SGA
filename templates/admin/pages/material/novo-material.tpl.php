@@ -7,41 +7,45 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="Equipamento" class="pb-2 t-cel">Equipamento</label>
-                <input type="text" class="form-control" name="Equipamento" id="Equipamento" placeholder="Equipamento">
+                <input type="text" class="form-control" name="equipamento" id="Equipamento" placeholder="Equipamento">
             </div>
+
             <div class="col-md-3">
                 <label for="Referencia" class="pb-2 t-cel">Referência</label>
-                <input type="text" class="form-control" name="Referencia" id="Referencia" placeholder="Referencia">
+                <input type="text" class="form-control" name="referencia" id="Referencia" placeholder="Referencia">
             </div>
+
             <div class="col-md-3">
                 <label for="Estoque" class="pb-2 t-cel">Quantidade</label>
                 <input type="number" class="form-control" placeholder="Ex: 1" name="quantidade" id="Estoque">
             </div>
             <div class="col-md-6 mt-4">
-                <label for="Endereco" class="pb-2 t-cel">Endereço</label>
-                <input type="text" class="form-control" name="Endereco" id="Endereco" placeholder="Endereco">
-            </div>
-            <div class="col-md-6 mt-4">
                 <label for="Servico" class="pb-2 t-cel">Serviço</label>
-                <input type="text" class="form-control" name="Servico" id="Servico" placeholder="Servico">
+                <input type="text" class="form-control" name="servico" id="Servico" placeholder="Servico">
             </div>
 
-            
-           
- 
+            <div class="col-md-2 mt-4">
+                <label for="codigo" class="pb-2 t-cel">Código</label>
+                <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Código">
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <label for="Endereco" class="pb-2 t-cel">Endereço</label>
+                <input type="text" class="form-control" name="endereco" id="Endereco" placeholder="Endereco">
+            </div>
+
             <div class="col-md-6 mt-4">
                 <label for="Descricao" class="pb-2 t-cel">Descrição</label>
-                <textarea name="Descricao" maxlength="55" placeholder="Digite sua descrição" id="Descricao" cols="30" rows="3" class="form-control"></textarea>
+                <textarea maxlength="55" name="descricao" placeholder="Digite sua descrição" id="Descricao" cols="30" rows="3" class="form-control"></textarea>
             </div>
 
-           
-            
             <div class="col-md-6 mt-4">
                 <label for="anexo" class="pb-2 t-cel">Anexar imagem </label>
                 <!-- <input type="file" name="" id="file__img"> -->
                 <!-- <i class="file fas fa-download"></i> -->
                 <p><input type="file" name="file" id="anexo"></p>
             </div>
+            
             <div class="col-12 mt-2 pt-1 t-cel">
                 <hr>
                 <button type="submit" class="btn btn_register">Cadastrar</button>

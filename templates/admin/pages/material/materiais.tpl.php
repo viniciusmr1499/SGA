@@ -25,20 +25,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php foreach($data['lista'] as $lista):?>
                     <tr>
-                        <td class="t-cel">006216</td>
-                        <td class="t-cel">TARTLER</td>
-                        <td class="t-cel">EK80-0020</td>
-                        <td class="t-cel">EK80-0020 Motor dosador de corrente alt </td>
-                        <td class="t-cel">BL1-A1</td>
-                        <td class="t-cel">Lam Vestas - V110</td>
-                        <td class="t-cel">10</td>
-                        <td class="t-cel">
-                            <a href="/admin/pages/1/ver-material"><i class="fas fa-eye"></i></a>
-                            <a href="/admin/pages/1/editar-material"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="/admin/pages/1/remover-material" class="confirm fas fa-trash"></a>
+                        <td class="t-cel"><?php echo $lista['codigo'];?></td>
+                        <td class="t-cel"><?php echo $lista['equipamento'];?></td>
+                        <td class="t-cel"><?php echo $lista['referencia'];?></td>
+                        <td class="t-cel d-flex"><?php echo $lista['descricao'];?></td>
+                        <td class="t-cel"><?php echo $lista['endereco'];?></td>
+                        <td class="t-cel d-flex"><?php echo $lista['servico'];?></td>
+                        <td class="t-cel"><?php echo $lista['quantidade'];?></td>
+                        <td class="t-cel d-flex justify-content-center align-self-center">
+                            <a href="/admin/pages/<?php echo $lista['id_material']?>/ver-material"><i class="fas fa-eye"></i></a>
+                            <a href="/admin/pages/<?php echo $lista['id_material']?>/editar-material"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="/admin/pages/<?php echo $lista['id_material']?>/remover-material" class="confirm fas fa-trash"></a>
                         </td>
                     </tr>
+                <?php endforeach;?>
                 </tbody>
             </table>
         </div>

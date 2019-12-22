@@ -22,7 +22,7 @@
 
                 <div class="list-group list-group-flush">
                     <a href="/admin" class="list-group-item"><i class="fas fa-home"></i> Início</a>
-                    <a href="/admin/pages/usuarios" class="list-group-item"><i class="fas fa-user"></i> Usuários</a>
+                    <a href="/admin/pages" class="list-group-item"><i class="fas fa-user"></i> Usuários</a>
                     
                     <div class="dropdown">
                         <a href="materiais.php" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Inventário</a>
@@ -130,14 +130,15 @@
     <script src="/resources/pinotify/pnotify.custom.min.js"></script>
     <script>
         <?php flash();?>
-            const confirmEl = document.querySelector('.confirm');
-
-            confirmEl.addEventListener('click',function(e){
-                e.preventDefault();
-                if(confirm('Tem certeza de que deseja excluir esse material permanentemente?')){
-                    window.location = e.target.getAttribute('href');
-                }
-            });
+            // const confirmEl = document.querySelector('.confirm');
+            
+            // confirmEl.addEventListener('click',function(e){
+            //     e.preventDefault();
+            //     if(confirm('Tem certeza de que deseja excluir esse material permanentemente?')){
+            //         window.location = e.target.getAttribute('href');
+            //     }
+            // });
     </script>
+    
 </body>
 </html>

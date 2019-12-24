@@ -35,3 +35,10 @@ CREATE TABLE IF NOT EXISTS `sga`.`materiais` (
   PRIMARY KEY (`id_material`))
 ENGINE = InnoDB;
 
+
+
+INSERT INTO usuarios (matricula,nome,email,setor,cargo,senha,data_de_criacao,data_de_atualizacao) VALUES 
+('006238','Yuri Sousa dos Santos','yuri.sousa@aerisenergy.com.br','PCM','Aprendiz',md5('123'),now(),now());
+
+INSERT INTO usuarios (matricula,nome,email,setor,cargo,senha,data_de_criacao,data_de_atualizacao) VALUES 
+('006216','Marcos Vinicius Meneses de Oliveira','vinicius.oliveira@aerisenergy.com.br','TIC','Aprendiz',md5('123'),now(),now());

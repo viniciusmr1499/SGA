@@ -66,3 +66,17 @@
     color:#000;
     opacity: .7;
 }
+#page-content-wrapper .fa-book-open{
+    color:#ff8055;
+}
+
+#page-content-wrapper .ghost:hover{
+    transition:.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@media(max-width:768px){
+    #page-content-wrapper .ghost{
+        display: none;
+    }
+
+}

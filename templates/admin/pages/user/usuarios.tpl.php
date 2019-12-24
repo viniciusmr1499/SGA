@@ -34,7 +34,7 @@
                         <td class="t-cel d-flex justify-content-center align-self-center">
                             <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/ver-perfil"><i class="fas fa-eye"></i></a>
                             <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/editar-usuario"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/remover-usuario" class="confirm fas fa-trash"></a> 
+                            <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/remover-usuario" class="fas fa-trash confirm"></a> 
                         </td>
                     </tr>
                 <?php endforeach; ?> 

@@ -43,7 +43,7 @@
                 <label for="anexo" class="pb-2 t-cel">Anexar imagem: </label>
                 <!-- <input type="file" name="" id="file__img"> -->
                 <!-- <i class="file fas fa-download"></i> -->
-                <p><input type="file" name="file" id="anexo"></p>
+                <p><input type="file" enctype="multipart/form-data" name="file" id="anexo"></p>
             </div>
             
             <div class="col-12 mt-2 pt-1 t-cel">

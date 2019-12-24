@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/dest/bootstrap.min.css">
     <link rel="stylesheet" href="/css/dest/style.css">
     <link rel="stylesheet" href="/resources/pinotify/pnotify.custom.min.css">
+    <link rel="stylesheet" href="/resources/jquery-confirm/dist/jquery-confirm.min.css">
     <title>Painel - SGA</title>
 </head>
 <body id="page-top">   
@@ -39,43 +40,15 @@
             <header>
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <span id="menu-toggle" class="h__toggle fas fa-chevron-circle-left"></span>
-
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="post">
-                        <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" name="pesquisar" placeholder="Pesquisar" aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn" id="button" type="submit">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                        </div>
-                    </form>
+                    <span class="ml-3 navbar-brand text-justify">SGA - Sistema de Gerenciamento Aeris</span>
 
                     <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
+                        <li class="nav-item ghost">
+                            <a href="" target="d-blank" class="nav-link ghost text-gray-600"><i class="fas fa-book-open"></i>&nbsp;Manual SGA</a>
                         </li>
-
                         <!-- Nav Item - Messages -->
                         <div class="topbar-divider d-none d-sm-block"></div>
-
+                        
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -96,6 +69,7 @@
                                 </a>
                             </div>
                         </li>
+                       
 
                     </ul>
 
@@ -128,16 +102,23 @@
     <script src="/js/datatables/jquery.dataTables.min.js"></script>
     <script src="/js/datatables/dataTables.bootstrap4.js"></script>
     <script src="/resources/pinotify/pnotify.custom.min.js"></script>
+    <script src="/resources/jquery-confirm/dist/jquery-confirm.min.js"></script>
     <script>
         <?php flash();?>
-            // const confirmEl = document.querySelector('.confirm');
-            
-            // confirmEl.addEventListener('click',function(e){
-            //     e.preventDefault();
-            //     if(confirm('Tem certeza de que deseja excluir esse material permanentemente?')){
-            //         window.location = e.target.getAttribute('href');
-            //     }
-            // });
+            $(".confirm").each(function() {
+                $(this).confirm({
+                    title: 'Excluir usuário',
+                    content: 'Tem certeza que deseja excluir este usuario?',
+                    buttons: {
+                        confirmar: function () {
+                            location.href = this.$target.attr('href');
+                        },
+                        cancelar: function () {
+                            $.alert('Ação cancelada!');
+                        }
+                    }
+                });
+            });
     </script>
     
 </body>

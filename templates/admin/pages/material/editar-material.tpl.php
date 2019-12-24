@@ -12,31 +12,31 @@
 
             <div class="col-md-3">
                 <label for="Referencia" class="pb-2 t-cel">Referência</label>
-                <input type="text" class="form-control" name="referencia" id="Referencia" value="Referencia">
+                <input type="text" class="form-control" name="referencia" id="Referencia" value="<?php echo $data['page']['referencia'];?>">
             </div>
 
             <div class="col-md-3">
                 <label for="Estoque" class="pb-2 t-cel">Quantidade</label>
-                <input type="number" class="form-control" value="Ex: 1" name="quantidade" id="Estoque">
+                <input type="number" class="form-control" value="<?php echo $data['page']['quantidade'];?>" name="quantidade" id="Estoque">
             </div>
             <div class="col-md-6 mt-4">
                 <label for="Servico" class="pb-2 t-cel">Serviço</label>
-                <input type="text" class="form-control" name="servico" id="Servico" value="Servico">
+                <input type="text" class="form-control" name="servico" id="Servico" value="<?php echo $data['page']['servico'];?>">
             </div>
 
             <div class="col-md-2 mt-4">
                 <label for="codigo" class="pb-2 t-cel">Código</label>
-                <input type="text" class="form-control" name="codigo" id="codigo" value="Código">
+                <input type="text" class="form-control" name="codigo" id="codigo" value="<?php echo $data['page']['codigo'];?>">
             </div>
 
             <div class="col-md-4 mt-4">
                 <label for="Endereco" class="pb-2 t-cel">Endereço</label>
-                <input type="text" class="form-control" name="endereco" id="Endereco" value="Endereco">
+                <input type="text" class="form-control" name="endereco" id="Endereco" value="<?php echo $data['page']['endereco'];?>">
             </div>
 
             <div class="col-md-6 mt-4">
                 <label for="Descricao" class="pb-2 t-cel">Descrição</label>
-                <textarea maxlength="55" name="descricao" value="Digite sua descrição" id="Descricao" cols="30" rows="3" class="form-control"></textarea>
+                <textarea maxlength="55" name="descricao" value="<?php echo $data['page']['equipamento'];?>" id="Descricao" cols="30" rows="3" class="form-control"></textarea>
             </div>
 
             <div class="col-md-6 mt-4">
@@ -46,7 +46,8 @@
             
             <div class="col-12 mt-2 pt-1 t-cel">
                 <hr>
-                <button type="submit" class="btn btn_register">Cadastrar</button>
+                <button type="submit" class="btn btn_register">Atualizar</button>
+                <a href="/admin/pages/materiais" class="btn btn-info">Voltar</a>
             </div>
         </div>
     </div>

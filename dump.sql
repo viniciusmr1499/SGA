@@ -23,14 +23,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sga`.`materiais` (
   `id_material` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `codigo` INT NOT NULL,
+  `codigo` VARCHAR(10) UNIQUE NOT NULL,
   `equipamento` VARCHAR(45) NOT NULL,
   `referencia` VARCHAR(45) NOT NULL,
   `descricao` TEXT NOT NULL,
   `endereco` VARCHAR(45) NOT NULL,
   `servico` VARCHAR(45) NOT NULL,
   `quantidade` INT NOT NULL,
-  `data_de_criacao` DATETIME NOT NULL,
+  `data_de_cadastro` DATETIME NOT NULL,
   `data_de_atualizacao` DATETIME NOT NULL,
   PRIMARY KEY (`id_material`))
 ENGINE = InnoDB;

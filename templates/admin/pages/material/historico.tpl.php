@@ -26,93 +26,21 @@
                             <th class="t-head" style="font-weight:bold" scope="col">Descricao</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Endereco</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Servico</th>
-                            <th class="t-head" style="font-weight:bold" scope="col">Data de inicio</th>
+                            <th class="t-head" style="font-weight:bold" scope="col">Data de cadastro</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <?php foreach($data['itens'] as $item): ?>
                         <tr>
-                            <td class="t-cel">006216</td>
-                            <td class="t-cel">TARTLER</td>
-                            <td class="t-cel">EK80-0020</td>
-                            <td class="t-cel">EK80-0020 Motor dosador de corrente alt </td>
-                            <td class="t-cel">BL1-A1</td>
-                            <td class="t-cel">Lam Vestas - V110</td>
-                            <td><?php echo date('d/m/Y')?></td>
+                            <td class="t-cel"><?php echo $item['codigo']?></td>
+                            <td class="t-cel"><?php echo $item['equipamento']?></td>
+                            <td class="t-cel"><?php echo $item['referencia']?></td>
+                            <td class="t-cel"><?php echo $item['descricao']?></td>
+                            <td class="t-cel"><?php echo $item['endereco']?></td>
+                            <td class="t-cel"><?php echo $item['servico']?></td>
+                            <td class="t-cel d-flex justify-content-center align-sel-center"><?php echo $item['data_de_cadastro']?></td>
                         </tr>
-
-                        <tr>
-                            <td class="t-cel">006846</td>
-                            <td class="t-cel">TARTLER</td>
-                            <td class="t-cel">EK80-0060</td>
-                            <td class="t-cel">EK80-0080 Motor dosador de corrente alt </td>
-                            <td class="t-cel">BL5-A2</td>
-                            <td class="t-cel">Lam Vestas - V150</td>
-                            <td><?php echo date('d/m/Y')?></td>
-                        </tr>
-                        <tr>
-                            <td class="t-cel">006846</td>
-                            <td class="t-cel">TARTLER</td>
-                            <td class="t-cel">EK80-0060</td>
-                            <td class="t-cel">EK80-0080 Motor dosador de corrente alt </td>
-                            <td class="t-cel">BL5-A2</td>
-                            <td class="t-cel">Lam Vestas - V150</td>
-                            <td><?php echo date('d/m/Y')?></td>
-                        </tr>
-                        <tr>
-                            <td class="t-cel">006846</td>
-                            <td class="t-cel">TARTLER</td>
-                            <td class="t-cel">EK80-0060</td>
-                            <td class="t-cel">EK80-0080 Motor dosador de corrente alt </td>
-                            <td class="t-cel">BL5-A2</td>
-                            <td class="t-cel">Lam Vestas - V150</td>
-                            <td><?php echo date('d/m/Y')?></td>
-                        </tr>
-                        <tr>
-                            <td class="t-cel">006846</td>
-                            <td class="t-cel">TARTLER</td>
-                            <td class="t-cel">EK80-0060</td>
-                            <td class="t-cel">EK80-0080 Motor dosador de corrente alt </td>
-                            <td class="t-cel">BL5-A2</td>
-                            <td class="t-cel">Lam Vestas - V150</td>
-                            <td><?php echo date('d/m/Y')?></td>
-                        </tr>
-                        <tr>
-                            <td class="t-cel">006846</td>
-                            <td class="t-cel">TARTLER</td>
-                            <td class="t-cel">EK80-0060</td>
-                            <td class="t-cel">EK80-0080 Motor dosador de corrente alt </td>
-                            <td class="t-cel">BL5-A2</td>
-                            <td class="t-cel">Lam Vestas - V150</td>
-                            <td><?php echo date('d/m/Y')?></td>
-                        </tr>
-                        <tr>
-                            <td class="t-cel">006846</td>
-                            <td class="t-cel">TARTLER</td>
-                            <td class="t-cel">EK80-0060</td>
-                            <td class="t-cel">EK80-0080 Motor dosador de corrente alt </td>
-                            <td class="t-cel">BL5-A2</td>
-                            <td class="t-cel">Lam Vestas - V150</td>
-                            <td><?php echo date('d/m/Y')?></td>
-                        </tr>
-                        <tr>
-                            <td class="t-cel">006846</td>
-                            <td class="t-cel">TARTLER</td>
-                            <td class="t-cel">EK80-0060</td>
-                            <td class="t-cel">EK80-0080 Motor dosador de corrente alt </td>
-                            <td class="t-cel">BL5-A2</td>
-                            <td class="t-cel">Lam Vestas - V150</td>
-                            <td><?php echo date('d/m/Y')?></td>
-                        </tr>
-                        <tr>
-                            <td class="t-cel">teste</td>
-                            <td class="t-cel">TARTLER</td>
-                            <td class="t-cel">EK80-0060</td>
-                            <td class="t-cel">EK80-0080 Motor dosador de corrente alt </td>
-                            <td class="t-cel">BL5-A2</td>
-                            <td class="t-cel">Lam Vestas - V150</td>
-                            <td><?php echo date('d/m/Y')?></td>
-                        </tr>
-                    
+                    <?php endforeach;?>
                     </tbody>
                 </table>
             </div>

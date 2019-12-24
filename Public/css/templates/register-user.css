@@ -75,3 +75,9 @@ a.fa-trash:hover{
     left:7.5%;
     transform:translateY(50%);
 }
+
+#wrapper .obrigatorio{
+    color:#A52A2A;
+    font-weight: bold;
+    font-size:1.1rem;
+}

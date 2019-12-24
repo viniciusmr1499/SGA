@@ -7,7 +7,6 @@ function usuario_get_data($redirecionarError){
     $setor = filter_input(INPUT_POST, 'setor');
     $cargo = filter_input(INPUT_POST, 'cargo');
     $senha = filter_input(INPUT_POST, 'senha');
-
     if(is_null($matricula) or is_null($nome) or is_null($email)){
         flash('Informe os campos obrigatórios','error');
         header('location: ' . $redirecionarError);
@@ -18,13 +17,13 @@ function usuario_get_data($redirecionarError){
 
 function material_get_data($redirecionarError){
     $codigo = filter_input(INPUT_POST, 'codigo');
-    $descricao = filter_input(INPUT_POST, 'descricao');
     $equipamento = filter_input(INPUT_POST, 'equipamento');
     $referencia = filter_input(INPUT_POST, 'referencia');
-    $quantidade = filter_input(INPUT_POST, 'quantidade');
-    $servico = filter_input(INPUT_POST, 'servico');
+    $descricao = filter_input(INPUT_POST, 'descricao');
     $endereco = filter_input(INPUT_POST, 'endereco');
-
+    $servico = filter_input(INPUT_POST, 'servico');
+    $quantidade = filter_input(INPUT_POST, 'quantidade');
+   
     if(is_null($codigo) or is_null($equipamento)){
         flash('Informe os campos obrigatórios','error');
         header('location: ' . $redirecionarError);
@@ -33,7 +32,15 @@ function material_get_data($redirecionarError){
     return compact('codigo','equipamento','referencia','quantidade','servico','endereco','descricao');
 }
 
-// *** FUNCÇÕES ANÔNIMAS PARA OS USUARIOS ***
+// *** FUNÇÃO ANÔNIMAS PARA BUSCA ***
+// $pesquisarAll = function() use($conn){
+//     $sql = 'SELECT * FROM sga.usuarios';
+//     $result = $conn->query($sql);
+
+//     return $result->fetch_all(MYSQLI_ASSOC);
+// };
+
+// *** FUNÇÕES ANÔNIMAS PARA OS USUARIOS ***
 
 $listarUsuario = function() use($conn){
     // buscar todos os usuarios
@@ -92,14 +99,23 @@ $verUsuario = function($id) use ($conn){
     return $result->fetch_assoc();
 };
 
+
 // *** FUNCÇÕES ANÔNIMAS PARA OS MATERIAIS ***
 $listarMateriais = function() use($conn){
+    // Listagem de materiais
+    $sql = 'SELECT * FROM materiais WHERE quantidade > 0';
+    $result = $conn->query($sql);
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+
+};
+
+$historico = function() use($conn){
     // Listagem de materiais
     $sql = 'SELECT * FROM materiais';
     $result = $conn->query($sql);
 
     return $result->fetch_all(MYSQLI_ASSOC);
-
 };
 
 $criarMaterial = function() use ($conn){
@@ -117,11 +133,11 @@ $criarMaterial = function() use ($conn){
 
 $editarMaterial = function($id) use ($conn){
     //EDITAR MATERIAL
-    $data = material_get_data('/admin/pages/' . $id . '/editar-material');
+    $data = material_get_data('/admin/pages/materiais');
 
     $sql = 'UPDATE materiais SET codigo=?, equipamento=?,referencia=?,descricao=?,endereco=?,servico=?,quantidade=?,data_de_atualizacao=NOW() WHERE id_material = ?';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssssssi',$data['codigo'],$data['equipamento'],$data['referencia'],$data['descricao'],$data['endereco'],$data['servico'],$data['quantidade']);
+    $stmt->bind_param('ssssssii',$data['codigo'],$data['equipamento'],$data['referencia'],$data['descricao'],$data['endereco'],$data['servico'],$data['quantidade'],$id);
     
     flash('Material foi atualizado com sucesso!', 'success');
 

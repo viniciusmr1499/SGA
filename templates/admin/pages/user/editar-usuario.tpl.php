@@ -43,6 +43,7 @@
             <div class="col-12 mt-2 pt-1 t-cel">
                 <hr>
                 <button type="submit" class="btn btn_register">Salvar</button>
+                <a href="/admin/pages" class="btn btn-info">Voltar</a>
             </div>
         </div>
     </div>

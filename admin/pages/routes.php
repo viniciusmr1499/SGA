@@ -68,9 +68,9 @@ else if($params = resolve('/admin/pages/(\d+)/editar-material')){
         $editarMaterial($params[1]);
         return header('location: /admin/pages/materiais');
     }
-    $page = $editarMaterial($params[1]);
+    
+    $page = $verMaterial($params[1]);
     render('admin/pages/material/editar-material','admin',['page' => $page]);
-
 }
 // ↓↓ REMOVER MATERIAL ↓↓
 else if($params = resolve('/admin/pages/(\d+)/remover-material')){
@@ -79,11 +79,16 @@ else if($params = resolve('/admin/pages/(\d+)/remover-material')){
 }
 // VISUALIZAR HISTÓRICO
 else if(resolve('/admin/pages/historico')){
-    render('admin/pages/material/historico','admin');
+    $itens = $historico();
+    render('admin/pages/material/historico','admin',['itens' => $itens]);
 }
 // VISUALIZAR LISTAGEM DE MATERIAIS
 else if(resolve('/admin/pages/materiais')){
     $lista = $listarMateriais();
     render('admin/pages/material/materiais','admin',['lista' => $lista]);
-}
+}// VISUALIZAR BUSCA
+// else if(resolve('/admin/pages/resultado-busca')){
+//     $itens = $pesquisarAll();
+//     render('admin/pages/resultado-busca','admin',['itens' => $itens]);
+// }
 

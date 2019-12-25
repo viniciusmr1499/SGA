@@ -40,11 +40,11 @@
             <header>
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <span id="menu-toggle" class="h__toggle fas fa-chevron-circle-left"></span>
-                    <span class="ml-3 navbar-brand text-justify">SGA - Sistema de Gerenciamento Aeris</span>
+                    <span class="ml-3 navbar-brand text-gray-700 text-justify">SGA - Sistema de Gerenciamento Aeris</span>
 
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item ghost">
-                            <a href="" target="d-blank" class="nav-link ghost text-gray-600"><i class="fas fa-book-open"></i>&nbsp;Manual SGA</a>
+                            <a href="" target="" class="nav-link ghost text-gray-600"><i class="fas fa-book-open"></i>&nbsp;Manual SGA</a>
                         </li>
                         <!-- Nav Item - Messages -->
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -109,6 +109,21 @@
                 $(this).confirm({
                     title: 'Excluir usuário',
                     content: 'Tem certeza que deseja excluir este usuario?',
+                    buttons: {
+                        confirmar: function () {
+                            location.href = this.$target.attr('href');
+                        },
+                        cancelar: function () {
+                            $.alert('Ação cancelada!');
+                        }
+                    }
+                });
+            });
+
+            $(".confirmMaterial").each(function() {
+                $(this).confirm({
+                    title: 'Excluir material',
+                    content: 'Tem certeza que deseja excluir este material?',
                     buttons: {
                         confirmar: function () {
                             location.href = this.$target.attr('href');

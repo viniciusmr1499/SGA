@@ -149,8 +149,7 @@ $removerMaterial = function($id) use ($conn){
     $sql = 'DELETE FROM materiais WHERE id_material = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i',$id);
-
-    // flash('Material foi excluído com sucesso!', 'success');
+    flash('Material foi excluído com sucesso!', 'success');
 
     return $stmt->execute();
 };

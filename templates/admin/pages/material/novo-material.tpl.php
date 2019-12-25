@@ -36,7 +36,7 @@
 
             <div class="col-md-6 mt-4">
                 <label for="Descricao" class="pb-2 t-cel">Descrição:</label>
-                <textarea maxlength="55" name="descricao"  required placeholder="Digite sua descrição" id="Descricao" cols="30" rows="3" class="form-control"></textarea>
+                <textarea maxlength="55" name="descricao" placeholder="Digite sua descrição" id="Descricao" cols="30" rows="3" class="form-control"></textarea>
             </div>
 
             <div class="col-md-6 mt-4">
@@ -49,7 +49,7 @@
             <div class="col-12 mt-2 pt-1 t-cel">
                 <hr>
                 <button type="submit" class="btn btn_register">Cadastrar</button>
-                <a href="/admin/pages" class="btn btn-info">Voltar</a>
+                <a href="/admin/pages/materiais" class="btn btn-info">Voltar</a>
             </div>
         </div>
     </div>

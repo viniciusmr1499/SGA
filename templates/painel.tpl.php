@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/dest/style.css">
     <link rel="stylesheet" href="/resources/pinotify/pnotify.custom.min.css">
     <link rel="stylesheet" href="/resources/jquery-confirm/dist/jquery-confirm.min.css">
-    <title>Painel ADM- SGA</title>
+    <title>Painel - SGA</title>
 </head>
 <body id="page-top">   
     
@@ -16,20 +16,18 @@
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
                 <div class="sidebar-heading">
-                    <a href="/admin">
+                    <a href="/painel">
                         <img src="/img/logo.png" style="padding-bottom:1rem;"height="auto" width="130px"alt="Logo"> 
                     </a>   
                 </div>
 
                 <div class="list-group list-group-flush">
-                    <a href="/admin" class="list-group-item"><i class="fas fa-home"></i> Início</a>
-                    <a href="/admin/users" class="list-group-item"><i class="fas fa-user"></i> Usuários</a>
-                    
+                    <a href="/painel" class="list-group-item"><i class="fas fa-home"></i> Início</a>
                     <div class="dropdown">
-                        <a href="materiais.php" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Inventário</a>
+                        <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Inventário</a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
-                            <a href="/admin/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Cadastro de Ativos</a>
-                            <a href="/admin/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>   
+                            <a href="/painel/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Cadastro de Ativos</a>
+                            <a href="/painel/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>   
                         </div>
                     </div>
                 </div>

@@ -14,8 +14,6 @@ require __DIR__ . '/src/flash.php';
 if(resolve('/admin/?(.*)')){
     require __DIR__ . '/admin/routes.php';
 
-}else if(resolve('/(.*)')){
-
-    require_once __DIR__ . '/site/routes.php';
-
+}else if(resolve('/painel/?(.*)')){
+    require_once __DIR__ . '/painel/routes.php';
 }

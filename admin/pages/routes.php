@@ -3,50 +3,10 @@
 include_once __DIR__ . '/db.php';
 
 
-
-// ******************** USUÁRIOS ************************ // 
-
-// LISTAGEM DE USUARIOS
-if(resolve('/admin/pages')){
-    $lista = $listarUsuario();
-    render('admin/pages/user/usuarios','admin',['lista' => $lista]);
-}
-
-// ↓↓ CRIAR  USUARIO ↓↓
-else if(resolve('/admin/pages/novo-usuario')){
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $criarUsuario();
-        return header('location: /admin/pages');
-    }
-    render('admin/pages/user/novo-usuario','admin');
-}
-// VER PERFIL DE UM USUÁRIO
-else if($params = resolve('/admin/pages/(\d+)/ver-perfil')){
-    $page = $verUsuario($params[1]);
-    render('admin/pages/user/ver-perfil','admin',['page' => $page]);
-}
-
-// ↓↓ EDITAR USUARIO ↓↓
-else if($params = resolve('/admin/pages/(\d+)/editar-usuario')){
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $editarUsuario($params[1]);
-        return header('location: /admin/pages');
-    }
-    $page = $verUsuario($params[1]);
-
-    render('admin/pages/user/editar-usuario','admin',['page' => $page]);
-}
-// REMOVER USUARIO
-else if($params = resolve('/admin/pages/(\d+)/remover-usuario')){
-    $removerUsuario($params[1]);
-    return header('location: /admin/pages');
-}
-
-
 // ************************** MATERIAIS *******************************
 
 // ↓↓ CRIAR  MATERIAL ↓↓
-else if(resolve('/admin/pages/novo-material')){
+if(resolve('/admin/pages/novo-material')){
     
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $criarMaterial();
@@ -86,9 +46,4 @@ else if(resolve('/admin/pages/historico')){
 else if(resolve('/admin/pages/materiais')){
     $lista = $listarMateriais();
     render('admin/pages/material/materiais','admin',['lista' => $lista]);
-}// VISUALIZAR BUSCA
-// else if(resolve('/admin/pages/resultado-busca')){
-//     $itens = $pesquisarAll();
-//     render('admin/pages/resultado-busca','admin',['itens' => $itens]);
-// }
-
+}

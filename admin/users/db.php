@@ -7,6 +7,7 @@ function usuario_get_data($redirecionarError){
     $setor = filter_input(INPUT_POST, 'setor');
     $cargo = filter_input(INPUT_POST, 'cargo');
     $senha = filter_input(INPUT_POST, 'senha');
+
     if(is_null($matricula) or is_null($nome) or is_null($email)){
         flash('Informe os campos obrigatórios','error');
         header('location: ' . $redirecionarError);
@@ -30,6 +31,15 @@ $criarUsuario = function() use ($conn){
     $data = usuario_get_data('/admin/pages/novo-usuario');
 
     $sql = 'INSERT INTO usuarios (matricula,nome,email,setor,cargo,senha,data_de_criacao,data_de_atualizacao) VALUES (?,?,?,?,?,?,NOW(),NOW())';
+    
+    if(is_null($data['senha'])){
+        flash('Informe o campo email','error');
+        header('location: /admin/users/novo-usuario');
+        die();
+    }
+    
+    $data['senha'] = password_hash($data['senha'],PASSWORD_DEFAULT);
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('ssssss',$data['matricula'],$data['nome'],$data['email'],$data['setor'],$data['cargo'],$data['senha']);
     flash('Usuário foi criado com sucesso!', 'success');
@@ -44,7 +54,8 @@ $editarUsuario = function($id) use ($conn){
     $sql = 'UPDATE usuarios SET matricula = ?, nome=?,email=?,setor=?,cargo=?,senha=md5(?),data_de_atualizacao=NOW() WHERE id_usuario = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('ssssssi',$data['matricula'],$data['nome'],$data['email'],$data['setor'],$data['cargo'],$data['senha'],$id);
-
+    
+    
     flash('Usuário foi atualizado com sucesso!', 'success');
 
     return $stmt->execute();
@@ -68,7 +79,7 @@ $verUsuario = function($id) use ($conn){
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i',$id);
     $stmt->execute();
-
     $result = $stmt->get_result();
+
     return $result->fetch_assoc();
 };

@@ -8,7 +8,7 @@
         </div>
         
         <div class="ml-auto mr-3">
-            <a href="/admin/pages/novo-usuario" class="btn btn__sum"><i class="fas fa-plus"></i></a>
+            <a href="/admin/users/novo-usuario" class="btn btn__sum"><i class="fas fa-plus"></i></a>
         </div>
 
         <div class="table-responsive mt-3">
@@ -32,9 +32,9 @@
                         <td class="t-cel"><?php echo $lista['setor']?></td>
                         <td class="t-cel"><?php echo $lista['cargo']?></td>
                         <td class="t-cel d-flex justify-content-center align-self-center">
-                            <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/ver-perfil"><i class="fas fa-eye"></i></a>
-                            <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/editar-usuario"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="/admin/pages/<?php echo $lista['id_usuario']; ?>/remover-usuario" class="fas fa-trash confirm"></a> 
+                            <a href="/admin/users/<?php echo $lista['id_usuario']; ?>/ver-perfil"><i class="fas fa-eye"></i></a>
+                            <a href="/admin/users/<?php echo $lista['id_usuario']; ?>/editar-usuario"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="/admin/users/<?php echo $lista['id_usuario']; ?>/remover-usuario" class="fas fa-trash confirm"></a> 
                         </td>
                     </tr>
                 <?php endforeach; ?> 

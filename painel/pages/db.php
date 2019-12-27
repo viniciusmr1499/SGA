@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function material_get_data($redirecionarError){
     $codigo = filter_input(INPUT_POST, 'codigo');
@@ -37,7 +37,7 @@ $historico = function() use($conn){
 
 $criarMaterial = function() use ($conn){
     // CRIAR MATERIAL
-    $data = material_get_data('/admin/pages/novo-material');
+    $data = material_get_data('/painel/pages/novo-material');
 
     $sql = 'INSERT INTO materiais (codigo,equipamento,referencia,descricao,endereco,servico,quantidade,data_de_cadastro,data_de_atualizacao) VALUES (?,?,?,?,?,?,?,NOW(),NOW())';
     $stmt = $conn->prepare($sql);
@@ -50,7 +50,7 @@ $criarMaterial = function() use ($conn){
 
 $editarMaterial = function($id) use ($conn){
     //EDITAR MATERIAL
-    $data = material_get_data('/admin/pages/materiais');
+    $data = material_get_data('/painel/pages/materiais');
 
     $sql = 'UPDATE materiais SET codigo=?, equipamento=?,referencia=?,descricao=?,endereco=?,servico=?,quantidade=?,data_de_atualizacao=NOW() WHERE id_material = ?';
     $stmt = $conn->prepare($sql);

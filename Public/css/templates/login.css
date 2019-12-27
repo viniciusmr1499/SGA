@@ -20,8 +20,6 @@
 
 }
 
-
-
 .box{
     box-shadow:1px 1px 12px rgba(0,0,0,.2);
     width:360px;
@@ -141,4 +139,14 @@
     letter-spacing:1.4px;
     text-align: center;
     transition: .5s;
+}
+
+.avatar{
+    padding:.5rem 1.2rem;
+    box-sizing:border-box;
+    width:12rem;
+    display:flex;
+    position:relative;
+    margin:0 auto;
+    transform:translateY(-20%);
 }

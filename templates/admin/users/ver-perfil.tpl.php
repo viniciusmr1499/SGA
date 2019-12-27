@@ -33,7 +33,7 @@
             
             <div class="col-12 mt-2 pt-1 t-cel">
                 <hr>
-                <a href="/admin/pages" class="btn btn_register">Voltar</a>
+                <a href="/admin/users" class="btn btn_register">Voltar</a>
             </div>
         </div>
     </div>

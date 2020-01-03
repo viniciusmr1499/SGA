@@ -5,21 +5,30 @@ $login = function () use ($conn) {
     $senha = mysqli_real_escape_string($conn,$_POST['senha']);
 
     if(empty($_POST['email']) || empty($_POST['senha'])){
-        header('location: /auth/login');
-        exit();
+        flash('Preencha todos os campos!', 'warning');
+        
+        return false;
     }
 
     $sql = "SELECT * FROM usuarios WHERE email  = '{$email}' AND senha = md5('{$senha}')";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_num_rows($result);
-
+    
+    $r = $result->fetch_assoc();
+    $nomeCompleto = $r['nome'];
+    $nivel = $r['nivel'];
     
     if($row == 1){
+        $nome = explode(" ",$nomeCompleto);
+        $nome = $nome[0] . ' ' . $nome[1];
         $_SESSION['usuario'] = $email;
-        header('location: /admin');
-        exit;
+        $_SESSION['nome'] = $nome;
+        $_SESSION['nivel'] = $nivel;
+        
+        return true;
     }else{
-        header('location: /auth/login');
-        exit;
+        flash('Dados inválidos', 'error');
+        return false;
     }
+    
 };

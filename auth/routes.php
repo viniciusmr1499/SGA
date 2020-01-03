@@ -4,22 +4,25 @@ require __DIR__ . '/db.php';
 
 if (resolve('/auth/login')) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if ($login()) {
-            flash('Autenticado com sucesso', 'success');
-            return header('location: /admin');
+        if($login()){
+            if ($_SESSION['nivel'] == 1) {
+                flash('Autenticado com sucesso', 'success');
+                
+                return header('location: /admin');
+
+            }else if($_SESSION['nivel'] == 0){
+                flash('Autenticado com sucesso', 'success');
+
+                return header('location: /painel');
+            }
         }
-        flash('Dados inválidos', 'error');
-        
     }
-    
     render('auth/login', 'login');
+    
 }
 
 // ROTAS
-if(resolve('/auth/login')){
-    render('/auth/login','login');
-
-}else if(resolve('/auth/logout')){
+else if(resolve('/auth/logout')){
     
     render('/auth/logout','login');
 

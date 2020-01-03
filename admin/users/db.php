@@ -30,15 +30,13 @@ $criarUsuario = function() use ($conn){
     //CRIAR USUARIO
     $data = usuario_get_data('/admin/pages/novo-usuario');
 
-    $sql = 'INSERT INTO usuarios (matricula,nome,email,setor,cargo,senha,data_de_criacao,data_de_atualizacao) VALUES (?,?,?,?,?,?,NOW(),NOW())';
+    $sql = 'INSERT INTO usuarios (matricula,nome,email,setor,cargo,senha,data_de_criacao,data_de_atualizacao) VALUES (?,?,?,?,?,md5(?),NOW(),NOW())';
     
     if(is_null($data['senha'])){
         flash('Informe o campo email','error');
         header('location: /admin/users/novo-usuario');
         die();
     }
-    
-    $data['senha'] = password_hash($data['senha'],PASSWORD_DEFAULT);
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('ssssss',$data['matricula'],$data['nome'],$data['email'],$data['setor'],$data['cargo'],$data['senha']);

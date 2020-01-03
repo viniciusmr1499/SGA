@@ -20,6 +20,7 @@
                         <th class="t-head" scope="col">E-mail</th>
                         <th class="t-head" scope="col">Setor</th>
                         <th class="t-head" scope="col">Cargo</th>
+                        <th class="t-head" scope="col">Data de cadastro</th>
                         <th class="t-head" scope="col">Status</th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                         <td class="t-cel"><?php echo $lista['email']?></td>
                         <td class="t-cel"><?php echo $lista['setor']?></td>
                         <td class="t-cel"><?php echo $lista['cargo']?></td>
+                        <td class="t-cel"><?php echo $lista['data_de_criacao']?></td>
                         <td class="t-cel d-flex justify-content-center align-self-center">
                             <a href="/admin/users/<?php echo $lista['id_usuario']; ?>/ver-perfil"><i class="fas fa-eye"></i></a>
                             <a href="/admin/users/<?php echo $lista['id_usuario']; ?>/editar-usuario"><i class="fas fa-pencil-alt"></i></a>

@@ -1,4 +1,4 @@
-<form class="f-register pl-3" method="post">
+<form name="formuser" class="f-register pl-3" method="post">
     <div class="col">
         <h1 class="text-title pt-2">Cadastro de Usuário</h1>
         <hr class="pb-4">
@@ -36,12 +36,12 @@
             </div>
             <div class="col-md-6 mt-4">
                 <label for="confirmar-senha" class="pb-2 t-cel">Confirmar Senha:</label><span class="obrigatorio"> *</span>
-                <input type="password" class="form-control" required="true" name="senha" id="confirmar-senha">
+                <input type="password" class="form-control" required="true" name="rep_senha" id="confirmar-senha">
             </div>
             
             <div class="col-12 mt-2 pt-1 t-cel">
                 <hr>
-                <button type="submit" class="btn btn_register">Cadastrar</button>
+                <button type="submit" class="btn btn_register" onclick="return validar();">Cadastrar</button>
                 <a href="/admin/users" class="btn btn-info">Voltar</a>
             </div>
         </div>

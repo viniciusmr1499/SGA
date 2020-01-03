@@ -49,7 +49,7 @@
                         
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="/auth/logout" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $admin = 'Vinicius'; echo "Olá, " . $admin ?></span>
                                 <img class="img-profile rounded-circle" src="/img/me.png">
                             </a>
@@ -103,25 +103,12 @@
     <script src="/resources/jquery-confirm/dist/jquery-confirm.min.js"></script>
     <script>
         <?php flash();?>
-            $(".confirm").each(function() {
-                $(this).confirm({
-                    title: 'Excluir usuário',
-                    content: 'Tem certeza que deseja excluir este usuario?',
-                    buttons: {
-                        confirmar: function () {
-                            location.href = this.$target.attr('href');
-                        },
-                        cancelar: function () {
-                            $.alert('Ação cancelada!');
-                        }
-                    }
-                });
-            });
-
             $(".confirmMaterial").each(function() {
                 $(this).confirm({
                     title: 'Excluir material',
                     content: 'Tem certeza que deseja excluir este material?',
+                    type: 'dark',
+                    typeAnimated: true,
                     buttons: {
                         confirmar: function () {
                             location.href = this.$target.attr('href');
@@ -133,30 +120,7 @@
                 });
             });
     </script>
-    <script>
-        // document.addEventListener('trix-attachment-add',function(){
-        //     const attachment = event.attachment;
-
-        //     if(!attachment.file){
-        //         return
-        //     } 
-
-        //     const form = new FormData();
-        //     form.append('file',attachment.file);
-
-        //     $.ajax({
-        //         url: '/admin/upload/image',
-        //         method: 'post',
-        //         data, form,
-        //         contentType:false,
-        //         processData: false,
-        //     }).done(function(){
-        //         console.log('deu certo');
-        //     }).fail(function(){
-        //         console.log('deu errado!');
-        //     });
-        // });
-    </script>
+    
     
 </body>
 </html>

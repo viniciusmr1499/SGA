@@ -1,6 +1,6 @@
 <?php 
 
- if(resolve('/admin')){
+if(resolve('/admin')){
     render('/admin/home','admin');
 
 }else if(resolve('/admin/pages.*')){
@@ -9,8 +9,9 @@
 }else if(resolve('/admin/users.*')){
     include_once  __DIR__ . '/users/routes.php';
 
-}else if(resolve('/admin/login')){
-    render('/admin/auth/login','login');
+}
+else if(resolve('/login')){
+    render('/auth/login','login');
 }
 else{
     http_response_code(404);

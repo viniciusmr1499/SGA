@@ -44,7 +44,7 @@
 
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item ghost">
-                            <a href="" target="" class="nav-link ghost text-gray-600"><i class="fas fa-book-open"></i>&nbsp;Manual SGA</a>
+                            <a href="#" target="" class="nav-link ghost text-gray-600"><i class="fas fa-book-open"></i>&nbsp;Manual SGA</a>
                         </li>
                         <!-- Nav Item - Messages -->
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -52,25 +52,18 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $admin = 'Vinicius'; echo "Olá, " . $admin ?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo 'Olá, ' . $_SESSION['usuario'];?></span>
                                 <img class="img-profile rounded-circle" src="/img/me.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/admin/pages/1/ver-perfil">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Perfil
-                                </a>
-                                
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="/auth/logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Sair
                                 </a>
+                                
                             </div>
                         </li>
-                       
-
                     </ul>
 
                 </nav>
@@ -109,6 +102,8 @@
                 $(this).confirm({
                     title: 'Excluir usuário',
                     content: 'Tem certeza que deseja excluir este usuario?',
+                    type: 'dark',
+                    typeAnimated: true,
                     buttons: {
                         confirmar: function () {
                             location.href = this.$target.attr('href');
@@ -124,6 +119,8 @@
                 $(this).confirm({
                     title: 'Excluir material',
                     content: 'Tem certeza que deseja excluir este material?',
+                    type: 'dark',
+                    typeAnimated: true,
                     buttons: {
                         confirmar: function () {
                             location.href = this.$target.attr('href');
@@ -134,6 +131,72 @@
                     }
                 });
             });
+
+            function validar(){
+                const senha = formuser.senha.value;
+                const rep_senha = formuser.rep_senha.value;
+
+                if(senha == '' || senha.length <=5){
+                    $.alert({
+                        title: 'ATENÇÃO!',
+                        content: 'Preencha o campo "SENHA" com no mínimo 6 caracteres!',
+                        type: 'orange',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: 'Fechar',
+                                btnClass: 'btn-warning',
+                                close: function(){
+                                }
+                            },
+                        }
+                    });
+
+                    formuser.senha.focus();
+                    return false;
+                }
+
+                if(rep_senha == '' || rep_senha.length <=5){
+
+                    $.alert({
+                        title: 'ATENÇÃO!',
+                        content: 'Preencha o campo "CONFIRMAR SENHA" com no mínimo 6 caracteres!',
+                        type: 'orange',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: 'Fechar',
+                                btnClass: 'btn-warning',
+                                close: function(){
+                                }
+                            },
+                        }
+                    });
+
+                    formuser.rep_senha.focus();
+                    return false;
+                }
+
+                if(senha != rep_senha){
+                    $.alert({
+                        title: 'Inválido!',
+                        content: 'Senhas diferentes',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: 'Fechar',
+                                btnClass: 'btn-red',
+                                close: function(){
+                                }
+                            },
+                        }
+                    });
+
+                    formuser.rep_senha.focus();
+                    return false;
+                }
+            }
     </script>
     <script>
         // document.addEventListener('trix-attachment-add',function(){

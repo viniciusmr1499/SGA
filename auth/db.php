@@ -17,14 +17,16 @@ $login = function () use ($conn) {
     $r = $result->fetch_assoc();
     $nomeCompleto = $r['nome'];
     $nivel = $r['nivel'];
-    
+    $id = $r['id_usuario'];
+
     if($row == 1){
         $nome = explode(" ",$nomeCompleto);
         $nome = $nome[0] . ' ' . $nome[1];
         $_SESSION['usuario'] = $email;
         $_SESSION['nome'] = $nome;
         $_SESSION['nivel'] = $nivel;
-        
+        $_SESSION['id_usuario'] = $id;
+
         return true;
     }else{
         flash('Dados inválidos', 'error');

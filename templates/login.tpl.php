@@ -19,11 +19,13 @@
     <script src="/js/popper.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/efect-field.js"></script>
+    <script src="/js/alertas.js"></script>
     <script src="/resources/pinotify/pnotify.custom.min.js"></script>
     <script src="/resources/jquery-confirm/dist/jquery-confirm.min.js"></script>
     <script>
         <?php flash();?>
     </script>
+
     
 </body>
 </html>

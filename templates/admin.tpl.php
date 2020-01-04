@@ -53,15 +53,19 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo 'Olá, ' . $_SESSION['nome'];?></span>
-                                <img class="img-profile rounded-circle" src="/img/me.png">
+                                <!-- <img class="img-profile rounded-circle" src="/img/me.png"> -->
+                                <i class="fas fa-user-circle" style="font-size:1.8rem"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/admin/users/<?php echo $_SESSION['id_usuario'];?>/perfil">
+                                    <i class="fas fa-address-card mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a>
                                 <a class="dropdown-item" href="/auth/logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Sair
                                 </a>
-                                
                             </div>
                         </li>
                     </ul>
@@ -92,111 +96,13 @@
     <script src="/js/efect-toggle.js"></script>
     <script src="/js/filter.js"></script>
     <script src="/js/admin.js"></script>
+    <script src="/js/alertas.js"></script>
     <script src="/js/datatables/jquery.dataTables.min.js"></script>
     <script src="/js/datatables/dataTables.bootstrap4.js"></script>
     <script src="/resources/pinotify/pnotify.custom.min.js"></script>
     <script src="/resources/jquery-confirm/dist/jquery-confirm.min.js"></script>
     <script>
         <?php flash();?>
-            $(".confirm").each(function() {
-                $(this).confirm({
-                    title: 'Excluir usuário',
-                    content: 'Tem certeza que deseja excluir este usuario?',
-                    type: 'dark',
-                    typeAnimated: true,
-                    buttons: {
-                        confirmar: function () {
-                            location.href = this.$target.attr('href');
-                        },
-                        cancelar: function () {
-                            $.alert('Ação cancelada!');
-                        }
-                    }
-                });
-            });
-
-            $(".confirmMaterial").each(function() {
-                $(this).confirm({
-                    title: 'Excluir material',
-                    content: 'Tem certeza que deseja excluir este material?',
-                    type: 'dark',
-                    typeAnimated: true,
-                    buttons: {
-                        confirmar: function () {
-                            location.href = this.$target.attr('href');
-                        },
-                        cancelar: function () {
-                            $.alert('Ação cancelada!');
-                        }
-                    }
-                });
-            });
-
-            function validar(){
-                const senha = formuser.senha.value;
-                const rep_senha = formuser.rep_senha.value;
-
-                if(senha == '' || senha.length <=5){
-                    $.alert({
-                        title: 'ATENÇÃO!',
-                        content: 'Preencha o campo "SENHA" com no mínimo 6 caracteres!',
-                        type: 'orange',
-                        typeAnimated: true,
-                        buttons: {
-                            tryAgain: {
-                                text: 'Fechar',
-                                btnClass: 'btn-warning',
-                                close: function(){
-                                }
-                            },
-                        }
-                    });
-
-                    formuser.senha.focus();
-                    return false;
-                }
-
-                if(rep_senha == '' || rep_senha.length <=5){
-
-                    $.alert({
-                        title: 'ATENÇÃO!',
-                        content: 'Preencha o campo "CONFIRMAR SENHA" com no mínimo 6 caracteres!',
-                        type: 'orange',
-                        typeAnimated: true,
-                        buttons: {
-                            tryAgain: {
-                                text: 'Fechar',
-                                btnClass: 'btn-warning',
-                                close: function(){
-                                }
-                            },
-                        }
-                    });
-
-                    formuser.rep_senha.focus();
-                    return false;
-                }
-
-                if(senha != rep_senha){
-                    $.alert({
-                        title: 'Inválido!',
-                        content: 'Senhas diferentes',
-                        type: 'red',
-                        typeAnimated: true,
-                        buttons: {
-                            tryAgain: {
-                                text: 'Fechar',
-                                btnClass: 'btn-red',
-                                close: function(){
-                                }
-                            },
-                        }
-                    });
-
-                    formuser.rep_senha.focus();
-                    return false;
-                }
-            }
     </script>
     <script>
         // document.addEventListener('trix-attachment-add',function(){
@@ -222,6 +128,7 @@
         //     });
         // });
     </script>
+    
     
 </body>
 </html>

@@ -17,7 +17,44 @@ function material_get_data($redirecionarError){
     return compact('codigo','equipamento','referencia','quantidade','servico','endereco','descricao');
 }
 
-// *** FUNCÇÕES ANÔNIMAS PARA OS MATERIAIS ***
+function usuario_get_data_perfil(){
+    $senha = filter_input(INPUT_POST, 'senha');
+
+    if(is_null($senha)){
+        flash('Senha vazia','error');
+        header('location: ' . $redirecionarError);
+        die();
+    }
+    return compact('senha');
+}
+// *** FUNÇÕES ANÔNIMAS PARA PERFIL DE USUÁRIO ***
+
+$verUsuario = function($id) use ($conn){
+    // VISUALIZAR UM USUARIO POR VEZ
+
+    $sql = 'SELECT * FROM usuarios WHERE id_usuario = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i',$id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_assoc();
+};
+$editarPerfil = function($id) use ($conn){
+    // EDITAR USUARIO
+    $data = usuario_get_data_perfil();
+
+    $sql = 'UPDATE usuarios SET senha=md5(?),data_de_atualizacao=NOW() WHERE id_usuario = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('si',$data['senha'],$id);
+    
+    
+    flash('Dados atualizados com sucesso!', 'success');
+
+    return $stmt->execute();
+};
+
+// *** FUNÇÕES ANÔNIMAS PARA OS MATERIAIS ***
 $listarMateriais = function() use($conn){
     // Listagem de materiais
     $sql = 'SELECT * FROM materiais WHERE quantidade > 0';

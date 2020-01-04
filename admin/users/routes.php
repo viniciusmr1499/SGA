@@ -21,13 +21,25 @@ else if(resolve('/admin/users/novo-usuario')){
     }
     render('admin/users/novo-usuario','admin');
 }
+// PERFIL 
+else if($params = resolve('/admin/users/(\d+)/perfil')){
+    // EDITAR PERFIL(SENHA DO USUARIO)
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $editarPerfil($params[1]);                
+       
+        return header('location: /admin');
+
+    }
+    
+    $page = $verUsuario($params[1]);
+
+    render('admin/users/perfil','admin',['page' => $page]);
+}
 // VER PERFIL DE UM USUÁRIO
 else if($params = resolve('/admin/users/(\d+)/ver-perfil')){
     $page = $verUsuario($params[1]);
+
     render('admin/users/ver-perfil','admin',['page' => $page]);
-
-    // render('admin/users/ver-usuario','admin');
-
 }
 
 // ↓↓ EDITAR USUARIO ↓↓

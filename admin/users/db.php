@@ -16,6 +16,17 @@ function usuario_get_data($redirecionarError){
     return compact('matricula','nome','email','setor','cargo','senha');
 }
 
+function usuario_get_data_perfil(){
+    $senha = filter_input(INPUT_POST, 'senha');
+
+    if(is_null($senha)){
+        flash('Senha vazia','error');
+        header('location: ' . $redirecionarError);
+        die();
+    }
+    return compact('senha');
+}
+
 
 $listarUsuario = function() use($conn){
     // buscar todos os usuarios
@@ -47,7 +58,7 @@ $criarUsuario = function() use ($conn){
 
 $editarUsuario = function($id) use ($conn){
     // EDITAR USUARIO
-    $data = usuario_get_data('/admin/pages/' . $id);
+    $data = usuario_get_data('/admin');
 
     $sql = 'UPDATE usuarios SET matricula = ?, nome=?,email=?,setor=?,cargo=?,senha=md5(?),data_de_atualizacao=NOW() WHERE id_usuario = ?';
     $stmt = $conn->prepare($sql);
@@ -55,6 +66,20 @@ $editarUsuario = function($id) use ($conn){
     
     
     flash('Usuário foi atualizado com sucesso!', 'success');
+
+    return $stmt->execute();
+};
+
+$editarPerfil = function($id) use ($conn){
+    // EDITAR USUARIO
+    $data = usuario_get_data_perfil();
+
+    $sql = 'UPDATE usuarios SET senha=md5(?),data_de_atualizacao=NOW() WHERE id_usuario = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('si',$data['senha'],$id);
+    
+    
+    flash('Dados atualizados com sucesso!', 'success');
 
     return $stmt->execute();
 };

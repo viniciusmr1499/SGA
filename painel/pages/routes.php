@@ -2,7 +2,19 @@
 
 include_once __DIR__ . '/db.php';
 
+// ************************* PERFIL DE USUÁRIO ************************
+if($params = resolve('/painel/pages/(\d+)/perfil')){
+    // EDITAR PERFIL(SENHA DO USUARIO)
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $editarPerfil($params[1]);
 
+        return header('location: /painel');
+    }
+    
+    $page = $verUsuario($params[1]);
+
+    render('painel/pages/perfil','painel',['page' => $page]);
+}
 // ************************** MATERIAIS *******************************
 
 // ↓↓ CRIAR  MATERIAL ↓↓
@@ -15,7 +27,6 @@ if(resolve('/painel/pages/novo-material')){
 
     render('painel/pages/material/novo-material','painel');
 }
-
 // ↓↓ VER UM MATERIAL POR VEZ ↓↓
 else if($params = resolve('/painel/pages/(\d+)/ver-material')){
     $page = $verMaterial($params[1]);

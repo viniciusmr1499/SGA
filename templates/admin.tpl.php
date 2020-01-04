@@ -29,8 +29,9 @@
                         <a href="materiais.php" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Inventário</a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
                             <a href="/admin/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Cadastro de Ativos</a>
-                            <a href="/admin/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>   
+                            <a href="/admin/pages/logistica-material" class="list-group-item" style="letter-spacing:1.2px;"><i class="fas fa-dolly"></i> Entrada/Saida</a>
                         </div>
+                        <a href="/admin/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>   
                     </div>
                 </div>
                 
@@ -96,39 +97,11 @@
     <script src="/js/efect-toggle.js"></script>
     <script src="/js/filter.js"></script>
     <script src="/js/admin.js"></script>
-    <script src="/js/alertas.js"></script>
     <script src="/js/datatables/jquery.dataTables.min.js"></script>
     <script src="/js/datatables/dataTables.bootstrap4.js"></script>
     <script src="/resources/pinotify/pnotify.custom.min.js"></script>
     <script src="/resources/jquery-confirm/dist/jquery-confirm.min.js"></script>
-    <script>
-        <?php flash();?>
-    </script>
-    <script>
-        // document.addEventListener('trix-attachment-add',function(){
-        //     const attachment = event.attachment;
-
-        //     if(!attachment.file){
-        //         return
-        //     } 
-
-        //     const form = new FormData();
-        //     form.append('file',attachment.file);
-
-        //     $.ajax({
-        //         url: '/admin/upload/image',
-        //         method: 'post',
-        //         data, form,
-        //         contentType:false,
-        //         processData: false,
-        //     }).done(function(){
-        //         console.log('deu certo');
-        //     }).fail(function(){
-        //         console.log('deu errado!');
-        //     });
-        // });
-    </script>
-    
-    
+    <script><?php flash();?></script>
+    <script src="/js/alertas.js"></script>
 </body>
 </html>

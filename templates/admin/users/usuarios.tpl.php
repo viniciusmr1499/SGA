@@ -1,8 +1,8 @@
 <div id="form-register">
     <section class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="padding:0;">
             <div class="gradient">
-                <h1 class="title__article">Cadastro de Usuário</h1>
+                <h1 class="text-title">Cadastro de Usuário</h1>
                 <hr>
             </div>
         </div>

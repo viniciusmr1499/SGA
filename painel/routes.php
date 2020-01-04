@@ -1,7 +1,11 @@
 <?php 
 
  if(resolve('/painel')){
-    render('/painel/home','painel');
+    if($_SESSION['nivel'] == 0){
+        render('/painel/home','painel');
+    }else{
+        header('location: /admin');
+    }
 
 }else if(resolve('/painel/pages.*')){
     include_once  __DIR__ . '/pages/routes.php';

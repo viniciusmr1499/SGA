@@ -1,7 +1,7 @@
 <div id="form-register">
     <section class="row">
-        <div class="col-md-12">
-            <div class="gradient"><h1 class="title__article">Cadastro de materiais</h1></div>
+        <div class="col-md-12" style="padding:0;">
+            <div class="gradient"><h1 class="text-title">Cadastro de materiais</h1></div>
             <hr>
         </div>
         

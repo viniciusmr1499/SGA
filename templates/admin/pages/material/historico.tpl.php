@@ -2,7 +2,7 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Histórico</h1>
-    <p class="mb-4"><strong>Info:</strong> Listagem com todos os items já cadastrados no SGA</p>
+    <p class="mb-4"><strong>Info:</strong> Listagem com todos os itens já cadastrados no SGA (Sistema de gerenciamento Aeris)</p>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">

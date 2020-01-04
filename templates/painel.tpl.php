@@ -27,9 +27,10 @@
                         <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Inventário</a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
                             <a href="/painel/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Cadastro de Ativos</a>
-                            <a href="/painel/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>   
+                            <a href="/painel/pages/logistica-material" class="list-group-item" style="letter-spacing:1.2px;"><i class="fas fa-dolly"></i> Entrada/Saida</a>           
                         </div>
                     </div>
+                    <a href="/painel/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>
                 </div>
                 
             </div>
@@ -100,25 +101,8 @@
     <script src="/js/datatables/dataTables.bootstrap4.js"></script>
     <script src="/resources/pinotify/pnotify.custom.min.js"></script>
     <script src="/resources/jquery-confirm/dist/jquery-confirm.min.js"></script>
-    <script>
-        <?php flash();?>
-            $(".confirmMaterial").each(function() {
-                $(this).confirm({
-                    title: 'Excluir material',
-                    content: 'Tem certeza que deseja excluir este material?',
-                    type: 'dark',
-                    typeAnimated: true,
-                    buttons: {
-                        confirmar: function () {
-                            location.href = this.$target.attr('href');
-                        },
-                        cancelar: function () {
-                            $.alert('Ação cancelada!');
-                        }
-                    }
-                });
-            });
-    </script>
+    <script><?php flash();?></script>
+    <script src="/js/alertas.js"></script>
     
     
 </body>

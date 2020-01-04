@@ -1,4 +1,5 @@
 <?php 
+session_start();
 // NÃO VAI FUNCIONAR NO INTERNET EXPLORER
 $navegador = $_SERVER['HTTP_USER_AGENT'];
 
@@ -11,7 +12,7 @@ if (strstr($navegador, 'Chrome') === False) {
 
 // DOCUMENTO ROOT - ARQUIVO CENTRAL DA APLICAÇÃO.
 
-session_start();
+
 
 // require __DIR__ . '/src/error_handler.php';  
 require __DIR__ . '/src/config.php';

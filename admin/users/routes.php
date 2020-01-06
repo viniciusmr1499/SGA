@@ -35,9 +35,7 @@ else if($params = resolve('/admin/users/(\d+)/perfil')){
     if($_SESSION['nivel'] == 1){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $editarPerfil($params[1]);                
-           
             return header('location: /admin');
-    
         }
         
         $page = $verUsuario($params[1]);
@@ -78,6 +76,16 @@ else if($params = resolve('/admin/users/(\d+)/remover-usuario')){
         $removerUsuario($params[1]);
 
         return header('location: /admin/users');
+    }else{
+        header('location: /painel');
+    }
+}
+// REDEFINIÇÃO DE SENHA
+else if($params = resolve('/admin/users/(\d+)/redefinir-senha')){
+    if($_SESSION['nivel'] == 1){
+        $redefinirSenha($params);
+        
+        return header('location: /admin');
     }else{
         header('location: /painel');
     }

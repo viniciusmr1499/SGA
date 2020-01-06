@@ -18,6 +18,7 @@ $login = function () use ($conn) {
     $nomeCompleto = $r['nome'];
     $nivel = $r['nivel'];
     $id = $r['id_usuario'];
+    $avatar = $r['nome_img'];
 
     if($row == 1){
         $nome = explode(" ",$nomeCompleto);
@@ -26,6 +27,7 @@ $login = function () use ($conn) {
         $_SESSION['nome'] = $nome;
         $_SESSION['nivel'] = $nivel;
         $_SESSION['id_usuario'] = $id;
+        $_SESSION['avatar'] = $avatar;
 
         return true;
     }else{

@@ -1,4 +1,4 @@
-<form class="f-register pl-3" method="post" name="formuser">
+<form class="f-register pl-3" method="post" name="formuser" enctype="multipart/form-data">
     <div class="col">
         <h1 class="text-title pt-2"><?php echo $data['page']['nome']; ?></h1>
         <hr class="pb-4">
@@ -30,23 +30,19 @@
                 <input type="text" class="form-control" id="cargo" readonly="true" value="<?php echo $data['page']['cargo'];?>">
             </div>
             <div class="col-md-6 mt-4">
-                <label for="file__img" class="pb-2 t-cel">Anexar imagem:</label>
-                <input type="file" class="d-flex" name="file" id="file__img">
+                <label for="file__img" class="pb-2 t-cel">Anexar imagem:</label><span class="obrigatorio"> *</span>
+                <input type="file" class="d-flex" required="true" name="file" id="file__img">
             </div>
 
-            <div class="col-md-6 mt-4">
-                <label for="senha" class="pb-2 t-cel">Senha:</label><span class="obrigatorio"> *</span>
-                <input type="password" class="form-control" required="true" name="senha" id="senha" value="<?php echo $data['page']['senha']; ?>">
-            </div>
+            <!-- <div class="col-md-6 mt-4">
+                <label for="senha" class="pb-2 t-cel">Senha:</label>
+                <input type="password" class="form-control" name="senha" id="senha">
+              
+            </div> -->
 
-            <div class="col-md-6 mt-4">
-                <label for="confirmar-senha" class="pb-2 t-cel">Confirmar Senha:</label><span class="obrigatorio"> *</span>
-                <input type="password" class="form-control" required="true" name="rep_senha" id="confirmar-senha" value="<?php echo $data['page']['senha']; ?>">
-            </div>
-            
             <div class="col-12 mt-5 pt-1 t-cel">
                 <hr>
-                <button type="submit" class="btn btn_register" onclick="return validar();">Salvar</button>
+                <button type="submit" class="btn btn_register">Salvar</button>
                 <a href="/admin" class="btn btn-dark">Voltar</a>
             </div>
         </div>

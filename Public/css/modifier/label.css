@@ -4,3 +4,10 @@
     letter-spacing: 1px;
     cursor:pointer;
 }
+
+.profile{
+    height:300px;
+    /* border-radius:100%; */
+    box-sizing: border-box;
+    border:1px dashed #333;
+}

@@ -1,20 +1,22 @@
 <?php 
 
 function material_get_data($redirecionarError){
-    $codigo = filter_input(INPUT_POST, 'codigo');
+    $file = filter_input(INPUT_POST, 'file');
+    $un_medida = filter_input(INPUT_POST, 'un_medida');
     $equipamento = filter_input(INPUT_POST, 'equipamento');
     $referencia = filter_input(INPUT_POST, 'referencia');
     $descricao = filter_input(INPUT_POST, 'descricao');
     $endereco = filter_input(INPUT_POST, 'endereco');
     $servico = filter_input(INPUT_POST, 'servico');
     $quantidade = filter_input(INPUT_POST, 'quantidade');
-   
-    if(is_null($codigo) or is_null($equipamento)){
+    
+
+    if(is_null($un_medida) or is_null($equipamento)){
         flash('Informe os campos obrigatórios','error');
         header('location: ' . $redirecionarError);
         die();
     }
-    return compact('codigo','equipamento','referencia','quantidade','servico','endereco','descricao');
+    return compact('un_medida','equipamento','referencia','quantidade','servico','file','endereco','descricao');
 }
 
 // *** FUNCÇÕES ANÔNIMAS PARA OS MATERIAIS ***
@@ -36,34 +38,60 @@ $historico = function() use($conn){
 };
 
 $criarMaterial = function() use ($conn){
-    // CRIAR MATERIAL
+    // pegar os dados do formulário
     $data = material_get_data('/admin/pages/novo-material');
+    
+    //Tratando o arquivo
+    if(isset($_FILES['file'])){
+        // var_dump($_FILES['file']);exit;
+        date_default_timezone_set('America/Sao_Paulo');
+        $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
+        $novo_nome = 'Mat - ' . date("Y.m.d"). $extensao; // define o nome do arquivo
+        $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
+        // var_dump($_FILES['file']); exit;
+        $data['file'] = $novo_nome;
+        // var_dump($data['file']);exit;
+        move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$novo_nome); // efetua o upload
+        
+        // CRIAR MATERIAL
+        $sql = 'INSERT INTO materiais (un_medida,equipamento,referencia,nome_img,descricao,endereco,servico,quantidade,data_de_cadastro,data_de_atualizacao) VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())';
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('dssssssi',$data['un_medida'],$data['equipamento'],$data['referencia'],$data['file'],$data['descricao'],$data['endereco'],$data['servico'],$data['quantidade']);
+        
+        flash('Material foi inserido com sucesso!', 'success');
+    }
 
-    $sql = 'INSERT INTO materiais (codigo,equipamento,referencia,descricao,endereco,servico,quantidade,data_de_cadastro,data_de_atualizacao) VALUES (?,?,?,?,?,?,?,NOW(),NOW())';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssssssi',$data['codigo'],$data['equipamento'],$data['referencia'],$data['descricao'],$data['endereco'],$data['servico'],$data['quantidade']);
-    
-    flash('Material foi inserido com sucesso!', 'success');
-    
     return $stmt->execute();
 };
 
 $editarMaterial = function($id) use ($conn){
     //EDITAR MATERIAL
     $data = material_get_data('/admin/pages/materiais');
-
-    $sql = 'UPDATE materiais SET codigo=?, equipamento=?,referencia=?,descricao=?,endereco=?,servico=?,quantidade=?,data_de_atualizacao=NOW() WHERE id_material = ?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssssssii',$data['codigo'],$data['equipamento'],$data['referencia'],$data['descricao'],$data['endereco'],$data['servico'],$data['quantidade'],$id);
+    date_default_timezone_set('America/Sao_Paulo');
     
-    flash('Material foi atualizado com sucesso!', 'success');
+    if(isset($_FILES['file'])){
+        $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
+        $result = 'Mat - ' . date("Y.m.d-H.i.s"). $extensao; // define o nome do arquivo
+        $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
+        
+        $data['file'] = $result;
+        // var_dump($data['file']);exit;
+        move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$result); // efetua o upload
 
+        // EDITAR MATERIAL
+        $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,nome_img=?,endereco=?,servico=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('dssssssii',$data['un_medida'],$data['equipamento'],$data['referencia'],$data['descricao'],$data['file'],$data['endereco'],$data['servico'],$data['quantidade'],$id);
+
+        flash('Material foi atualizado com sucesso!', 'success'); 
+    }
+    
     return $stmt->execute();
 };
 
 $removerMaterial = function($id) use ($conn){
     // REMOVER MATERIAL
-    $sql = 'DELETE FROM materiais WHERE id_material = ?';
+    $sql = 'DELETE FROM materiais WHERE codigo = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i',$id);
     flash('Material foi excluído com sucesso!', 'success');
@@ -73,7 +101,7 @@ $removerMaterial = function($id) use ($conn){
 
 $verMaterial = function($id) use ($conn){
     //VER APENAS UM MATERIAL POR VEZ  
-    $sql = 'SELECT * FROM materiais WHERE id_material = ?';
+    $sql = 'SELECT * FROM materiais WHERE codigo = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i',$id);
     $stmt->execute();

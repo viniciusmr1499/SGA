@@ -19,6 +19,16 @@ if($params = resolve('/painel/pages/(\d+)/perfil')){
         header('location: /admin');
     }
 }
+// REDEFINIÇÃO DE SENHA
+else if($params = resolve('/painel/pages/(\d+)/redefinir-senha')){
+    if($_SESSION['nivel'] == 0){
+        $redefinirSenha($params);
+        
+        return header('location: /painel');
+    }else{
+        header('location: /admin');
+    }
+}
 // ************************** MATERIAIS *******************************
 
 // ↓↓ CRIAR  MATERIAL ↓↓

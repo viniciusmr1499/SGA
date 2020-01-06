@@ -10,7 +10,7 @@
             <h6 class="m-0 font-weight-bold text-primary">
             <i class="fas fa-table"></i> Tabela 
             </h6>
-            <a href="#" class="h4 ml-auto title__article">Gerar Relatório
+            <a href="/admin/pages/gerar-relatorio" class="h4 ml-auto title__article">Gerar Relatório
                 <i class="fas fa-file-excel"></i>
             </a>
         </div>
@@ -21,6 +21,7 @@
                     <thead>
                         <tr>
                             <th class="t-head" style="font-weight:bold" scope="col">Código</th>
+                            <th class="t-head" style="font-weight:bold">UN.Medida</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Equipamento</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Referencia </th>
                             <th class="t-head" style="font-weight:bold" scope="col">Descricao</th>
@@ -33,6 +34,7 @@
                     <?php foreach($data['itens'] as $item): ?>
                         <tr>
                             <td class="t-cel"><?php echo $item['codigo']?></td>
+                            <td class="t-cel"><?php echo $item['un_medida'];?></td>
                             <td class="t-cel"><?php echo $item['equipamento']?></td>
                             <td class="t-cel"><?php echo $item['referencia']?></td>
                             <td class="t-cel"><?php echo $item['descricao']?></td>

@@ -54,8 +54,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo 'Olá, ' . $_SESSION['nome'];?></span>
-                                <!-- <img class="img-profile rounded-circle" src="/img/me.png"> -->
-                                <i class="fas fa-user-circle" style="font-size:1.8rem"></i>
+                                <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['avatar'];?>">
+                                <!-- <i class="fas fa-user-circle" style="font-size:1.8rem"></i> -->
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -63,6 +63,12 @@
                                     <i class="fas fa-address-card mr-2 text-gray-400"></i>
                                     Perfil
                                 </a>
+                                <hr>
+                                <a href="#" data-target="#exampleModal" data-toggle="modal" class="dropdown-item">
+                                    <i class="fas fa-lock mr-2 text-gray-400"></i>
+                                    Redefinir Senha
+                                </a>
+                                <hr>
                                 <a class="dropdown-item" href="/auth/logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Sair
@@ -73,6 +79,37 @@
 
                 </nav>
             </header>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Redefinição de Senha</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" name="formuser" action="/admin/users/<?php echo $_SESSION['id_usuario'] ?>/redefinir-senha">
+                                <div class="form-group">
+                                    <label for="senha" class="col-form-label">Senha:</label>
+                                    <input type="password" name="senha" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rep_senha" class="col-form-label">Confirmar Senha:</label>
+                                    <input type="password" name="rep_senha" class="form-control">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn_register" onclick="return validar();">Salvar</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- fim do modal  -->
 
             <div class="container-fluid mb-5 pb-5">
                 <?php include $content ?>
@@ -90,7 +127,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
     
-   
+    
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/popper.js"></script>
     <script src="/js/bootstrap.min.js"></script>
@@ -101,7 +138,8 @@
     <script src="/js/datatables/dataTables.bootstrap4.js"></script>
     <script src="/resources/pinotify/pnotify.custom.min.js"></script>
     <script src="/resources/jquery-confirm/dist/jquery-confirm.min.js"></script>
-    <script><?php flash();?></script>
+    <script><?php flash();?></script> 
     <script src="/js/alertas.js"></script>
+    
 </body>
 </html>

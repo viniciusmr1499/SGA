@@ -1,4 +1,4 @@
-<form name="formuser" class="f-register pl-3" method="post">
+<form name="formuser" class="f-register pl-3" method="post" enctype="multipart/form-data">
     <div class="col">
         <h1 class="text-title pt-2">Cadastro de Usuário</h1>
         <hr class="pb-4">

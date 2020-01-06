@@ -2,6 +2,7 @@
 
 if(resolve('/admin')){
     if($_SESSION['nivel'] == 1){
+        // pendente para fazer.
         render('/admin/home','admin');
     }else{
         header('location: /painel');

@@ -36,7 +36,7 @@ function validar(){
     const senha = formuser.senha.value;
     const rep_senha = formuser.rep_senha.value;
 
-    if(senha == '' || senha.length <=5){
+    if(rep_senha == '' || senha.length <=5){
         $.alert({
             title: 'ATENÇÃO!',
             content: 'Preencha o campo "SENHA" com no mínimo 6 caracteres!',

@@ -22,19 +22,18 @@ ENGINE = InnoDB;
 -- Table `sga`.`materiais`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sga`.`materiais` (
-  `codigo` INT AUTO_INCREMENT NOT NULL DEFAULT 6000,
+  `codigo` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `un_medida` DOUBLE NOT NULL,
   `equipamento` VARCHAR(45) NOT NULL,
   `referencia` VARCHAR(45) NOT NULL,
-  `aplicacao` VARCHAR(45) NOT NULL,
   `descricao` TEXT NOT NULL,
   `endereco` VARCHAR(45) NOT NULL,
   `servico` VARCHAR(45) NOT NULL,
   `quantidade` INT NOT NULL,
-  `unidade_de_medida` INT NOT NULL // verificar se essa unidade vai receber algum calculo futuramente,
+  `nome_img` VARCHAR(45) NOT NULL,
   `data_de_cadastro` DATETIME NOT NULL,
-  `data_de_atualizacao` DATETIME NOT NULL,
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB;
+  `data_de_atualizacao` DATETIME NOT NULL
+  )AUTO_INCREMENT = 6000;
 
 
 

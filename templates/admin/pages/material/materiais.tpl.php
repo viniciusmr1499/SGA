@@ -15,6 +15,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th class="t-head" scope="col">Código</th>
+                        <th class="t-head" scope="col">UN.Medida</th>
                         <th class="t-head" scope="col">Equipamento</th>
                         <th class="t-head" scope="col">Referência </th>
                         <th class="t-head" scope="col">Descrição</th>
@@ -28,6 +29,7 @@
                 <?php foreach($data['lista'] as $lista):?>
                     <tr>
                         <td class="t-cel"><?php echo $lista['codigo'];?></td>
+                        <td class="t-cel"><?php echo $lista['un_medida'];?></td>
                         <td class="t-cel"><?php echo $lista['equipamento'];?></td>
                         <td class="t-cel"><?php echo $lista['referencia'];?></td>
                         <td class="t-cel d-flex"><?php echo $lista['descricao'];?></td>
@@ -35,9 +37,9 @@
                         <td class="t-cel d-flex"><?php echo $lista['servico'];?></td>
                         <td class="t-cel"><?php echo $lista['quantidade'];?></td>
                         <td class="t-cel d-flex justify-content-center align-self-center">
-                            <a href="/admin/pages/<?php echo $lista['id_material']?>/ver-material"><i class="fas fa-eye"></i></a>
-                            <a href="/admin/pages/<?php echo $lista['id_material']?>/editar-material"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="/admin/pages/<?php echo $lista['id_material']?>/remover-material" class="fas fa-trash confirmMaterial"></a>
+                            <a href="/admin/pages/<?php echo $lista['codigo']?>/ver-material"><i class="fas fa-eye"></i></a>
+                            <a href="/admin/pages/<?php echo $lista['codigo']?>/editar-material"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="/admin/pages/<?php echo $lista['codigo']?>/remover-material" class="fas fa-trash confirmMaterial"></a>
                         </td>
                     </tr>
                 <?php endforeach;?>

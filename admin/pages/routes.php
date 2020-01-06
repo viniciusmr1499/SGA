@@ -69,10 +69,17 @@ else if(resolve('/admin/pages/materiais')){
         header('location: /painel');
     }
 }
+// LOGISTICA DE MATERIAL
 else if(resolve('/admin/pages/logistica-material')){
     if($_SESSION['nivel'] == 1){
         $lista = $listarMateriais();
         render('admin/pages/material/logistica-material','admin',['lista' => $lista]);
+    }else{
+        header('location: /painel');
+    }
+}else if(resolve('/admin/pages/gerar-relatorio')){
+    if($_SESSION['nivel'] == 1){
+        
     }else{
         header('location: /painel');
     }

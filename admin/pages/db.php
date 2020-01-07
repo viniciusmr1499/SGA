@@ -19,6 +19,16 @@ function material_get_data($redirecionarError){
     return compact('un_medida','equipamento','referencia','quantidade','servico','file','endereco','descricao');
 }
 
+function despache_get_data(){
+    $codigo = filter_input(INPUT_POST,'codigo');
+    $matricula = filter_input(INPUT_POST,'matricula');
+    $ordem = filter_input(INPUT_POST,'ordem');
+    $nome = filter_input(INPUT_POST,'nome');
+    $quantidade = filter_input(INPUT_POST, 'quantidade');
+    
+    return compact('codigo','matricula','ordem','nome','quantidade');
+}
+
 // *** FUNCÇÕES ANÔNIMAS PARA OS MATERIAIS ***
 $listarMateriais = function() use($conn){
     // Listagem de materiais
@@ -108,4 +118,41 @@ $verMaterial = function($id) use ($conn){
 
     $result = $stmt->get_result();
     return $result->fetch_assoc();
+};
+
+$despacho = function() use ($conn){
+    $data = despache_get_data();
+
+    // var_dump($data['nome']);exit;
+    $sql = 'SELECT * FROM materiais';
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $r = $result->fetch_assoc();
+    $qtd = $r['quantidade'];
+    $data['quantidade'] = (int) $data['quantidade'];
+
+    // var_dump($data['quantidade']);exit;
+    
+    if($data['quantidade'] > $qtd){
+        flash('Valor de quantidade superior ao que tem em estoque!', 'warning');
+        header('location: /admin/pages/logistica-material');
+        exit;
+    }else{
+        $qtd -= $data['quantidade'];
+        $sql = 'UPDATE materiais SET quantidade=? WHERE codigo = ?';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii',$qtd,$data['codigo']);
+
+        return $stmt->execute();
+    }
+};
+
+$listarDespacho = function(){
+    // $sql = 'SELECT * FROM controle_saida_materiais WHERE quantidade > 0';
+    // $result = $conn->query($sql);
+
+    // return $result->fetch_all(MYSQLI_ASSOC);
 };

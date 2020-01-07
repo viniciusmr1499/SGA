@@ -72,12 +72,21 @@ else if(resolve('/admin/pages/materiais')){
 // LOGISTICA DE MATERIAL
 else if(resolve('/admin/pages/logistica-material')){
     if($_SESSION['nivel'] == 1){
-        $lista = $listarMateriais();
+        $lista = $listarDespacho();
         render('admin/pages/material/logistica-material','admin',['lista' => $lista]);
     }else{
         header('location: /painel');
     }
-}else if(resolve('/admin/pages/gerar-relatorio')){
+}else if(resolve('/admin/pages/despacho')){
+    if($_SESSION['nivel'] == 1){
+        $despacho();
+        flash('Realizado despacho com sucesso!','success');
+        header('location: /admin/pages/logistica-material');
+    }else{
+        header('location: /painel');
+    }
+}
+else if(resolve('/admin/pages/gerar-relatorio')){
     if($_SESSION['nivel'] == 1){
         
     }else{

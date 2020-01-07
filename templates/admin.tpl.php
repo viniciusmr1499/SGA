@@ -26,9 +26,9 @@
                     <a href="/admin/users" class="list-group-item"><i class="fas fa-user"></i> Usuários</a>
                     
                     <div class="dropdown">
-                        <a href="materiais.php" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Inventário</a>
+                        <a href="materiais.php" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Materiais</a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
-                            <a href="/admin/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Cadastro de Ativos</a>
+                            <a href="/admin/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Cadastro</a>
                             <a href="/admin/pages/logistica-material" class="list-group-item" style="letter-spacing:1.2px;"><i class="fas fa-dolly"></i> Entrada/Saida</a>
                         </div>
                         <a href="/admin/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>   
@@ -100,7 +100,7 @@
                                     <input type="password" name="rep_senha" class="form-control">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                     <button type="submit" class="btn btn_register" onclick="return validar();">Salvar</button>
                                 </div>
                             </form>

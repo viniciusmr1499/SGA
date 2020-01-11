@@ -1,12 +1,13 @@
 <div id="form-register">
     <section class="row">
         <div class="col-md-12" style="padding:0;">
-            <div class="gradient"><h1 class="text-title">Cadastro de materiais</h1></div>
+            <div class="gradient"><h1 class="text-title">Materiais</h1></div>
             <hr>
         </div>
         
         <div  class="ml-auto mr-3">
-            <a href="/admin/pages/novo-material" class="btn btn__sum"><i class="fas fa-plus"></i></a>
+            <a href="#" class="btn btn-success mt-1" data-target="#renovarEstoque" data-toggle="modal"><i class="fas fa-box-open"></i> Renovar Estoque</i></a>
+            <a href="/admin/pages/novo-material" class="text-title mt-1 btn btn-primary"><i class="fas fa-plus"> Adicionar material </i></a>
         </div>
 
 
@@ -20,7 +21,6 @@
                         <th class="t-head" scope="col">Referência </th>
                         <th class="t-head" scope="col">Descrição</th>
                         <th class="t-head" scope="col">Endereço</th>
-                        <th class="t-head" scope="col">Servico</th>
                         <th class="t-head" scope="col">Quantidade</th>
                         <th class="t-head" scope="col">Status</th>
                     </tr>
@@ -34,7 +34,6 @@
                         <td class="t-cel"><?php echo $lista['referencia'];?></td>
                         <td class="t-cel d-flex"><?php echo $lista['descricao'];?></td>
                         <td class="t-cel"><?php echo $lista['endereco'];?></td>
-                        <td class="t-cel d-flex"><?php echo $lista['servico'];?></td>
                         <td class="t-cel"><?php echo $lista['quantidade'];?></td>
                         <td class="t-cel d-flex justify-content-center align-self-center">
                             <a href="/admin/pages/<?php echo $lista['codigo']?>/ver-material"><i class="fas fa-eye"></i></a>
@@ -48,3 +47,41 @@
         </div>
     </section>
 </div>
+
+<div class="modal fade" id="renovarEstoque" tabindex="-1" role="dialog" aria-labelledby="renovarEstoque" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="renovarEstoque">Estoque</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/admin/pages/renovar-estoque">
+                    <div class="form-group">
+                        <label for="codigo" class="col-form-label">Código:</label>
+                        <input type="number" required="true" class="form-control" placeholder="Código" id="codigo" name="codigo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="equipamento" class="col-form-label">EQUIPAMENTO:</label>
+                        <input type="text" readonly="true" required class="form-control" placeholder="Equipamento" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qtd" class="col-form-label">Quantidade:</label>
+                        <input type="number" name="quantidade" required="true" id="qtd" class="form-control" placeholder="Quantidade">
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn_register">Salvar</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- fim do modal  -->

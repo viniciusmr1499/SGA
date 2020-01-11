@@ -23,19 +23,29 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sga`.`materiais` (
   `codigo` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `un_medida` DOUBLE NOT NULL,
+  `un_medida` VARCHAR(10) NOT NULL,
   `equipamento` VARCHAR(45) NOT NULL,
   `referencia` VARCHAR(45) NOT NULL,
   `descricao` TEXT NOT NULL,
   `endereco` VARCHAR(45) NOT NULL,
-  `servico` VARCHAR(45) NOT NULL,
   `quantidade` INT NOT NULL,
   `nome_img` VARCHAR(45) NOT NULL,
   `data_de_cadastro` DATETIME NOT NULL,
-  `data_de_atualizacao` DATETIME NOT NULL
-  )AUTO_INCREMENT = 6000;
-
-
+  `data_de_atualizacao` DATETIME NOT NULL,
+  `codigo_solicitacao` INT,
+  FOREIGN KEY(`codigo_solicitacao`) REFERENCES `sga`.`solicitacao`(id)
+  )AUTO_INCREMENT = 90000;
+  
+  
+  CREATE TABLE IF NOT EXISTS `sga`.`solicitacao` (
+  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `codigo` INT NOT NULL,
+  `matricula` VARCHAR(8) NOT NULL,
+  `utilizacao` VARCHAR(45) NOT NULL,
+  `colaborador` VARCHAR(45) NOT NULL,
+  `quantidade` INT NOT NULL,
+  `data_de_despache` DATETIME NOT NULL
+  );
 
 INSERT INTO usuarios (matricula,nome,email,setor,cargo,senha,data_de_criacao,data_de_atualizacao) VALUES 
 ('006238','Yuri Sousa dos Santos','yuri.sousa@aerisenergy.com.br','PCM','Aprendiz',md5('123'),now(),now());

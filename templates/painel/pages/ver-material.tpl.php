@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-3">
                 <label class="pb-2 t-cel">Código</label>
-                <p class="form-control"><?php echo $data['page']['codigo'];?></p>
+                <p class="form-control" readonly="true"><?php echo $data['page']['codigo'];?></p>
             </div>
             
             <div class="col-md-2">
@@ -33,10 +33,10 @@
                 <label for="Descricao" class="pb-2 t-cel">Descrição</label>
                 <p class="form-control"><?php echo $data['page']['descricao'];?></p>
             </div>
-            <div class="col-md-4 mt-2">
+            <!-- <div class="col-md-4 mt-2">
                 <label class="pb-2 t-cel">Serviço</label>
                 <p class="form-control"><?php echo $data['page']['servico'];?></p>
-            </div>
+            </div> -->
 
             <div class="col-md-4 mt-2">
                 <label class="pb-2 t-cel">Endereço</label>
@@ -59,7 +59,7 @@
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
+    <div class=" modal-content">
         <img src="/img/<?php echo $data['page']['nome_img'];?>" class="img-fluid" alt="Imagem">
     </div>
 </div>

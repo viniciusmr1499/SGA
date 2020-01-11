@@ -19,14 +19,14 @@
                 <label for="Estoque" class="text-uppercase pb-2 t-cel">Quantidade</label>
                 <input type="number" class="form-control" value="<?php echo $data['page']['quantidade'];?>" name="quantidade" id="Estoque">
             </div>
-            <div class="col-md-6 mt-4">
+            <!-- <div class="col-md-6 mt-4">
                 <label for="Servico" class="text-uppercase pb-2 t-cel">Serviço</label>
                 <input type="text" class="form-control" name="servico" id="Servico" value="<?php echo $data['page']['servico'];?>">
-            </div>
+            </div> -->
 
             <div class="col-md-2 mt-4">
                 <label for="un_medida" class="text-uppercase pb-2 t-cel">UN.Medida</label>
-                <input type="text" class="form-control" name="un_medida" id="un_medida" value="<?php echo $data['page']['un_medida'];?>">
+                <input type="text" name="un_medida" id="un_medida" class="text-uppercase form-control" maxlength="3" value="<?php echo $data['page']['un_medida'] ?>">
             </div>
 
             <div class="col-md-4 mt-4">

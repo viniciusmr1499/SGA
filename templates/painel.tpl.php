@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/resources/jquery-confirm/dist/jquery-confirm.min.css">
     <title>Painel - SGA</title>
 </head>
-<body id="page-top">   
+<body>   
     
     <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
@@ -23,14 +23,15 @@
 
                 <div class="list-group list-group-flush">
                     <a href="/painel" class="list-group-item"><i class="fas fa-home"></i> Início</a>
+
                     <div class="dropdown">
-                        <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Inventário</a>
+                        <a href="materiais.php" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Materiais</a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
-                            <a href="/painel/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Cadastro de Ativos</a>
-                            <a href="/painel/pages/logistica-material" class="list-group-item" style="letter-spacing:1.2px;"><i class="fas fa-dolly"></i> Entrada/Saida</a>           
+                            <a href="/painel/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Estoque</a>
+                            <a href="/painel/pages/deliberar-material" class="list-group-item" style="letter-spacing:1.2px;"><i class="fas fa-dolly"></i> Despache</a>
                         </div>
+                        <a href="/painel/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>   
                     </div>
-                    <a href="/painel/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>
                 </div>
                 
             </div>
@@ -57,7 +58,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/painel/pages/<?php echo $_SESSION['id_usuario'];?>/perfil">
+                                <a class="dropdown-item" href="/painel/user/<?php echo $_SESSION['id_usuario'];?>/perfil">
                                     <i class="fas fa-address-card mr-2 text-gray-400"></i>
                                     Perfil
                                 </a>
@@ -87,7 +88,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" name="formuser" action="/painel/pages/<?php echo $_SESSION['id_usuario'] ?>/redefinir-senha">
+                            <form method="post" name="formuser" action="/painel/user/<?php echo $_SESSION['id_usuario'] ?>/redefinir-senha">
                                 <div class="form-group">
                                     <label for="senha" class="col-form-label">Senha:</label>
                                     <input type="password" name="senha" class="form-control" id="recipient-name">
@@ -119,11 +120,6 @@
         </div>      
         <!-- /#page-content-wrapper -->
     </div>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    
    
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/popper.js"></script>

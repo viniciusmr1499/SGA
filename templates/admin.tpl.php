@@ -28,8 +28,8 @@
                     <div class="dropdown">
                         <a href="materiais.php" aria-haspopup="true" aria-expanded="false" role="button" class="list-group-item dropdown-toggle" data-toggle="dropdown"><i id="dropdownMenuLink" class="fas fa-hand-holding-usd"></i> Materiais</a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
-                            <a href="/admin/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Cadastro</a>
-                            <a href="/admin/pages/logistica-material" class="list-group-item" style="letter-spacing:1.2px;"><i class="fas fa-dolly"></i> Entrada/Saida</a>
+                            <a href="/admin/pages/materiais" class="dropdown-item list-group-item"><i class="fas fa-notes-medical"></i> Estoque</a>
+                            <a href="/admin/pages/deliberar-material" class="list-group-item" style="letter-spacing:1.2px;"><i class="fas fa-dolly"></i> Despache</a>
                         </div>
                         <a href="/admin/pages/historico" class="dropdown-item list-group-item"><i class="fas fa-history"></i> Histórico</a>   
                     </div>

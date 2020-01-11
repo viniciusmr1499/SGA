@@ -33,10 +33,10 @@
                 <label for="Descricao" class="pb-2 t-cel">Descrição</label>
                 <p class="form-control"><?php echo $data['page']['descricao'];?></p>
             </div>
-            <div class="col-md-4 mt-2">
+            <!-- <div class="col-md-4 mt-2">
                 <label class="pb-2 t-cel">Serviço</label>
                 <p class="form-control"><?php echo $data['page']['servico'];?></p>
-            </div>
+            </div> -->
 
             <div class="col-md-4 mt-2">
                 <label class="pb-2 t-cel">Endereço</label>

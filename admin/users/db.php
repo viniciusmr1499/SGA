@@ -138,10 +138,12 @@ $verUsuario = function($id) use ($conn){
 
 $redefinirSenha = function($id) use($conn){
     $data = usuario_get_data_perfil();
-    // var_dump($data['senha']); exit;
+    $id_usuario = (int) $_SESSION['id_usuario'];
+    
+    // var_dump($id_usuario); exit;
     $sql = 'UPDATE usuarios SET senha=md5(?),data_de_atualizacao=NOW() WHERE id_usuario = ?';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('si',$data['senha'],$id);
+    $stmt->bind_param('si',$data['senha'],$id_usuario);
     
     flash('Dados atualizados com sucesso!', 'success');
 

@@ -9,13 +9,16 @@ if(resolve('/admin/pages/novo-material')){
     if($_SESSION['nivel'] == 1){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $criarMaterial();
+        
             return header('location: /admin/pages/materiais');
         }
-    
+
         render('admin/pages/material/novo-material','admin');
+    }else{
+        header('location: /painel');
     }
 
-    echo '<h1 style="color:red;">Página não encontrada</h1>';
+
 }
 
 // ↓↓ VER UM MATERIAL POR VEZ ↓↓
@@ -37,6 +40,7 @@ else if($params = resolve('/admin/pages/(\d+)/editar-material')){
         }
         
         $page = $verMaterial($params[1]);
+
         render('admin/pages/material/editar-material','admin',['page' => $page]);
     }else{
         header('location: /painel');
@@ -70,26 +74,32 @@ else if(resolve('/admin/pages/materiais')){
     }
 }
 // LOGISTICA DE MATERIAL
-else if(resolve('/admin/pages/logistica-material')){
+else if(resolve('/admin/pages/deliberar-material')){
     if($_SESSION['nivel'] == 1){
         $lista = $listarDespacho();
-        render('admin/pages/material/logistica-material','admin',['lista' => $lista]);
+        render('admin/pages/material/deliberar-material','admin',['lista' => $lista]);
     }else{
         header('location: /painel');
     }
 }else if(resolve('/admin/pages/despacho')){
     if($_SESSION['nivel'] == 1){
+        $inserirDadosDespacho();
         $despacho();
-        flash('Realizado despacho com sucesso!','success');
-        header('location: /admin/pages/logistica-material');
+        
+        header('location: /admin/pages/deliberar-material');
     }else{
         header('location: /painel');
     }
+}else if(resolve('/admin/pages/renovar-estoque')){
+    if($_SESSION['nivel'] == 1){
+        $lista = $reporEstoque();
+        
+        header('location: /admin/pages/materiais');
+    }else{
+        header('location: /painel');
+    }
+
 }
 else if(resolve('/admin/pages/gerar-relatorio')){
-    if($_SESSION['nivel'] == 1){
-        
-    }else{
-        header('location: /painel');
-    }
+   
 }

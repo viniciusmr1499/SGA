@@ -26,7 +26,6 @@
                             <th class="t-head" style="font-weight:bold" scope="col">Referencia </th>
                             <th class="t-head" style="font-weight:bold" scope="col">Descricao</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Endereco</th>
-                            <th class="t-head" style="font-weight:bold" scope="col">Servico</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Data de cadastro</th>
                         </tr>
                     </thead>
@@ -39,7 +38,6 @@
                             <td class="t-cel"><?php echo $item['referencia']?></td>
                             <td class="t-cel"><?php echo $item['descricao']?></td>
                             <td class="t-cel"><?php echo $item['endereco']?></td>
-                            <td class="t-cel"><?php echo $item['servico']?></td>
                             <td class="t-cel d-flex justify-content-center align-sel-center"><?php echo $item['data_de_cadastro']?></td>
                         </tr>
                     <?php endforeach;?>

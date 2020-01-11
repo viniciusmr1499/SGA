@@ -35,7 +35,7 @@
 
     $html .= '<td><b></b>Endereco</td>';
 
-    $html .= '<td><b></b>Servico</td>';
+    $html .= '<td><b></b>Utilização</td>';
 
     $html .= '<td><b></b>Data de cadastro</td>';
 
@@ -61,7 +61,7 @@
             
             $html .= '<td style="vertical-align: top;">'.$row["descricao"].'</td>';
             
-            $html .= '<td style="vertical-align: top;">'.$row["endereco"].'</td>';
+            $html .= '<td style="vertical-align: top;">'.$row["utilizacao"].'</td>';
 
             $html .= '<td style="vertical-align: top;">'.$row["servico"].'</td>';
 
@@ -90,8 +90,6 @@
     // Envia o conteúdo do arquivo
 
     echo $html;
-    
-    header('location: /admin'); 
     
     ?>
 

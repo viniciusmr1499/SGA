@@ -1,6 +1,6 @@
 <form method="POST" class="box">
     <!-- <h1 class="b__title">Login</h1>  -->
-    <img src="/img/logo.png" alt="Aeris" class="avatar img-fluid">
+    <img src="/img/SGaeris.png" alt="Aeris" class="avatar img-fluid">
 
     <div class="txtb">
         <input type="email" name="email" id="email">

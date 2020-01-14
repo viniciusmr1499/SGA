@@ -7,7 +7,7 @@
         
         <div  class="ml-auto mr-3">
             <a href="#" class="btn btn-success mt-1" data-target="#renovarEstoque" data-toggle="modal"><i class="fas fa-box-open"></i> Renovar Estoque</i></a>
-            <a href="/admin/pages/novo-material" class="text-title mt-1 btn btn-primary"><i class="fas fa-plus"> Adicionar material </i></a>
+            <a href="/admin/pages/novo-material" class="text-title mt-1 btn btn-info"><i class="fas fa-plus"> Adicionar Material </i></a>
         </div>
 
 
@@ -58,15 +58,23 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/admin/pages/renovar-estoque">
-                    <div class="form-group">
-                        <label for="codigo" class="col-form-label">Código:</label>
-                        <input type="number" required="true" class="form-control" placeholder="Código" id="codigo" name="codigo">
+                <form method="POST"action="/admin/pages/renovar-estoque">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <label for="id_codigo" class="col-form-label">Código:</label>
+                            <input type="number" name="codigo" id="id_codigo" required="true" class="form-control"  id="codigo">
+                        </div>
+                        <div class="position">
+                            <button type="button" id="buscarNomeEquipamento" class="btn btn-info">
+                                <i class="fas fa-search p-1" style="box-sizing:border-box;font-size:1.1rem;"></i>
+                            </button>
+                        </div>
+                        <!-- fim da linha  -->
                     </div>
                     
                     <div class="form-group">
                         <label for="equipamento" class="col-form-label">EQUIPAMENTO:</label>
-                        <input type="text" readonly="true" required class="form-control" placeholder="Equipamento" value="">
+                        <input type="text" readonly="true" required class="form-control" placeholder="Equipamento" id="equipamento-nome">
                     </div>
 
                     <div class="form-group">

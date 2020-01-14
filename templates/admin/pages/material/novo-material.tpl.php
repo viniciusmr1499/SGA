@@ -1,4 +1,4 @@
-<form class="f-register pl-3" method="post" enctype="multipart/form-data">
+<form class="f-register pl-3" id="cadastro-material" method="post" enctype="multipart/form-data">
     <div class="col">
         <h1 class="text-title pt-2">Cadastro de Material</h1>
         <hr class="pb-4">
@@ -17,20 +17,20 @@
 
             <div class="col-md-3 mt-4">
                 <label for="un_medida" class="text-uppercase pb-2 t-cel">UN.MEDIDA:</label><span class="obrigatorio"> *</span>
-                <input type="text" name="un_medida" id="un_medida" placeholder="Ex: M" class="text-uppercase form-control" maxlength="3">
+                <select name="un_medida" id="un_medida" class="form-control select2">
+                    <option>Selecione:</option>
+                    <?php foreach($data['lista'] as $item) : ?>
+                    <option><?php echo $item['nome'];?></option>
+                    <?php endforeach; ?>
+                </select>
+                
             </div>
 
             <div class="col-md-3 mt-4">
                 <label for="Estoque" class="text-uppercase pb-2 t-cel">Quantidade:</label><span class="obrigatorio"> *</span>
                 <input type="number" class="form-control" required placeholder="Ex: 1" name="quantidade" id="Estoque">
             </div>
-            <!-- <div class="col-md-6 mt-4">
-                <label for="Servico" class="text-uppercase pb-2 t-cel">Serviço:</label><span class="obrigatorio"> *</span>
-                <input type="text" class="form-control"  required name="servico" id="Servico" placeholder="Servico">
-            </div> -->
-
             
-
             <div class="col-md-6 mt-4">
                 <label for="Endereco" class="text-uppercase pb-2 t-cel">Endereço:</label><span class="obrigatorio"> *</span>
                 <input type="text" class="form-control"  required name="endereco" id="Endereco" placeholder="Endereco">
@@ -42,7 +42,7 @@
             </div>
 
             <div class="col-md-6 mt-4">
-                <label for="anexo" class="text-uppercase pb-2 t-cel">Anexar imagem: </label>
+                <label for="inputGroupFileAddon01" class="text-uppercase pb-2 t-cel">Anexar imagem:</label>
                 <p><input type="file" accept="image/*" name="file" id="anexo"></p>
             </div>
             

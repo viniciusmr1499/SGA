@@ -1,6 +1,6 @@
 <?php 
 
- if(resolve('/painel')){
+if(resolve('/painel')){
     if($_SESSION['nivel'] == 0){
         render('/painel/home','painel');
     }else{

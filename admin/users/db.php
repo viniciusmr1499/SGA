@@ -8,13 +8,14 @@ function usuario_get_data($redirecionarError){
     $setor = filter_input(INPUT_POST, 'setor');
     $cargo = filter_input(INPUT_POST, 'cargo');
     $senha = filter_input(INPUT_POST, 'senha');
+    $fotoAntiga = filter_input(INPUT_POST,'fotoAntiga');
 
     if(is_null($matricula) or is_null($nome) or is_null($email)){
         flash('Informe os campos obrigatórios','error');
         header('location: ' . $redirecionarError);
         die();
     }
-    return compact('matricula','nome','email','setor','cargo','senha','file');
+    return compact('matricula','nome','email','setor','cargo','senha','file','fotoAntiga');
 }
 
 function usuario_get_data_perfil(){
@@ -30,8 +31,9 @@ function usuario_get_data_perfil(){
 
 function usuario_get_data_avatar(){
     $file = filter_input(INPUT_POST, 'file');
+    $fotoAntiga = filter_input(INPUT_POST,'fotoAntiga');
     
-    return compact('file');
+    return compact('file','fotoAntiga');
 }
 
 
@@ -47,33 +49,41 @@ $criarUsuario = function() use ($conn){
     //CRIAR USUARIO
     date_default_timezone_set('America/Sao_Paulo');
     $data = usuario_get_data('/admin/pages/novo-usuario');
-
     
-    if(isset($_FILES['file'])){
-        
-        // var_dump($_FILES['file']);exit;
-        
-        $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
-        $novo_nome = 'user - ' . date("Y.m.d"). $extensao; // define o nome do arquivo
-        $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
-        // var_dump($_FILES['file']); exit;
-        $data['file'] = $novo_nome;
-        // var_dump($data['file']);exit;
-        move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$novo_nome); // efetua o upload
+    if(is_null($data['senha'])){
+        flash('Informe o campo email','error');
+        header('location: /admin/users/novo-usuario');
+        die();
+    }  
 
-        if(is_null($data['senha'])){
-            flash('Informe o campo email','error');
+    if(isset($_FILES['file'])){
+        // $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
+        $extensao = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+        $formatosPermitidos = array('jpg','png','jpeg');
+        $tamanho = $_FILES['file']['size']; 
+        
+        if(in_array($extensao,$formatosPermitidos)){
+            if($tamanho <= 2097152){
+                $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
+                $novo_nome = 'image-'.rand(5,10000).'-'. date("Y.m.d").$extensao; // define o nome do arquivo
+                $diretorio = __DIR__ ."/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
+                move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$novo_nome); // efetua o upload
+
+                $sql = 'INSERT INTO usuarios (matricula,nome,email,setor,cargo,nome_img,senha,data_de_criacao,data_de_atualizacao) VALUES (?,?,?,?,?,?,md5(?),NOW(),NOW())';
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('sssssss',$data['matricula'],$data['nome'],$data['email'],$data['setor'],$data['cargo'],$novo_nome,$data['senha']);
+                
+                return $stmt->execute();
+            }
+
+        }else{
+            flash('O formato da imagem anexada não é permitida!','error');
             header('location: /admin/users/novo-usuario');
             die();
         }
-
-        $sql = 'INSERT INTO usuarios (matricula,nome,email,setor,cargo,nome_img,senha,data_de_criacao,data_de_atualizacao) VALUES (?,?,?,?,?,?,md5(?),NOW(),NOW())';
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sssssss',$data['matricula'],$data['nome'],$data['email'],$data['setor'],$data['cargo'],$data['file'],$data['senha']);
-        flash('Usuário foi criado com sucesso!', 'success');
+        
+        
     }
-
-    return $stmt->execute();
 };
 
 $editarUsuario = function($id) use ($conn){
@@ -93,24 +103,45 @@ $editarPerfil = function($id) use ($conn){
     // EDITAR USUARIO
     $data = usuario_get_data_avatar();
     date_default_timezone_set('America/Sao_Paulo');
-
+    
     if(isset($_FILES['file'])){
-        $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
-        $result = 'User - ' . date("Y.m.d-H.i.s"). $extensao; // define o nome do arquivo
-        $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
-        
-        $data['file'] = $result;
-        // var_dump($data['file']);exit;
-        move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$result); // efetua o upload
+        $extensao = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+        $formatosPermitidos = array('jpg','png','jpeg');
+        $tamanho = $_FILES['file']['size'];    
+        // var_dump($tamanho);exit;
+        if(in_array($extensao,$formatosPermitidos)){
+            if($tamanho <= 2097152){
+                $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
+         
+                $novo_nome = 'image-'.rand(5,10000).'-'. date("Y.m.d").$extensao; // define o nome do arquivo
+                
+                $diretorio = __DIR__ ."/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
+             
+                move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$novo_nome); // efetua o upload
 
-        $sql = 'UPDATE usuarios SET nome_img=?,data_de_atualizacao=NOW() WHERE id_usuario = ?';
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('si',$data['file'],$id);
-
-        flash('Dados atualizados com sucesso!', 'success');
+                unlink($data['fotoAntiga']); // APAGA A IMAGEM ANTIGA NO SERVIDOR
+                $data['file'] = $novo_nome;
+                $_SESSION['avatar'] = $novo_nome;
+                $sql = 'UPDATE usuarios SET nome_img=?,data_de_atualizacao=NOW() WHERE id_usuario = ?';
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('si',$data['file'],$id);
+                
+                flash('Dados atualizados com sucesso!', 'success');
+                return $stmt->execute();
+            }
+           
+        }else if(!in_array($extensao,$formatosPermitidos)){
+            flash('O formato da imagem anexada não é permitida!','error');
+            header('location: /painel');
+            die();
+        }else{
+            // var_dump($tamanho);exit;
+            flash('O Tamanho da imagem não pode ser superior a 2MB!','warning');
+            header('location: /painel');
+            die();
+        }
     }
 
-    return $stmt->execute();
 };
 
 $removerUsuario = function($id) use ($conn){

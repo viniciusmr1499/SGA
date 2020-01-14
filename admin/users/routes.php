@@ -19,7 +19,8 @@ else if(resolve('/admin/users/novo-usuario')){
     if($_SESSION['nivel'] == 1){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $criarUsuario();
-    
+            flash('Usuário foi criado com sucesso!', 'success');
+            
             return header('location: /admin/users');
         }
         render('admin/users/novo-usuario','admin');

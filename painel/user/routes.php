@@ -1,6 +1,7 @@
 <?php 
 include __DIR__ . '/db.php';
 // ************************* PERFIL DE USUÁRIO ************************
+
 // ↓↓ EDITAR USUARIO ↓↓
 if($params = resolve('/painel/user/(\d+)/perfil')){
     if($_SESSION['nivel'] == 0){

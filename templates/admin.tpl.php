@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="/css/dest/style.css">
     <link rel="stylesheet" href="/resources/pinotify/pnotify.custom.min.css">
     <link rel="stylesheet" href="/resources/jquery-confirm/dist/jquery-confirm.min.css">
+    <link rel="stylesheet" href="/resources/select2/dist/css/select2.min.css">
     <title>Painel ADM- SGA</title>
 </head>
-<body id="page-top">   
+<body>   
     
     <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
                 <div class="sidebar-heading">
                     <a href="/admin">
-                        <img src="/img/logo.png" style="padding-bottom:1rem;"height="auto" width="130px"alt="Logo"> 
+                        <img src="/img/SGaeris.png" style="padding-bottom:1rem;"height="auto" width="130px"alt="Logo"> 
                     </a>   
                 </div>
 
@@ -45,7 +46,7 @@
 
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item ghost">
-                            <a href="#" target="" class="nav-link ghost text-gray-600"><i class="fas fa-book-open"></i>&nbsp;Manual SGA</a>
+                            <a href="#" target="" class="nav-link ghost text-gray-600"><i class="fas fa-book-open"></i>&nbsp;Tutorial SGA</a>
                         </li>
                         <!-- Nav Item - Messages -->
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -54,8 +55,11 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo 'Olá, ' . $_SESSION['nome'];?></span>
-                                <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['avatar'];?>">
-                                <!-- <i class="fas fa-user-circle" style="font-size:1.8rem"></i> -->
+                                <?php if(!empty($_SESSION['avatar'])) :?>
+                                <img class="img-profile rounded-circle" src="/img/<?php echo $_SESSION['avatar'] ?>">
+                                <?php else:?>
+                                <i class="fas fa-user-circle rounded-circle" style="font-size:1.8rem"></i>
+                                <?php endif;?>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -122,11 +126,6 @@
         </div>      
         <!-- /#page-content-wrapper -->
     </div>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    
     
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/popper.js"></script>
@@ -140,6 +139,9 @@
     <script src="/resources/jquery-confirm/dist/jquery-confirm.min.js"></script>
     <script><?php flash();?></script> 
     <script src="/js/alertas.js"></script>
+    <script src="/resources/select2/dist/js/select2.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/ajax.js"></script>
     
 </body>
 </html>

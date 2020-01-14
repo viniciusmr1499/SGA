@@ -8,14 +8,15 @@ function material_get_data($redirecionarError){
     $descricao = filter_input(INPUT_POST, 'descricao');
     $endereco = filter_input(INPUT_POST, 'endereco');
     $quantidade = filter_input(INPUT_POST, 'quantidade');
-    
+    $fotoAntiga = filter_input(INPUT_POST,'fotoAntiga');    
+    // var_dump($fotoAntiga);exit;
 
     if(is_null($un_medida) or is_null($equipamento)){
         flash('Informe os campos obrigatórios','error');
         header('location: ' . $redirecionarError);
-        die();
+        exit;
     }
-    return compact('un_medida','equipamento','referencia','quantidade','file','endereco','descricao');
+    return compact('un_medida','equipamento','referencia','quantidade','file','endereco','descricao','fotoAntiga');
 }
 
 function despache_get_data(){
@@ -58,6 +59,10 @@ $historico = function() use($conn){
 $criarMaterial = function() use ($conn){
     // pegar os dados do formulário
     $data = material_get_data('/admin/pages/novo-material');
+    date_default_timezone_set('America/Sao_Paulo');
+    $responsavel = $_SESSION['nomeCompleto'];
+    // echo $responsavel; exit;
+    
     if($data['un_medida'] == 'Selecione'){
         flash('Selecione os campos obrigatórios','error');
 
@@ -66,25 +71,40 @@ $criarMaterial = function() use ($conn){
     }
     //Tratando o arquivo
     if(isset($_FILES['file'])){
-        // var_dump($_FILES['file']);exit;
-        date_default_timezone_set('America/Sao_Paulo');
-        $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
-        $novo_nome = 'Mat - ' . date("Y.m.d"). $extensao; // define o nome do arquivo
-        $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
-        // var_dump($_FILES['file']); exit;
-        $data['file'] = $novo_nome;
-        // var_dump($data['file']);exit;
-        move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$novo_nome); // efetua o upload
+        $extensao = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+        $formatosPermitidos = array('jpg','png','jpeg');
+        $tamanho = $_FILES['file']['size'];    
         
-        // CRIAR MATERIAL
-        $sql = 'INSERT INTO materiais (un_medida,equipamento,referencia,nome_img,descricao,endereco,quantidade,data_de_cadastro,data_de_atualizacao) VALUES (?,?,?,?,?,?,?,NOW(),NOW())';
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ssssssi',strtoupper($data['un_medida']),$data['equipamento'],$data['referencia'],$data['file'],$data['descricao'],$data['endereco'],$data['quantidade']);
-        
-        flash('Material foi inserido com sucesso!', 'success');
+        if($_FILES['file']['type'] == 'image/png' || $_FILES['file']['type'] == 'image/jpeg' || $_FILES['file']['type'] == 'image/jpg'){
+            // VALIDAÇÃO VIA PHP - TAMANHO DA IMAGEM => LIMITE MÁXIMO 2MB
+            if($tamanho <= 2097152 && $tamanho != 0){
+                $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
+                // var_dump($_FILES['file']['type']); exit;
+                $novo_nome = 'image-'.rand(5,10000).'-'. date("Y.m.d").$extensao; // define o nome do arquivo
+                
+                $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
+                
+                move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$novo_nome); // efetua o upload
+                
+                $data['file'] = $novo_nome;
+                $sql = 'INSERT INTO materiais (un_medida,equipamento,referencia,nome_img,materialCriadoPor,descricao,endereco,quantidade,data_de_cadastro,data_de_atualizacao) VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())';
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('sssssssi',$data['un_medida'],$data['equipamento'],$data['referencia'],$data['file'],$responsavel,$data['descricao'],$data['endereco'],$data['quantidade']);
+                
+                flash('Material foi inserido com sucesso!', 'success');
+                return $stmt->execute();
+            }
+        }
     }
-
+    // var_dump($materialCriadoPor);exit;
+    $sql = 'INSERT INTO materiais (un_medida,equipamento,referencia,materialCriadoPor,descricao,endereco,quantidade,data_de_cadastro,data_de_atualizacao) VALUES (?,?,?,?,?,?,?,NOW(),NOW())';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ssssssi',$data['un_medida'],$data['equipamento'],$data['referencia'],$responsavel,$data['descricao'],$data['endereco'],$data['quantidade']);
+    
+    flash('Material foi inserido com sucesso!', 'success');
     return $stmt->execute();
+    
+
 };
 
 $editarMaterial = function($id) use ($conn){
@@ -92,28 +112,70 @@ $editarMaterial = function($id) use ($conn){
     $data = material_get_data('/admin/pages/materiais');
     date_default_timezone_set('America/Sao_Paulo');
     
-    if(isset($_FILES['file'])){
-        $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
-        $result = 'Mat - ' . date("Y.m.d-H.i.s"). $extensao; // define o nome do arquivo
-        $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
-        // var_dump($extensao);exit;
-        $data['file'] = $result;
-        // var_dump($data['file']);exit;
-        move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$result); // efetua o upload
+    if($data['un_medida'] == 'Selecione'){
+        flash('Selecione os campos obrigatórios','error');
 
-        // EDITAR MATERIAL
-        $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,nome_img=?,endereco=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ssssssii',strtoupper($data['un_medida']),$data['equipamento'],$data['referencia'],$data['descricao'],$data['file'],$data['endereco'],$data['quantidade'],$id);
-
-        flash('Material foi atualizado com sucesso!', 'success'); 
+        header('location: /admin/pages/novo-material');
+        exit;
     }
-    
+    // var_dump($data['fotoAntiga']);exit;
+    if(isset($_FILES['file'])){
+        $extensao = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+        $formatosPermitidos = array('jpg','png','jpeg');
+        $tamanho = $_FILES['file']['size']; 
+        // var_dump($data['fotoAntiga']);exit;
+        if($_FILES['file']['type'] == 'image/png' || $_FILES['file']['type'] == 'image/jpeg' || $_FILES['file']['type'] == 'image/jpg'){
+            if($tamanho <= 2097152){
+                $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
+                $novo_nome = 'image-'.rand(5,10000).'-'. date("Y.m.d").$extensao; // define o nome do arquivo
+                $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
+                $data['file'] = $novo_nome;
+                move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$novo_nome); // efetua o upload
+                
+                if($data['fotoAntiga'] == 'img/'){
+                    // var_dump($data['fotoAntiga']);exit;
+                    $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,nome_img=?,endereco=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param('ssssssii',strtoupper($data['un_medida']),$data['equipamento'],$data['referencia'],$data['descricao'],$data['file'],$data['endereco'],$data['quantidade'],$id);
+
+                    flash('Material foi atualizado com sucesso!', 'success'); 
+                    
+                    return $stmt->execute();
+                }
+
+                unlink($data['fotoAntiga']); // APAGA A IMAGEM ANTIGA NO SERVIDOR
+            
+                // EDITAR MATERIAL
+                $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,nome_img=?,endereco=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('ssssssii',strtoupper($data['un_medida']),$data['equipamento'],$data['referencia'],$data['descricao'],$data['file'],$data['endereco'],$data['quantidade'],$id);
+
+                flash('Material foi atualizado com sucesso!', 'success'); 
+                
+                return $stmt->execute();
+
+            }
+        }else{
+            var_dump($formatosPermitidos);exit;
+            flash('O formato do arquivo anexado não é permitido!','error');
+
+            header("location: /admin/pages/{$id}/editar-material");
+            exit;
+        }
+        
+    }
+
+    $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,endereco=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('sssssii',$data['un_medida'],$data['equipamento'],$data['referencia'],$data['descricao'],$data['endereco'],$data['quantidade'],$id);
+    flash('Material foi atualizado com sucesso!', 'success');  
+
     return $stmt->execute();
+    
 };
 
-$listarMedidas = function($id) use($conn){
-    $sql = 'SELECT nome FROM unidades';
+$listarMedidas = function() use($conn){
+    $sql = 'SELECT nome FROM unidade_de_medidas';
     $result = $conn->query($sql);
 
     return $result->fetch_all(MYSQLI_ASSOC);
@@ -206,7 +268,7 @@ $inserirDadosDespacho = function() use($conn){
         if($data['quantidade'] > 0 && $data['quantidade'] <= $qtd){
             $sql = 'INSERT INTO solicitacao (codigo,matricula,colaborador,setor,utilizacao,quantidade,data_de_despache) VALUES (?,?,?,?,?,?,now())';
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param('issssi',$data['codigo'],$data['matricula'],strtoupper($data['colaborador']),strtoupper($data['setor']),$data['utilizacao'],$data['quantidade']);
+            $stmt->bind_param('issssi',$data['codigo'],$data['matricula'],$data['colaborador'],$data['setor'],$data['utilizacao'],$data['quantidade']);
             
             return $stmt->execute();
         }
@@ -261,73 +323,200 @@ $reporEstoque = function() use($conn){
     
 };
 
-$gerarRelatorio = function() use($conn){
-    date_default_timezone_set('America/Sao_Paulo');
-    $arquivo = 'Mat -' . date("Y.m.d-H.i.s");
+$gerarRelatorioHistorico = function() use($conn){
+    $date = date('d-m-Y');
 
-    // Criamos uma tabela HTML com o formato da planilha
+        $nome = "Base-materiais.xls";
 
-    $html = '';
+        // Definimos o nome do arquivo que será exportado
 
-    $html .= '<table border="1">';
+        $arquivo = $date." - ".$nome;
 
-    $html .= '<td><b>CÓDIGO</b></td>';
+        
 
-    $html .= '<td><b></b>UN.MEDIDA</td>';
+        // Criamos uma tabela HTML com o formato da planilha
 
-    $html .= '<td><b></b>Equipamento</td>';
+        $html = '';
 
-    $html .= '<td><b></b>Referencia</td>';
+        $html .= '<table border="1">';
 
-    $html .= '<td><b></b>Descricao</td>';
+        
+        $html .= '<td><b>CODIGO</b></td>';
 
-    $html .= '<td><b></b>Endereco</td>';
+        $html .= '<td><b>UN.MEDIDA</b></td>';
+        
+        $html .= '<td><b>EQUIPAMENTO</b></td>';
 
-    $html .= '<td><b></b>Data de cadastro</td>';
+        $html .= '<td><b>REFERENCIA</b></td>';
 
-    $html .= '</tr>';
+        $html .= '<td><b>DESCRICAO</b></td>';
 
-    $result = "SELECT * FROM materiais";
+        $html .= '<td><b>ENDERECO</b></td>';
 
-    $result = mysqli_query($conn , $result);
+        $html .= '<td><b>DATA DE CADASTRO</b></td>';
+        
+
+        $html .= '</tr>';
+
+        
+
+        //Selecionar todos os itens da tabela
+
+        $result_msg_contatos = "SELECT * FROM materiais";
+
+        $resultado_msg_contatos = mysqli_query($conn , $result_msg_contatos);
+
+        
+
+        while($row_msg_contatos = mysqli_fetch_assoc($resultado_msg_contatos)){
+
+                $html .= '<tr>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["codigo"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["un_medida"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["equipamento"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["referencia"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["descricao"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["endereco"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["data_de_cadastro"].'</td>';
+
+                $html .= '</tr>';
+
+        }
+
+        // Configurações header para forçar o download
+
+        header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+
+        header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+
+        header ("Cache-Control: no-cache, must-revalidate");
+
+        header ("Pragma: no-cache");
+
+        // header ("Content-type: application/x-msexcel");
+        header ('Content-type: application/vnd.ms-excel');
+        
+        header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+
+        header ("Content-Description: PHP Generated Data" );
+
+        // Envia o conteúdo do arquivo
+
+        echo $html;
+        exit; 
+};
+
+$gerarRelatorioDespacho = function() use($conn){
+    $date = date('d-m-Y');
+
+        $nome = "Despache-materiais.xls";
+
+        // Definimos o nome do arquivo que será exportado
+
+        $arquivo = $date." - ".$nome;
+
+        
+
+        // Criamos uma tabela HTML com o formato da planilha
+
+        $html = '';
+
+        $html .= '<table border="1">';
+
+        
+        $html .= '<td><b>CODIGO</b></td>';
+
+        $html .= '<td><b>MATRICULA</b></td>';
+        
+        $html .= '<td><b>COLABORADOR</b></td>';
+
+        $html .= '<td><b>SETOR</b></td>';
+
+        $html .= '<td><b>UTILIZACAO</b></td>';
+
+        $html .= '<td><b>EQUIPAMENTO</b></td>';
+
+        $html .= '<td><b>QUANTIDADE</b></td>';
+
+        $html .= '<td><b>DATA DE ENVIO</b></td>';
+        
+
+        $html .= '</tr>';
+
+        
+
+        //Selecionar todos os itens da tabela
+
+        $result_msg_contatos = 'SELECT c.codigo,c.matricula,c.colaborador,c.setor,c.utilizacao,m.equipamento, c.quantidade,c.data_de_despache
+        FROM materiais as m 
+        INNER JOIN solicitacao as c 
+        ON m.codigo = c.codigo';
+        
+
+        $resultado_msg_contatos = mysqli_query($conn , $result_msg_contatos);
+
+        
+
+        while($row_msg_contatos = mysqli_fetch_assoc($resultado_msg_contatos)){
+
+                $html .= '<tr>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["codigo"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["matricula"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["colaborador"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["setor"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["utilizacao"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["equipamento"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["quantidade"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["data_de_despache"].'</td>';
+
+                $html .= '</tr>';
+
+        }
+
+        // Configurações header para forçar o download
+
+        header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+
+        header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+
+        header ("Cache-Control: no-cache, must-revalidate");
+
+        header ("Pragma: no-cache");
+
+        header ("Content-type: application/x-msexcel");
+        
+        header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+
+        header ("Content-Description: PHP Generated Data" );
+
+        // Envia o conteúdo do arquivo
+
+        echo $html;
+        exit; 
+};
+
+$pesquisarEquipamento = function($id) use($conn){
+    $sql = 'SELECT equipamento FROM materiais WHERE codigo = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i',$id);
+    $stmt->execute();
+    $result = $stmt->get_result();
     
-    while($row = mysqli_fetch_assoc($result)){
+    echo json_encode($result->fetch_assoc());
 
-            $html .= '<tr>';
-
-            $html .= '<td style="vertical-align: top;">'.$row["codigo"].'</td>';
-
-            $html .= '<td style="vertical-align: top;">'.$row["un_medida"].'</td>';
-
-            $html .= '<td style="vertical-align: top;">'.$row["equipamento"].'</td>';
-            
-            $html .= '<td style="vertical-align: top;">'.$row["referencia"].'</td>';
-            
-            $html .= '<td style="vertical-align: top;">'.$row["descricao"].'</td>';
-
-            $html .= '<td style="vertical-align: top;">'.$row["data_de_cadastro"].'</td>';
-
-            $html .= '</tr>';
-
-    }
-    
-    // Configurações header para forçar o download
-
-    header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-
-    header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
-
-    header ("Cache-Control: no-cache, must-revalidate");
-
-    header ("Pragma: no-cache");
-
-    header ("Content-type: application/x-msexcel");
-    
-    header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
-
-    header ("Content-Description: PHP Generated Data" );
-
-    // Envia o conteúdo do arquivo
-
-    echo $html;
 };

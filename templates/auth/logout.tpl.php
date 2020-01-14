@@ -1,4 +1,4 @@
 <?php
 
-unset($_SESSION['usuario']);
+session_destroy();
 header('location: /auth/login');

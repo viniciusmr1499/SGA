@@ -27,8 +27,8 @@
                 <input type="email" class="form-control" name="email" required="true" id="email" placeholder="@aerisenergy.com.br">
             </div>
             <div class="col-md-6 mt-4">
-                <label for="file__img" class="pb-2 t-cel">Anexar imagem:</label>
-                <input type="file" class="d-flex" name="file" id="file__img">
+                <label for="anexo" class="pb-2 t-cel">Anexar imagem:</label>
+                <input type="file" class="d-flex" name="file" id="anexo">
             </div>
             <div class="col-md-6 mt-4">
                 <label for="senha" class="pb-2 t-cel">Senha:</label><span class="obrigatorio"> *</span>

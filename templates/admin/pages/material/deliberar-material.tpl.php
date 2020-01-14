@@ -1,14 +1,16 @@
 <div id="form-register">
     <section class="row">
         <div class="col-md-12" style="padding:0;">
-            <div class="gradient"><h1 class="text-title">Fluxo de materiais</h1></div>
+            <div class="gradient"><h1 class="text-title">Fluxo de Materiais</h1></div>
             <hr>
         </div>
-        
-        <div  class="ml-auto mr-3">
-            <a href="#" data-target="#outMaterials" data-toggle="modal"  class="btn btn-dark">Deliberar <i class="far fa-hand-point-right"></i></a>
-        </div>
 
+        <div class="col-12 pb-2" style="display:flex;align-items:center ;justify-content:flex-end">
+            <a href="#" data-target="#outMaterials" data-toggle="modal"  class="mr-1 btn btn-info">Deliberar <i class="far fa-hand-point-right"></i></a>
+            <a href="/admin/pages/gerar-relatorio-deliberacao" class="btn btn-success ml-1">Gerar Relatório
+                <i class="fas fa-file-excel"></i>
+            </a>
+        </div>
 
         <div class="table-responsive mt-3">
             <table class="table table-register table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -55,39 +57,53 @@
             <div class="modal-body">
                 <form method="post" action="/admin/pages/despacho">
                     <div class="form-group">
-                        <label for="codigo" class="col-form-label">Código:</label>
-                        <input type="number" name="codigo" required="true" class="form-control" placeholder="Código" id="codigo">
-                    </div>
- 
-                    <div class="form-group">
-                        <label for="mat" class="col-form-label">Matricula:</label>
-                        <input type="text" required="true" name="matricula" id="mat" class="form-control" placeholder="Ex: 006216">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label for="codigo" class="col-form-label">Código:</label>
+                                <input type="number" name="codigo" id="codigo" required="true" class="form-control"  id="codigo">
+                            </div>
+                            <div class="position">
+                                <button id="buscarEquipamento" class="btn btn-info">
+                                    <i class="fas fa-search p-1" style="box-sizing:border-box;font-size:1.1rem;"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="colaborador" class="col-form-label">Colaborador:</label>
-                        <input type="text" required="true" name="colaborador" id="colaborador" class="text-uppercase form-control" placeholder="Colaborador">
-                    </div>
-                    <div class="form-group">
-                        <label for="Setor" class="col-form-label">Setor:</label>
-                        <input type="text" required="true" name="setor" id="Setor" class="text-uppercase form-control" placeholder="TIC">
+                        <label for="equipamento" class="col-form-label">EQUIPAMENTO:</label>
+                        <input type="text" readonly="true" required class="form-control" placeholder="equipamento" id="equipamento-nome">
                     </div>
                     
-                    <div class="form-group">
-                        <label for="equipamento" class="col-form-label">EQUIPAMENTO:</label>
-                        <input type="text" readonly="true" required class="form-control" placeholder="Equipamento">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="mat" class="col-form-label">Matricula:</label>
+                            <input type="text" required="true" name="matricula" id="mat" class="form-control">
+                        </div>
+                        <div class="col-9">
+                            <label for="colaborador" class="col-form-label">Colaborador:</label>
+                            <input type="text" required="true" name="colaborador" id="colaborador" class="form-control">
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="order" class="col-form-label">Utilizacao:</label>
-                        <input type="text" required="true" name="utilizacao" id="order" class="text-uppercase form-control" placeholder="Utilização">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="qtd" class="col-form-label">Quantidade:</label>
-                        <input type="number" name="quantidade" required="true" id="qtd" class="form-control" placeholder="Quantidade">
+                        <input type="text" required="true" name="utilizacao" id="order" class="form-control">
                     </div>
                     
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="Setor" class="col-form-label">Setor:</label>
+                            <input type="text" required="true" name="setor" id="Setor" class="form-control">
+                        </div>
+                        <div class="col-md-12   ">
+                            <label for="qtd" class="col-form-label">Quantidade:</label>
+                            <input type="number" name="quantidade" required="true" id="qtd" class="form-control">
+                        </div>
+                    </div>
+
+                    
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn_register">Salvar</button>

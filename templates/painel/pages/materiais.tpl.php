@@ -7,7 +7,7 @@
         
         <div  class="ml-auto mr-3">
             <a href="#" class="btn btn-success mt-1" data-target="#renovarEstoque" data-toggle="modal"><i class="fas fa-box-open"></i> Renovar Estoque</i></a>
-            <a href="/painel/pages/novo-material" class="text-title mt-1 btn btn-primary"><i class="fas fa-plus"> Adicionar material </i></a>
+            <a href="/painel/pages/novo-material" class="text-title mt-1 btn btn-primary"><i class="fas fa-plus"> Adicionar Material </i></a>
         </div>
 
 

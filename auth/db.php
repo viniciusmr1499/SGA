@@ -25,6 +25,7 @@ $login = function () use ($conn) {
         $nome = $nome[0] . ' ' . $nome[1];
         $_SESSION['usuario'] = $email;
         $_SESSION['nome'] = $nome;
+        $_SESSION['nomeCompleto'] = $nomeCompleto;
         $_SESSION['nivel'] = $nivel;
         $_SESSION['id_usuario'] = $id;
         $_SESSION['avatar'] = $avatar;

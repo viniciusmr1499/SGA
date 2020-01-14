@@ -30,16 +30,11 @@
                 <input type="text" class="form-control" id="cargo" readonly="true" value="<?php echo $data['page']['cargo'];?>">
             </div>
             <div class="col-md-6 mt-4">
-                <label for="file__img" class="pb-2 t-cel">Anexar imagem:</label>
-                <input type="file" class="d-flex" name="file" id="file__img">
+                <label for="file__img" class="pb-2 t-cel">Anexar imagem:</label><span class="obrigatorio"> *</span>
+                <input type="hidden" name="fotoAntiga" value="img/<?php echo $_SESSION['avatar'];?>">
+                <input type="file" class="d-flex" accept="image/*" required="true" name="file" id="file__img">
             </div>
-
-            <div class="col-md-6 mt-4">
-                <label for="senha" class="pb-2 t-cel">Senha:</label>
-                <input type="password" class="form-control" name="senha" id="senha">
-                <!-- value="<?php echo $data['page']['senha']; ?>" -->
-            </div>
-
+            
             <div class="col-12 mt-5 pt-1 t-cel">
                 <hr>
                 <button type="submit" class="btn btn_register">Salvar</button>

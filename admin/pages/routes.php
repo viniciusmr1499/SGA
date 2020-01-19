@@ -35,12 +35,13 @@ else if($params = resolve('/admin/pages/(\d+)/editar-material')){
     if($_SESSION['nivel'] == 1){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $editarMaterial($params[1]);
+
             return header('location: /admin/pages/materiais');
         }
         
         $page = $verMaterial($params[1]);
-
-        render('admin/pages/material/editar-material','admin',['page' => $page]);
+        $lista = $listarMedidas();
+        render('admin/pages/material/editar-material','admin',['page' => $page],['lista' => $lista]);
     }else{
         header('location: /painel');
     }
@@ -115,9 +116,9 @@ else if(resolve('/admin/pages/gerar-relatorio-deliberacao')){
     }
 }
 // BUSCAR O EQUIPAMENTO AUTOMATICO COM APENAS O CODIGO DO MATERIAL
-else if($params = resolve('/admin/pages/(\d+)/buscar-equipamento')){
+else if($params = resolve('/admin/pages/(\d+)/buscar-descricao')){
     if($_SESSION['nivel'] == 1){
-        $pesquisarEquipamento($params[1]);
+        $pesquisarDescricao($params[1]);
     }else{
         header('location: /painel');
     }

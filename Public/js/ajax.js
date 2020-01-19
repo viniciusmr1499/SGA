@@ -1,7 +1,7 @@
 $('#buscarEquipamento').click(function(e){
     // e.preventDefault();
-    let equipamento = $('#codigo').val();
-    if(equipamento == ""){
+    let descricao = $('#codigo').val();
+    if(descricao == ""){
         $.alert({
             title: 'Campo vazio!',
             content: 'Favor, preencher o campo código!',
@@ -16,14 +16,14 @@ $('#buscarEquipamento').click(function(e){
                 },
             }
         });
-        $('#equipamento-nome').val("Equipamento");
+        $('#descricao-nome').val("descricao");
         return;
     }
     $('#buscarEquipamento').attr('disabled', 'disabled');
 
     $.ajax({
         type: "POST",
-        url: "/admin/pages/"+equipamento+"/buscar-equipamento",
+        url: "/admin/pages/"+descricao+"/buscar-descricao",
         processData: false,
         cache: false,
         contentType: false,
@@ -51,11 +51,11 @@ $('#buscarEquipamento').click(function(e){
                     },
                 }
             });
-            $('#equipamento-nome').val("Equipamento");
+            $('#descricao-nome').val("Descricao");
             return;
         }
         
-        $('#equipamento-nome').val(nome.equipamento);
+        $('#descricao-nome').val(nome.descricao);
 
     }).fail(function (data) {
         // console.log(data);
@@ -66,7 +66,7 @@ $('#codigo').change(function(){
     let valor = $(this).val();
     
     if(valor == ''){
-        $('#equipamento-nome').val("Equipamento");
+        $('#descricao-nome').val("Descrição");
     }
    
 })
@@ -75,20 +75,20 @@ $('#codigo').focusout(function(){
     let valor = $(this).val();
     
     if(valor == ''){
-        $('#equipamento-nome').val("Equipamento");
+        $('#descricao-nome').val("Descrição");
     }
 
 })
 
 
 
-// SEGUNDA FUNCAO PARA BUSCAR NOME DO EQUIPAMENTO
+// SEGUNDA FUNCAO PARA BUSCAR NOME Da descricao
 
 $('#buscarNomeEquipamento').click(function(e){
     // e.preventDefault();
-    let equipamento = $('#id_codigo').val();
+    let descricao = $('#id_codigo').val();
     
-    if(equipamento == ""){
+    if(descricao == ""){
         $.alert({
             title: 'Campo vazio!',
             content: 'Favor, preencher o campo código!',
@@ -103,7 +103,7 @@ $('#buscarNomeEquipamento').click(function(e){
                 },
             }
         });
-        $('#equipamento-nome').val("Equipamento");
+        $('#descricao-nome').val("Descrição");
         return;
     }
 
@@ -111,7 +111,7 @@ $('#buscarNomeEquipamento').click(function(e){
 
     $.ajax({
         type: "POST",
-        url: "/admin/pages/"+equipamento+"/buscar-equipamento",
+        url: "/admin/pages/"+descricao+"/buscar-descricao",
         processData: false,
         cache: false,
         contentType: false,
@@ -139,12 +139,12 @@ $('#buscarNomeEquipamento').click(function(e){
                     },
                 }
             });
-            $('#equipamento-nome').val("Equipamento");
+            $('#descricao-nome').val("Descrição");
 
             return;
         }
 
-        $('#equipamento-nome').val(nome.equipamento);
+        $('#descricao-nome').val(nome.descricao);
 
     }).fail(function (data) {
         // console.log(data);
@@ -156,7 +156,7 @@ $('#id_codigo').change(function(){
     let valor = $(this).val();
     
     if(valor == ''){
-        $('#equipamento-nome').val("Equipamento");
+        $('#descricao-nome').val("Descrição");
     }
    
 })
@@ -165,7 +165,7 @@ $('#id_codigo').focusout(function(){
     let valor = $(this).val();
     
     if(valor == ''){
-        $('#equipamento-nome').val("Equipamento");
+        $('#descricao-nome').val("Descrição");
     }
 
 })

@@ -68,11 +68,10 @@
                                     Perfil
                                 </a>
                                 <hr>
-                                <a href="#" data-target="#exampleModal" data-toggle="modal" class="dropdown-item">
+                                <!-- <a href="#" data-target="#exampleModal" data-toggle="modal" class="dropdown-item">
                                     <i class="fas fa-lock mr-2 text-gray-400"></i>
                                     Redefinir Senha
-                                </a>
-                                <hr>
+                                </a> -->
                                 <a class="dropdown-item" href="/auth/logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Sair
@@ -84,7 +83,7 @@
                 </nav>
             </header>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -94,7 +93,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" name="formuser" action="/admin/users/<?php echo $_SESSION['id_usuario'] ?>/redefinir-senha">
+                            <form method="post" name="renameUser" action="/admin/users/<?php echo $_SESSION['id_usuario'] ?>/redefinir-senha">
                                 <div class="form-group">
                                     <label for="senha" class="col-form-label">Senha:</label>
                                     <input type="password" name="senha" class="form-control" id="recipient-name">
@@ -105,14 +104,14 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                    <button type="submit" class="btn btn_register" onclick="return validar();">Salvar</button>
+                                    <button type="submit" class="btn btn_register" onclick="return renameUser();">Salvar</button>
                                 </div>
                             </form>
                         </div>
                         
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- fim do modal  -->
 
             <div class="container-fluid mb-5 pb-5">
@@ -140,8 +139,10 @@
     <script><?php flash();?></script> 
     <script src="/js/alertas.js"></script>
     <script src="/resources/select2/dist/js/select2.min.js"></script>
+    <script src="/resources/jquery-mask/dist/jquery.mask.min.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/ajax.js"></script>
+    
     
 </body>
 </html>

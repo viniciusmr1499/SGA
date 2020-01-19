@@ -51,7 +51,7 @@
             
             <div class="col-12 mt-2 pt-1 t-cel">
                 <hr>
-                <a href="/admin/pages/materiais" class="btn btn_register">voltar</a>
+                <a href="/admin/pages/materiais" class="btn btn-secondary">voltar</a>
             </div>
         </div>
     </div>

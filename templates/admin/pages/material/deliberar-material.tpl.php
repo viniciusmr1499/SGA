@@ -17,6 +17,7 @@
                 <thead class="text-light" style="background:#ff8055">
                     <tr>
                         <th class="t-head" scope="col">Código</th>
+                        <th class="t-head" scope="col">Descrição</th>
                         <th class="t-head" scope="col">Matricula</th>
                         <th class="t-head" scope="col">Colaborador</th>
                         <th class="t-head" scope="col">Setor</th>
@@ -30,13 +31,14 @@
                 <?php foreach($data['lista'] as $item):?>
                     <tr>
                         <td class="t-cel"><?php echo $item['codigo'];?></td>
+                        <td class="t-cel"><?php echo $item['descricao'];?></td>
                         <td class="t-cel"><?php echo $item['matricula'];?></td>
                         <td class="t-cel"><?php echo $item['colaborador'];?></td>
                         <td class="t-cel"><?php echo $item['setor'];?></td>
                         <td class="t-cel"><?php echo $item['utilizacao'];?></td>
                         <td class="t-cel"><?php echo $item['equipamento'];?></td>
                         <td class="t-cel"><?php echo $item['quantidade'];?></td>
-                        <td class="t-cel"><?php echo $item['data_de_despache'];?></td>
+                        <td class="t-cel"><?php echo $item['row_data'];?></td>
                     </tr>
                 <?php endforeach;?>
                 </tbody>
@@ -60,7 +62,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <label for="codigo" class="col-form-label">Código:</label>
-                                <input type="number" name="codigo" id="codigo" required="true" class="form-control"  id="codigo">
+                                <input type="text" name="codigo" id="codigo" required="true" class="form-control"  id="codigo">
                             </div>
                             <div class="position">
                                 <button id="buscarEquipamento" class="btn btn-info">
@@ -71,8 +73,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="equipamento" class="col-form-label">EQUIPAMENTO:</label>
-                        <input type="text" readonly="true" required class="form-control" placeholder="equipamento" id="equipamento-nome">
+                        <label for="equipamento" class="col-form-label">Descrição:</label>
+                        <input type="text" readonly="true" required class="form-control" placeholder="" id="descricao-nome">
                     </div>
                     
                     <div class="row">
@@ -98,14 +100,12 @@
                         </div>
                         <div class="col-md-12   ">
                             <label for="qtd" class="col-form-label">Quantidade:</label>
-                            <input type="number" name="quantidade" required="true" id="qtd" class="form-control">
+                            <input type="text" name="quantidade" required="true" id="qtd" class="form-control">
                         </div>
                     </div>
 
-                    
-
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn_register">Salvar</button>
                     </div>
                 </form>

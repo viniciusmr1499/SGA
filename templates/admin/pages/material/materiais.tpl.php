@@ -16,10 +16,10 @@
                 <thead class="thead-dark">
                     <tr>
                         <th class="t-head" scope="col">Código</th>
-                        <th class="t-head" scope="col">UN.Medida</th>
+                        <th class="t-head" scope="col">Descrição</th>
+                        <th class="t-head" scope="col">Un.Medida</th>
                         <th class="t-head" scope="col">Equipamento</th>
                         <th class="t-head" scope="col">Referência </th>
-                        <th class="t-head" scope="col">Descrição</th>
                         <th class="t-head" scope="col">Endereço</th>
                         <th class="t-head" scope="col">Quantidade</th>
                         <th class="t-head" scope="col">Status</th>
@@ -29,10 +29,10 @@
                 <?php foreach($data['lista'] as $lista):?>
                     <tr>
                         <td class="t-cel"><?php echo $lista['codigo'];?></td>
+                        <td class="t-cel d-flex"><?php echo $lista['descricao'];?></td>
                         <td class="t-cel"><?php echo $lista['un_medida'];?></td>
                         <td class="t-cel"><?php echo $lista['equipamento'];?></td>
                         <td class="t-cel"><?php echo $lista['referencia'];?></td>
-                        <td class="t-cel d-flex"><?php echo $lista['descricao'];?></td>
                         <td class="t-cel"><?php echo $lista['endereco'];?></td>
                         <td class="t-cel"><?php echo $lista['quantidade'];?></td>
                         <td class="t-cel d-flex justify-content-center align-self-center">
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col-md-10">
                             <label for="id_codigo" class="col-form-label">Código:</label>
-                            <input type="number" name="codigo" id="id_codigo" required="true" class="form-control"  id="codigo">
+                            <input type="text" name="codigo" id="id_codigo" required="true" class="form-control"  id="codigo">
                         </div>
                         <div class="position">
                             <button type="button" id="buscarNomeEquipamento" class="btn btn-info">
@@ -73,17 +73,17 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="equipamento" class="col-form-label">EQUIPAMENTO:</label>
-                        <input type="text" readonly="true" required class="form-control" placeholder="Equipamento" id="equipamento-nome">
+                        <label for="equipamento" class="col-form-label">Descrição:</label>
+                        <input type="text" readonly="true" required class="form-control" id="descricao-nome">
                     </div>
 
                     <div class="form-group">
                         <label for="qtd" class="col-form-label">Quantidade:</label>
-                        <input type="number" name="quantidade" required="true" id="qtd" class="form-control" placeholder="Quantidade">
+                        <input type="text" name="quantidade" required="true" id="qtd" class="form-control" placeholder="Quantidade">
                     </div>
                     
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn_register">Salvar</button>
                     </div>
                 </form>

@@ -21,10 +21,11 @@
                     <thead>
                         <tr>
                             <th class="t-head" style="font-weight:bold" scope="col">Código</th>
-                            <th class="t-head" style="font-weight:bold">UN.Medida</th>
+                            <th class="t-head" style="font-weight:bold" scope="col">Descricao</th>
+                            <th class="t-head" style="font-weight:bold">Un.Medida</th>
+                            <th class="t-head" style="font-weight:bold" scope="col">Quantidade</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Equipamento</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Referencia </th>
-                            <th class="t-head" style="font-weight:bold" scope="col">Descricao</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Endereco</th>
                             <th class="t-head" style="font-weight:bold" scope="col">Data de cadastro</th>
                         </tr>
@@ -33,12 +34,13 @@
                     <?php foreach($data['itens'] as $item): ?>
                         <tr>
                             <td class="t-cel"><?php echo $item['codigo']?></td>
+                            <td class="t-cel"><?php echo $item['descricao']?></td>
                             <td class="t-cel"><?php echo $item['un_medida'];?></td>
+                            <td class="t-cel"><?php echo $item['quantidade'];?></td>
                             <td class="t-cel"><?php echo $item['equipamento']?></td>
                             <td class="t-cel"><?php echo $item['referencia']?></td>
-                            <td class="t-cel"><?php echo $item['descricao']?></td>
                             <td class="t-cel"><?php echo $item['endereco']?></td>
-                            <td class="t-cel d-flex justify-content-center align-sel-center"><?php echo $item['data_de_cadastro']?></td>
+                            <td class="t-cel d-flex justify-content-center align-sel-center"><?php echo $item['row_data']?></td>
                         </tr>
                     <?php endforeach;?>
                     </tbody>

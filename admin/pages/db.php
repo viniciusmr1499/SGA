@@ -50,7 +50,7 @@ $listarMateriais = function() use($conn){
 
 $historico = function() use($conn){
     // Listagem de materiais
-    $sql = 'SELECT * FROM materiais';
+    $sql = 'SELECT *, DATE_FORMAT(data_de_cadastro,"%d-%m-%Y %H:%i:%s") AS row_data FROM materiais';
     $result = $conn->query($sql);
 
     return $result->fetch_all(MYSQLI_ASSOC);
@@ -63,7 +63,7 @@ $criarMaterial = function() use ($conn){
     $responsavel = $_SESSION['nomeCompleto'];
     // echo $responsavel; exit;
     
-    if($data['un_medida'] == 'Selecione'){
+    if(empty($data['un_medida'])){
         flash('Selecione os campos obrigatórios','error');
 
         header('location: /admin/pages/novo-material');
@@ -142,9 +142,9 @@ $editarMaterial = function($id) use ($conn){
                     
                     return $stmt->execute();
                 }
-
+                
                 unlink($data['fotoAntiga']); // APAGA A IMAGEM ANTIGA NO SERVIDOR
-            
+                
                 // EDITAR MATERIAL
                 $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,nome_img=?,endereco=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
                 $stmt = $conn->prepare($sql);
@@ -155,14 +155,7 @@ $editarMaterial = function($id) use ($conn){
                 return $stmt->execute();
 
             }
-        }else{
-            var_dump($formatosPermitidos);exit;
-            flash('O formato do arquivo anexado não é permitido!','error');
-
-            header("location: /admin/pages/{$id}/editar-material");
-            exit;
         }
-        
     }
 
     $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,endereco=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
@@ -279,7 +272,7 @@ $inserirDadosDespacho = function() use($conn){
 $listarDespacho = function() use ($conn){
     $data = despache_get_data();
 
-    $sql = 'SELECT c.codigo,c.matricula,c.colaborador,c.setor,c.utilizacao,m.equipamento, c.quantidade,c.data_de_despache
+    $sql = 'SELECT c.codigo,c.matricula,c.colaborador,c.setor,c.utilizacao,m.equipamento,m.descricao, c.quantidade,DATE_FORMAT(data_de_despache,"%d-%m-%Y %H:%i:%s") AS row_data
     FROM materiais as m 
     INNER JOIN solicitacao as c 
     ON m.codigo = c.codigo';
@@ -343,13 +336,15 @@ $gerarRelatorioHistorico = function() use($conn){
         
         $html .= '<td><b>CODIGO</b></td>';
 
+        $html .= '<td><b>DESCRICAO</b></td>';
+
+        $html .= '<td><b>QUANTIDADE</b></td>';
+
         $html .= '<td><b>UN.MEDIDA</b></td>';
         
         $html .= '<td><b>EQUIPAMENTO</b></td>';
 
         $html .= '<td><b>REFERENCIA</b></td>';
-
-        $html .= '<td><b>DESCRICAO</b></td>';
 
         $html .= '<td><b>ENDERECO</b></td>';
 
@@ -374,13 +369,15 @@ $gerarRelatorioHistorico = function() use($conn){
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["codigo"].'</td>';
 
-                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["un_medida"].'</td>';
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["descricao"].'</td>';
 
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["quantidade"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["un_medida"].'</td>';
+                
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["equipamento"].'</td>';
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["referencia"].'</td>';
-
-                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["descricao"].'</td>';
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["endereco"].'</td>';
 
@@ -433,6 +430,8 @@ $gerarRelatorioDespacho = function() use($conn){
         
         $html .= '<td><b>CODIGO</b></td>';
 
+        $html .= '<td><b>DESCRICAO</b></td>';
+
         $html .= '<td><b>MATRICULA</b></td>';
         
         $html .= '<td><b>COLABORADOR</b></td>';
@@ -447,14 +446,13 @@ $gerarRelatorioDespacho = function() use($conn){
 
         $html .= '<td><b>DATA DE ENVIO</b></td>';
         
-
         $html .= '</tr>';
 
         
 
         //Selecionar todos os itens da tabela
 
-        $result_msg_contatos = 'SELECT c.codigo,c.matricula,c.colaborador,c.setor,c.utilizacao,m.equipamento, c.quantidade,c.data_de_despache
+        $result_msg_contatos = 'SELECT c.codigo,c.matricula,c.colaborador,c.setor,c.utilizacao,m.equipamento,m.descricao, c.quantidade,c.data_de_despache
         FROM materiais as m 
         INNER JOIN solicitacao as c 
         ON m.codigo = c.codigo';
@@ -469,6 +467,8 @@ $gerarRelatorioDespacho = function() use($conn){
                 $html .= '<tr>';
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["codigo"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["descricao"].'</td>';
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["matricula"].'</td>';
 
@@ -510,8 +510,8 @@ $gerarRelatorioDespacho = function() use($conn){
         exit; 
 };
 
-$pesquisarEquipamento = function($id) use($conn){
-    $sql = 'SELECT equipamento FROM materiais WHERE codigo = ?';
+$pesquisarDescricao= function($id) use($conn){
+    $sql = 'SELECT descricao FROM materiais WHERE codigo = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i',$id);
     $stmt->execute();

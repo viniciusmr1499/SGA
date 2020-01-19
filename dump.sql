@@ -7,11 +7,12 @@ USE `sga` ;
 CREATE TABLE IF NOT EXISTS `sga`.`usuarios` (
   `matricula` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
+  `usuario` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `setor` VARCHAR(45) NOT NULL,
   `cargo` VARCHAR(45) NOT NULL,
   `nivel` INT NOT NULL,
-  `senha` VARCHAR(45) NOT NULL,
+  `nome_img` VARCHAR(45) NOT NULL,
   `data_de_criacao` DATETIME NOT NULL,
   `data_de_atualizacao` DATETIME NOT NULL,
   PRIMARY KEY (`id_usuarios`))

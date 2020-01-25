@@ -8,15 +8,15 @@ function material_get_data($redirecionarError){
     $descricao = filter_input(INPUT_POST, 'descricao');
     $endereco = filter_input(INPUT_POST, 'endereco');
     $quantidade = filter_input(INPUT_POST, 'quantidade');
-    
+    $fotoAntiga = filter_input(INPUT_POST,'fotoAntiga');    
+    // var_dump($fotoAntiga);exit;
 
     if(is_null($un_medida) or is_null($equipamento)){
         flash('Informe os campos obrigatórios','error');
         header('location: ' . $redirecionarError);
-        die();
+        exit;
     }
-
-    return compact('un_medida','equipamento','referencia','quantidade','file','endereco','descricao');
+    return compact('un_medida','equipamento','referencia','quantidade','file','endereco','descricao','fotoAntiga');
 }
 
 function despache_get_data(){
@@ -39,6 +39,7 @@ function renovar_estoque(){
 }
 
 
+
 // *** FUNCÇÕES ANÔNIMAS PARA OS MATERIAIS ***
 $listarMateriais = function() use($conn){
     // Listagem de materiais
@@ -51,7 +52,7 @@ $listarMateriais = function() use($conn){
 
 $historico = function() use($conn){
     // Listagem de materiais
-    $sql = 'SELECT * FROM materiais';
+    $sql = 'SELECT *, DATE_FORMAT(data_de_cadastro,"%d-%m-%Y %H:%i:%s") AS row_data FROM materiais';
     $result = $conn->query($sql);
 
     return $result->fetch_all(MYSQLI_ASSOC);
@@ -59,19 +60,28 @@ $historico = function() use($conn){
 
 $criarMaterial = function() use ($conn){
     // pegar os dados do formulário
-    $data = material_get_data('/admin/pages/novo-material');
+    $data = material_get_data('/painel/pages/novo-material');
     date_default_timezone_set('America/Sao_Paulo');
+    $responsavel = $_SESSION['nomeCompleto'];
+    // echo $responsavel; exit;
+    
+    if(empty($data['un_medida'])){
+        flash('Selecione os campos obrigatórios','error');
 
+        header('location: /painel/pages/novo-material');
+        exit;
+    }
     //Tratando o arquivo
     if(isset($_FILES['file'])){
         $extensao = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
         $formatosPermitidos = array('jpg','png','jpeg');
         $tamanho = $_FILES['file']['size'];    
         
-        if(in_array($extensao,$formatosPermitidos)){
-            if($tamanho <= 2097152){
+        if($_FILES['file']['type'] == 'image/png' || $_FILES['file']['type'] == 'image/jpeg' || $_FILES['file']['type'] == 'image/jpg'){
+            // VALIDAÇÃO VIA PHP - TAMANHO DA IMAGEM => LIMITE MÁXIMO 2MB
+            if($tamanho <= 2097152 && $tamanho != 0){
                 $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
-                
+                // var_dump($_FILES['file']['type']); exit;
                 $novo_nome = 'image-'.rand(5,10000).'-'. date("Y.m.d").$extensao; // define o nome do arquivo
                 
                 $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
@@ -79,26 +89,22 @@ $criarMaterial = function() use ($conn){
                 move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$novo_nome); // efetua o upload
                 
                 $data['file'] = $novo_nome;
-                $sql = 'INSERT INTO materiais (un_medida,equipamento,referencia,nome_img,descricao,endereco,quantidade,data_de_cadastro,data_de_atualizacao) VALUES (?,?,?,?,?,?,?,NOW(),NOW())';
+                $sql = 'INSERT INTO materiais (un_medida,equipamento,referencia,nome_img,materialCriadoPor,descricao,endereco,quantidade,data_de_cadastro,data_de_atualizacao) VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())';
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param('ssssssi',strtoupper($data['un_medida']),$data['equipamento'],$data['referencia'],$data['file'],$data['descricao'],$data['endereco'],$data['quantidade']);
+                $stmt->bind_param('sssssssi',$data['un_medida'],$data['equipamento'],$data['referencia'],$data['file'],$responsavel,$data['descricao'],$data['endereco'],$data['quantidade']);
                 
                 flash('Material foi inserido com sucesso!', 'success');
                 return $stmt->execute();
-
-            }else{
-                flash('O Tamanho da imagem não pode ser superior a 2MB!','warning');
-                header('location: /painel/pages/novo-material');
-                die();
             }
-        }else if(!in_array($extensao,$formatosPermitidos)){
-            flash('O formato da imagem anexada não é permitida!','error');
-            header('location: /painel/pages/novo-material');
-            die();
         }
     }
-    flash('Cadastro não realizado, verifique se os campos estão corretos!','warning');
-
+    // var_dump($materialCriadoPor);exit;
+    $sql = 'INSERT INTO materiais (un_medida,equipamento,referencia,materialCriadoPor,descricao,endereco,quantidade,data_de_cadastro,data_de_atualizacao) VALUES (?,?,?,?,?,?,?,NOW(),NOW())';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ssssssi',$data['un_medida'],$data['equipamento'],$data['referencia'],$responsavel,$data['descricao'],$data['endereco'],$data['quantidade']);
+    
+    flash('Material foi inserido com sucesso!', 'success');
+    return $stmt->execute();
 };
 
 $editarMaterial = function($id) use ($conn){
@@ -106,31 +112,40 @@ $editarMaterial = function($id) use ($conn){
     $data = material_get_data('/painel/pages/materiais');
     date_default_timezone_set('America/Sao_Paulo');
     
-    if($data['un_medida'] == 'Selecione:'){
+    if($data['un_medida'] == 'Selecione'){
         flash('Selecione os campos obrigatórios','error');
 
-        header('location: /painel/pages/editar-material');
+        header('location: /painel/pages/novo-material');
         exit;
     }
-
+    // var_dump($data['fotoAntiga']);exit;
     if(isset($_FILES['file'])){
         $extensao = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
         $formatosPermitidos = array('jpg','png','jpeg');
         $tamanho = $_FILES['file']['size']; 
-
-        if(in_array($extensao,$formatosPermitidos)){
+        // var_dump($data['fotoAntiga']);exit;
+        if($_FILES['file']['type'] == 'image/png' || $_FILES['file']['type'] == 'image/jpeg' || $_FILES['file']['type'] == 'image/jpg'){
             if($tamanho <= 2097152){
                 $extensao = strtolower(substr($_FILES['file']['name'], -4)); // pega a extensao do arquivo
                 $novo_nome = 'image-'.rand(5,10000).'-'. date("Y.m.d").$extensao; // define o nome do arquivo
                 $diretorio = __DIR__ . "/../../public/img/"; // define o diretório para onde iremos enviar o arquivo
                 $data['file'] = $novo_nome;
                 move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$novo_nome); // efetua o upload
+                
+                if($data['fotoAntiga'] == 'img/'){
+                    // var_dump($data['fotoAntiga']);exit;
+                    $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,nome_img=?,endereco=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param('ssssssii',strtoupper($data['un_medida']),$data['equipamento'],$data['referencia'],$data['descricao'],$data['file'],$data['endereco'],$data['quantidade'],$id);
 
+                    flash('Material foi atualizado com sucesso!', 'success'); 
+                    
+                    return $stmt->execute();
+                }
+                
                 unlink($data['fotoAntiga']); // APAGA A IMAGEM ANTIGA NO SERVIDOR
-                $data['file'] = $novo_nome;
-                $_SESSION['avatar'] = $novo_nome;
-
-               // EDITAR MATERIAL
+                
+                // EDITAR MATERIAL
                 $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,nome_img=?,endereco=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param('ssssssii',strtoupper($data['un_medida']),$data['equipamento'],$data['referencia'],$data['descricao'],$data['file'],$data['endereco'],$data['quantidade'],$id);
@@ -138,18 +153,25 @@ $editarMaterial = function($id) use ($conn){
                 flash('Material foi atualizado com sucesso!', 'success'); 
                 
                 return $stmt->execute();
-            }else{
-                // var_dump($tamanho);exit;
-                flash('O Tamanho da imagem não pode ser superior a 2MB!','warning');
-                header('location: /painel');
-                die();
+
             }
-        }else if(!in_array($extensao,$formatosPermitidos)){
-            flash('O formato da imagem anexada não é permitida!','error');
-            header('location: /painel');
-            die();
         }
     }
+
+    $sql = 'UPDATE materiais SET un_medida=?, equipamento=?,referencia=?,descricao=?,endereco=?,quantidade=?,data_de_atualizacao=NOW() WHERE codigo = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('sssssii',$data['un_medida'],$data['equipamento'],$data['referencia'],$data['descricao'],$data['endereco'],$data['quantidade'],$id);
+    flash('Material foi atualizado com sucesso!', 'success');  
+
+    return $stmt->execute();
+    
+};
+
+$listarMedidas = function() use($conn){
+    $sql = 'SELECT nome FROM unidade_de_medidas';
+    $result = $conn->query($sql);
+
+    return $result->fetch_all(MYSQLI_ASSOC);
 };
 
 $removerMaterial = function($id) use ($conn){
@@ -158,7 +180,7 @@ $removerMaterial = function($id) use ($conn){
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i',$id);
     flash('Material foi excluído com sucesso!', 'success');
-
+    
     return $stmt->execute();
 };
 
@@ -250,7 +272,7 @@ $inserirDadosDespacho = function() use($conn){
 $listarDespacho = function() use ($conn){
     $data = despache_get_data();
 
-    $sql = 'SELECT c.codigo,c.matricula,c.colaborador,c.setor,c.utilizacao,m.equipamento, c.quantidade,c.data_de_despache
+    $sql = 'SELECT c.codigo,c.matricula,c.colaborador,c.setor,c.utilizacao,m.equipamento,m.descricao, c.quantidade,DATE_FORMAT(data_de_despache,"%d-%m-%Y %H:%i:%s") AS row_data
     FROM materiais as m 
     INNER JOIN solicitacao as c 
     ON m.codigo = c.codigo';
@@ -262,7 +284,7 @@ $listarDespacho = function() use ($conn){
 $reporEstoque = function() use($conn){
     $data = renovar_estoque();
 
-    $sql = 'SELECT codigo,quantidade FROM MATERIAIS WHERE codigo = ?';
+    $sql = 'SELECT codigo,quantidade FROM materiais WHERE codigo = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i',$data['codigo']);
     $stmt->execute();
@@ -294,8 +316,8 @@ $reporEstoque = function() use($conn){
     
 };
 
-$listarMedidas = function($id) use($conn){
-    $sql = 'SELECT nome FROM unidades';
+$listarMedidas = function() use($conn){
+    $sql = 'SELECT nome FROM unidade_de_medidas';
     $result = $conn->query($sql);
 
     return $result->fetch_all(MYSQLI_ASSOC);
@@ -321,13 +343,15 @@ $gerarRelatorioHistorico = function() use($conn){
         
         $html .= '<td><b>CODIGO</b></td>';
 
+        $html .= '<td><b>DESCRICAO</b></td>';
+
+        $html .= '<td><b>QUANTIDADE</b></td>';
+
         $html .= '<td><b>UN.MEDIDA</b></td>';
         
         $html .= '<td><b>EQUIPAMENTO</b></td>';
 
         $html .= '<td><b>REFERENCIA</b></td>';
-
-        $html .= '<td><b>DESCRICAO</b></td>';
 
         $html .= '<td><b>ENDERECO</b></td>';
 
@@ -352,13 +376,15 @@ $gerarRelatorioHistorico = function() use($conn){
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["codigo"].'</td>';
 
-                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["un_medida"].'</td>';
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["descricao"].'</td>';
 
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["quantidade"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["un_medida"].'</td>';
+                
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["equipamento"].'</td>';
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["referencia"].'</td>';
-
-                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["descricao"].'</td>';
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["endereco"].'</td>';
 
@@ -411,6 +437,8 @@ $gerarRelatorioDespacho = function() use($conn){
         
         $html .= '<td><b>CODIGO</b></td>';
 
+        $html .= '<td><b>DESCRICAO</b></td>';
+
         $html .= '<td><b>MATRICULA</b></td>';
         
         $html .= '<td><b>COLABORADOR</b></td>';
@@ -425,14 +453,13 @@ $gerarRelatorioDespacho = function() use($conn){
 
         $html .= '<td><b>DATA DE ENVIO</b></td>';
         
-
         $html .= '</tr>';
 
         
 
         //Selecionar todos os itens da tabela
 
-        $result_msg_contatos = 'SELECT c.codigo,c.matricula,c.colaborador,c.setor,c.utilizacao,m.equipamento, c.quantidade,c.data_de_despache
+        $result_msg_contatos = 'SELECT c.codigo,c.matricula,c.colaborador,c.setor,c.utilizacao,m.equipamento,m.descricao, c.quantidade,c.data_de_despache
         FROM materiais as m 
         INNER JOIN solicitacao as c 
         ON m.codigo = c.codigo';
@@ -447,6 +474,8 @@ $gerarRelatorioDespacho = function() use($conn){
                 $html .= '<tr>';
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["codigo"].'</td>';
+
+                $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["descricao"].'</td>';
 
                 $html .= '<td style="vertical-align: top;">'.$row_msg_contatos["matricula"].'</td>';
 
@@ -488,16 +517,13 @@ $gerarRelatorioDespacho = function() use($conn){
         exit; 
 };
 
-$pesquisarEquipamento = function($id) use($conn){
-    $sql = 'SELECT equipamento FROM materiais WHERE codigo = ?';
+$pesquisarDescricao= function($id) use($conn){
+    $sql = 'SELECT descricao FROM materiais WHERE codigo = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i',$id);
     $stmt->execute();
     $result = $stmt->get_result();
     
     echo json_encode($result->fetch_assoc());
-    // $r = $result->fetch_assoc();
-
-    // return $r;
 
 };

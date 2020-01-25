@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-3">
                 <label class="pb-2 t-cel">Código</label>
-                <p class="form-control" readonly="true"><?php echo $data['page']['codigo'];?></p>
+                <p class="form-control"><?php echo $data['page']['codigo'];?></p>
             </div>
             
             <div class="col-md-2">
@@ -51,7 +51,7 @@
             
             <div class="col-12 mt-2 pt-1 t-cel">
                 <hr>
-                <a href="/painel/pages/materiais" class="btn btn_register">voltar</a>
+                <a href="/painel/pages/materiais" class="btn btn-secondary">voltar</a>
             </div>
         </div>
     </div>

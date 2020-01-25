@@ -17,18 +17,17 @@
 
             <div class="col-md-3 mt-4">
                 <label for="un_medida" class="text-uppercase pb-2 t-cel">UN.MEDIDA:</label><span class="obrigatorio"> *</span>
-                <select name="un_medida" id="un_medida" class="form-control select2">
-                    <option>Selecione:</option>
+                <select name="un_medida" required id="un_medida" class="form-control select2">
+                    <option value="">Selecione:</option>
                     <?php foreach($data['lista'] as $item) : ?>
                     <option><?php echo $item['nome'];?></option>
                     <?php endforeach; ?>
                 </select>
-                
             </div>
 
             <div class="col-md-3 mt-4">
                 <label for="Estoque" class="text-uppercase pb-2 t-cel">Quantidade:</label><span class="obrigatorio"> *</span>
-                <input type="number" class="form-control" required placeholder="Ex: 1" name="quantidade" id="Estoque">
+                <input type="text" class="form-control" required placeholder="Ex: 1" name="quantidade" id="Estoque">
             </div>
             
             <div class="col-md-6 mt-4">
@@ -37,8 +36,8 @@
             </div>
 
             <div class="col-md-6 mt-4">
-                <label for="Descricao" class="text-uppercase pb-2 t-cel">Descrição:</label>
-                <textarea maxlength="55" name="descricao" placeholder="Digite sua descrição" id="Descricao" cols="30" rows="3" class="form-control"></textarea>
+                <label for="Descricao" class="text-uppercase pb-2 t-cel">Descrição:</label><span class="obrigatorio"> *</span>
+                <textarea maxlength="55" required name="descricao" placeholder="Digite sua descrição" id="Descricao" cols="30" rows="3" class="form-control"></textarea>
             </div>
 
             <div class="col-md-6 mt-4">
@@ -49,7 +48,7 @@
             <div class="col-12 mt-2 pt-1 t-cel">
                 <hr>
                 <button type="submit" class="btn btn_register">Salvar</button>
-                <a href="/painel/pages/materiais" class="btn btn-info">Voltar</a>
+                <a href="/painel/pages/materiais" class="btn btn-secondary">Voltar</a>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@
             <div id="sidebar-wrapper">
                 <div class="sidebar-heading">
                     <a href="/painel">
-                        <img src="/img/logo.png" style="padding-bottom:1rem;"height="auto" width="130px"alt="Logo"> 
+                        <img src="/img/SGaeris.png" style="padding-bottom:1rem;"height="auto" width="130px"alt="Logo"> 
                     </a>   
                 </div>
 
@@ -64,11 +64,6 @@
                                 <a class="dropdown-item" href="/painel/user/<?php echo $_SESSION['id_usuario'];?>/perfil">
                                     <i class="fas fa-address-card mr-2 text-gray-400"></i>
                                     Perfil
-                                </a>
-                                <hr>
-                                <a href="#" data-target="#exampleModal" data-toggle="modal" class="dropdown-item">
-                                    <i class="fas fa-lock mr-2 text-gray-400"></i>
-                                    Redefinir Senha
                                 </a>
                                 <hr>
                                 <a class="dropdown-item" href="/auth/logout">
@@ -134,9 +129,10 @@
     <script src="/js/datatables/dataTables.bootstrap4.js"></script>
     <script src="/resources/pinotify/pnotify.custom.min.js"></script>
     <script src="/resources/jquery-confirm/dist/jquery-confirm.min.js"></script>
-    <script><?php flash();?></script>
+    <script><?php flash();?></script> 
     <script src="/js/alertas.js"></script>
     <script src="/resources/select2/dist/js/select2.min.js"></script>
+    <script src="/resources/jquery-mask/dist/jquery.mask.min.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/ajax.js"></script>
 </body>

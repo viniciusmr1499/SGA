@@ -103,8 +103,6 @@ $criarMaterial = function() use ($conn){
     
     flash('Material foi inserido com sucesso!', 'success');
     return $stmt->execute();
-    
-
 };
 
 $editarMaterial = function($id) use ($conn){

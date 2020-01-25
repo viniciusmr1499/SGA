@@ -7,16 +7,16 @@ if(resolve('/painel/pages/novo-material')){
     if($_SESSION['nivel'] == 0){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $criarMaterial();
-        
+            
             return header('location: /painel/pages/materiais');
         }
-
-        render('painel/pages/novo-material','painel');
+        $lista = $listarMedidas();   
+        render('painel/pages/novo-material','painel',['lista' => $lista]);
     }else{
         header('location: /admin');
     }
-}
 
+}
 // ↓↓ VER UM MATERIAL POR VEZ ↓↓
 else if($params = resolve('/painel/pages/(\d+)/ver-material')){
     if($_SESSION['nivel'] == 0){
@@ -57,7 +57,6 @@ else if(resolve('/painel/pages/historico')){
     if($_SESSION['nivel'] == 0){
         $itens = $historico();
         render('painel/pages/historico','painel',['itens' => $itens]);
-        // render('painel/pages/material/historico','painel',['itens' => $itens]);
     }else{
         header('location: /admin');
     }
@@ -66,24 +65,20 @@ else if(resolve('/painel/pages/historico')){
 else if(resolve('/painel/pages/materiais')){
     if($_SESSION['nivel'] == 0){
         $lista = $listarMateriais();
-        
         render('painel/pages/materiais','painel',['lista' => $lista]);
     }else{
         header('location: /admin');
     }
 }
-// *** LOGISTICA DE MATERIAL ***
-// LISTAR FLUXO
+// LOGISTICA DE MATERIAL
 else if(resolve('/painel/pages/deliberar-material')){
     if($_SESSION['nivel'] == 0){
         $lista = $listarDespacho();
-
         render('painel/pages/deliberar-material','painel',['lista' => $lista]);
     }else{
         header('location: /admin');
     }
 }
-// ANEXAR REGISTRO DE OPERÁRIO QUE PEGOU MATERIAL
 else if(resolve('/painel/pages/despacho')){
     if($_SESSION['nivel'] == 0){
         $inserirDadosDespacho();
@@ -94,15 +89,36 @@ else if(resolve('/painel/pages/despacho')){
         header('location: /admin');
     }
 }
-// RENOVAÇÃO DE MATERIAL NO ESTOQUE
 else if(resolve('/painel/pages/renovar-estoque')){
     if($_SESSION['nivel'] == 0){
         $lista = $reporEstoque();
-        
         header('location: /painel/pages/materiais');
-        
     }else{
         header('location: /admin');
     }
 
+}
+// GERAR RELATÓRIO DO HISTÓRICO
+else if(resolve('/painel/pages/gerar-relatorio')){
+    if($_SESSION['nivel'] == 0){
+        $gerarRelatorioHistorico();
+    }else{
+        header('location: /admin');
+    }
+}
+// GERAR RELATÓRIO DO FLUXO DE DESPACHO
+else if(resolve('/painel/pages/gerar-relatorio-deliberacao')){
+    if($_SESSION['nivel'] == 0){
+        $gerarRelatorioDespacho();
+    }else{
+        header('location: /admin');
+    }
+}
+// BUSCAR O EQUIPAMENTO AUTOMATICO COM APENAS O CODIGO DO MATERIAL
+else if($params = resolve('/painel/pages/(\d+)/buscar-descricao')){
+    if($_SESSION['nivel'] == 0){
+        $pesquisarDescricao($params[1]);
+    }else{
+        header('location: /admin');
+    }
 }

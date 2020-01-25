@@ -19,7 +19,6 @@ if(resolve('/admin/pages/novo-material')){
     }
 
 }
-
 // ↓↓ VER UM MATERIAL POR VEZ ↓↓
 else if($params = resolve('/admin/pages/(\d+)/ver-material')){
     if($_SESSION['nivel'] == 1){
@@ -81,7 +80,8 @@ else if(resolve('/admin/pages/deliberar-material')){
     }else{
         header('location: /painel');
     }
-}else if(resolve('/admin/pages/despacho')){
+}
+else if(resolve('/admin/pages/despacho')){
     if($_SESSION['nivel'] == 1){
         $inserirDadosDespacho();
         $despacho();
@@ -90,7 +90,8 @@ else if(resolve('/admin/pages/deliberar-material')){
     }else{
         header('location: /painel');
     }
-}else if(resolve('/admin/pages/renovar-estoque')){
+}
+else if(resolve('/admin/pages/renovar-estoque')){
     if($_SESSION['nivel'] == 1){
         $lista = $reporEstoque();
         header('location: /admin/pages/materiais');

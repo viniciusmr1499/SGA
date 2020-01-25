@@ -44,7 +44,6 @@ function usuario_get_data_avatar(){
     return compact('file','fotoAntiga');
 }
 
-
 $listarUsuario = function() use($conn){
     // buscar todos os usuarios
     $sql = 'SELECT *, DATE_FORMAT(data_de_criacao,"%d-%m-%Y %H:%i:%s") AS row_data  FROM sga.usuarios';
@@ -170,7 +169,7 @@ $removerUsuario = function($id) use ($conn){
     $stmt->bind_param('i',$id);
 
     flash('Usuário foi removido com sucesso!', 'success');
-
+    
     return $stmt->execute();
 };
 
@@ -186,16 +185,16 @@ $verUsuario = function($id) use ($conn){
     return $result->fetch_assoc();
 };
 
-$redefinirSenha = function($id) use($conn){
-    $data = usuario_get_data_perfil();
-    $id_usuario = (int) $_SESSION['id_usuario'];
+// $redefinirSenha = function($id) use($conn){
+//     $data = usuario_get_data_perfil();
+//     $id_usuario = (int) $_SESSION['id_usuario'];
     
-    // var_dump($id_usuario); exit;
-    $sql = 'UPDATE usuarios SET senha=md5(?),data_de_atualizacao=NOW() WHERE id_usuario = ?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('si',$data['senha'],$id_usuario);
+//     // var_dump($id_usuario); exit;
+//     $sql = 'UPDATE usuarios SET senha=md5(?),data_de_atualizacao=NOW() WHERE id_usuario = ?';
+//     $stmt = $conn->prepare($sql);
+//     $stmt->bind_param('si',$data['senha'],$id_usuario);
     
-    flash('Dados atualizados com sucesso!', 'success');
+//     flash('Dados atualizados com sucesso!', 'success');
 
-    return $stmt->execute();
-};
+//     return $stmt->execute();
+// };

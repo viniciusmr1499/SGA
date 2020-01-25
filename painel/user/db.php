@@ -78,15 +78,15 @@ $editarPerfil = function($id) use ($conn){
 };
 
 
-$redefinirSenha = function($id) use($conn){
-    $data = usuario_get_data_perfil();
-    $id_usuario = (int )$_SESSION['id_usuario'];
+// $redefinirSenha = function($id) use($conn){
+//     $data = usuario_get_data_perfil();
+//     $id_usuario = (int )$_SESSION['id_usuario'];
     
-    $sql = 'UPDATE usuarios SET senha=md5(?),data_de_atualizacao=NOW() WHERE id_usuario = ?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('si',$data['senha'],$id_usuario);
+//     $sql = 'UPDATE usuarios SET senha=md5(?),data_de_atualizacao=NOW() WHERE id_usuario = ?';
+//     $stmt = $conn->prepare($sql);
+//     $stmt->bind_param('si',$data['senha'],$id_usuario);
     
-    flash('Dados atualizados com sucesso!', 'success');
+//     flash('Dados atualizados com sucesso!', 'success');
 
-    return $stmt->execute();
-};
+//     return $stmt->execute();
+// };
